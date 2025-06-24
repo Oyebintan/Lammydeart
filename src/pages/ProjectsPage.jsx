@@ -1,7 +1,7 @@
 import React from 'react'
-import gradient from '../assets/gradient.png'
+import gradient from '../assets/lgradient.png'
 
-const ProjectPAge = () => {
+const ProjectsPage = () => {
   return (
     <div>
       <img src={gradient} alt="" className="absolute top-0 h-[60vh] w-[100vw] opacity-[0.5] z-[-1] "/>
@@ -10,4 +10,4 @@ const ProjectPAge = () => {
   )
 }
 
-export default ProjectPAge
+export default ProjectsPage

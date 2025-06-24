@@ -1,5 +1,5 @@
 import HomePage from "./pages/HomePage"
-import ProjectPage from "./pages/ProjectPAge"
+import ProjectsPage from "./pages/ProjectsPage"
 import Mainlayout from "./layouts/MainLayout"
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom"
 
@@ -8,7 +8,7 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<Mainlayout />}>
         <Route index element={<HomePage/>} />
-        <Route path="/project" element={<ProjectPage/>} />
+        <Route path="/project" element={<ProjectsPage/>} />
       </Route>
     </>
   )
