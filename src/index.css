@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+*{
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg, hsla(236, 100%, 6%, 1) 0%, hsla(214, 100%, 20%, 1) 62%, hsla(211, 100%, 32%, 1) 100%);
+}
+.lbr{
+    box-shadow: 0 0 700px 15px white;
+    rotate: -30deg;
+    z-index: -1;
+}
