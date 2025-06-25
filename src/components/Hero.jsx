@@ -28,7 +28,7 @@ const Hero = () => {
                 <a href="" className='font-semibold border-1 rounded-lg py-2 px-3 text-gray-200'>Contact Me</a>
             </div>
         </div>
-        <img src={heroimg} alt="" className='h-120 w-85'/>
+        <img src={heroimg} alt="" className='h-[500px] w-[375px]'/>
     </div>
   )
 }
