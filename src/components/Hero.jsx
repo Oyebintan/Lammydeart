@@ -5,7 +5,7 @@ import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 const Hero = () => {
   const [text] = useTypewriter({
-    words: ["Olamide", "CS Student", "Graphic Designer"],
+    words: ["Olamidé", "A CS Student", "A Graphic Designer", "A UI/UX Designer"],
     loop: 0, // Infinite loop
     typeSpeed: 100,
     deleteSpeed: 50,
@@ -19,7 +19,7 @@ const Hero = () => {
                 <h1 className='text-4xl text-gray-400'>hi!</h1>
                 <img src={hand} className='size-8' />
             </div>
-            <h1 className='font-bold text-5xl text-gray-300 my-2'>I'm <span className='text-[#018aBE] text-7xl'>{text}<Cursor cursorStyle="|" /> </span></h1>
+            <h1 className='font-bold text-5xl text-gray-300 my-2'>I'm <span className='text-[#018aBE] text-6xl'>{text}<Cursor cursorStyle="|" /> </span></h1>
             <p className='w-[630px] text-gray-500 text-lg my-2 font-semibold'>A  <span className='text-gray-300'>Graphic Designer </span> passionate about crafting visually compelling, clean, and modern designs that
                communicate clearly and captivate users across both digital and print media.
             </p>
