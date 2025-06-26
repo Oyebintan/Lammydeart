@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'   
 import HeroCards from '../components/HeroCards'
 import gradient from '../assets/gradient.png'
+import About from '../components/About'
 
 const HomePage = () => {
   return (
@@ -11,10 +12,7 @@ const HomePage = () => {
       <div className="h-0 w-[25rem] absolute top-[20%] right-0 lbr z-[-1]"></div>
       <Hero/>
       <HeroCards/>
-      <div className='flex flex-col items-center '>
-        <h1></h1>
-
-      </div>
+      <About/>
     </div>
   )
 }
