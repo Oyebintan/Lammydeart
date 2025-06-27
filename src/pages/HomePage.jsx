@@ -4,6 +4,7 @@ import Hero from '../components/Hero'
 import HeroCards from '../components/HeroCards'
 import gradient from '../assets/gradient.png'
 import About from '../components/About'
+import Timeline from '../components/Timeline'
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
       <Hero/>
       <HeroCards/>
       <About/>
+      <Timeline/>
     </div>
   )
 }

@@ -20,7 +20,7 @@ const HeroCardsData = [
         'id': 3,
         'title': 'Visual Editing Expert',
         'icon': edit,
-        'description': 'Enhancing images with precision—expert in photo retouching, color correction, and visual storytelling.'
+        'description': 'Precision-crafted visuals—skilled in retouching, color correction, and storytelling.'
     }
 ]
 
