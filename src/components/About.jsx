@@ -18,9 +18,9 @@ const About = () => {
   return (
     <div className='flex justify-between px-10 mt-8 py-6'>
       <div>
-        <h1 className='text-3xl font-bold text-gray-200 my-2'>Design</h1>
+        <h1 className='text-3xl font-bold text-gray-500 my-2'>Design</h1>
         <h2 className='text-lg text-gray-400 font-bold'>Every great design begin with even a better story</h2>
-        <p className='w-152 text-gray-500 my-2 text-lg'>Over the past 3 years as a freelance designer, I’ve worked remotely with agencies, consulted for startups, 
+        <p className='w-152 text-gray-200 my-2 text-lg'>Over the past 3 years as a freelance designer, I’ve worked remotely with agencies, consulted for startups, 
             and helped build digital products. I'm curious, confident, and always improving—one design challenge at a 
             time.</p>
       </div>
