@@ -6,7 +6,7 @@ import logo from '../assets/logo.png'
 
 const Navbar = () => {
   return (
-    <div className='flex items-center justify-between py-4 px-12'>
+    <div className='flex items-center justify-between py-4 px-12 sticky top-0 bg-gray/40 backdrop-blur-md z-10'>
       <div className='flex gap-8 items-center  '>
         <Link to="/"><img src={logo} alt="Logo" className='h-6' /></Link>
       </div>
