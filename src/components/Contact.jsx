@@ -57,7 +57,7 @@ const Contact = () => {
             </div>
             <div className=" bg-[#202020] h-[1px] w-88 lg:w-75 md:w-20"></div>
             <a href="mailto:example@gmail.com" className="text-white text-sm tracking-wide">
-              <FaEnvelope className="inline text-[#c1d4c0] mx-1" />
+              <FaEnvelope className="inline text-[#018aBE] mx-1" />
               example.1234567@gmail.com
             </a>
             <div className=" bg-[#202020] h-[1px] w-88 lg:w-75 md:w-20"></div>
@@ -65,7 +65,7 @@ const Contact = () => {
               href=""
               className="text-white text-sm tracking-wide font-semibold"
             >
-              <FaPhone className="inline text-[#c1d4c0] mx-1" />
+              <FaPhone className="inline text-[#018aBE] mx-1" />
               +234 000 000 0000
             </a>
           </div>

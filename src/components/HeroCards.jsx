@@ -26,14 +26,14 @@ const HeroCardsData = [
 
 const HeroCards = () => {
   return (
-    <div className='flex flex-wrap gap-2 justify-between lg:px-11'>
+    <div className='flex flex-wrap px-7 md:px-0 gap-2 justify-center lg:justify-between lg:px-11'>
       {HeroCardsData.map((card) => (
         <div key={card.id} className='border-1 border-gray-400 p-4 rounded-lg '>
           <h1 className='text-gray-300 font-bold bg-gray-600/30 p-1 rounded-2xl flex gap-1 items-center w-[100%] '>
             <div className='bg-brown rounded-[50%] p-1'><img src={card.icon} alt="" className='size-7' /></div>
             {card.title}
           </h1>
-            <p className='text-gray-400 text-sm mt-2 w-85'>{card.description}</p>
+            <p className='text-gray-400 text-sm mt-2 lg:w-85'>{card.description}</p>
         </div>
         ))}
     </div>

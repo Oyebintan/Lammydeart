@@ -1,8 +1,8 @@
-import React from 'react'
-import p1 from '../assets/projects/p1.jpg'
-import p2 from '../assets/projects/p2.jpg'
-import p3 from '../assets/projects/p3.jpg'
-import p4 from '../assets/projects/p4.jpg'
+import React from "react";
+import p1 from "../assets/projects/p1.jpg";
+import p2 from "../assets/projects/p2.jpg";
+import p3 from "../assets/projects/p3.jpg";
+import p4 from "../assets/projects/p4.jpg";
 
 const Designs = [
   {
@@ -10,7 +10,7 @@ const Designs = [
     name: "OBAIMOLE",
     about: "flyer",
     img: p1,
-    bg: "bg-[#c8acba]",
+    bg: "bg-[#ebf2f5]",
   },
   {
     id: 2,
@@ -24,25 +24,27 @@ const Designs = [
     name: "SUG",
     about: "flyer",
     img: p3,
-    bg: "bg-blue-700",
+    bg: "bg-[#066521]",
   },
   {
     id: 4,
     name: "OJUDE",
     about: "flyer",
     img: p4,
-    bg: "bg-[#b9b7b7]",
-  },]
+    bg: "bg-[#e0bfc6]",
+  },
+];
 
-const HeroPrj = ({times}) => {
+const HeroPrj = ({ times }) => {
   return (
-     <div className="flex flex-wrap justify-center gap-8 mt-4">
+    <div className="flex flex-wrap justify-center gap-8 mt-4">
       {Designs.slice(0, times).map((design) => (
         <div key={design.id}>
           <div
             className={`h-90 w-90 lg:h-120  lg:w-140 justify-center flex items-center rounded-xl ${design.bg}`}
           >
             <img
+              loading="lazy"
               src={design.img}
               alt=""
               className=" h-75 w-80 lg:h-98 lg:w-120 rounded-lg transition-all duration-300 lg:hover:h-105  lg:hover:w-127 hover:shadow-2xl  "
@@ -56,7 +58,7 @@ const HeroPrj = ({times}) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default HeroPrj
+export default HeroPrj;

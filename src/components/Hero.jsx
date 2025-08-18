@@ -18,13 +18,13 @@ const Hero = () => {
   });
 
   return (
-    <div className="flex flex-wrap justify-between lg:px-10 items-center py-10 px-15">
+    <div className="flex flex-wrap justify-between lg:px-10 items-center py-10 px-7">
       <div>
         <div className="flex">
           <h1 className="text-xl lg:text-4xl text-gray-400">hi!</h1>
           <img src={hand} className="size-8" />
         </div>
-        <h1 className="font-bold text-2xl lg:text-5xl text-gray-300 my-2">
+        <h1 className="font-bold text-3xl lg:text-5xl text-gray-300 my-2">
           I'm{" "}
           <span className="text-[#018aBE] text-3xl lg:text-6xl">
             {text}
@@ -52,7 +52,7 @@ const Hero = () => {
           </a>
         </div>
       </div>
-      <img src={heroimg} alt="" className="h-[500px] w-[375px]" />
+      <img src={heroimg} alt="" className="h-[500px] w-[375px] mt-8 md:mt-0" loading="lazy"/>
     </div>
   );
 };

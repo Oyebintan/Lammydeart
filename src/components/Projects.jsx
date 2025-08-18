@@ -28,7 +28,7 @@ const Projects = ({count}) => {
         {
             Prjs.slice(0, count).map((prj) => (
                 <div key={prj.id} className=''>
-                    <img src={prj.image} alt={`Project ${prj.id}`} className='size-87'/>
+                    <img src={prj.image} alt={`Project ${prj.id}`} className='size-87' loading='lazy'/>
                 </div>
             ))
         }
