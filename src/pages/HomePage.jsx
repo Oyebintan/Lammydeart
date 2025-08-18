@@ -5,6 +5,9 @@ import HeroCards from '../components/HeroCards'
 import gradient from '../assets/gradient.png'
 import About from '../components/About'
 import Timeline from '../components/Timeline'
+import Service from '../components/Service'
+import HeroPrj from "../components/HeroPrj";
+import Testimonial from '../components/Testimonial'
 
 const HomePage = () => {
   return (
@@ -16,7 +19,10 @@ const HomePage = () => {
         <HeroCards/>
         <About/>
       </div>
+      <HeroPrj times={4} />
+      <Service/>
       <Timeline/>
+      <Testimonial/>
     </div>
   )
 }

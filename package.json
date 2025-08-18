@@ -21,7 +21,11 @@
     "react-intersection-observer": "^9.16.0",
     "react-router-dom": "^7.6.2",
     "react-simple-typewriter": "^5.0.1",
+    "react-slick": "^0.30.3",
+    "react-stars": "^2.2.5",
     "react-vertical-timeline-component": "^3.5.3",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.19",
     "tailwindcss": "^4.1.10"
   },
   "devDependencies": {
