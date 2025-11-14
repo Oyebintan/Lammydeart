@@ -1,6 +1,6 @@
 import React from "react";
 import hand from "../assets/hand.png";
-import heroimg from "../assets/hero2.jpg";
+import heroimg from "../assets/hero2.JPG";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 const Hero = () => {
