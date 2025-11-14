@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="border-t-[1px] py-3 border-[#202020] flex justify-between">
         <p className="text-sm text-gray-400">
           Designed by{" "}
-          <a href="domstack.vercel.app" className="text-white font-semibold">
+          <a href="https://domstack.vercel.app" className="text-white font-semibold">
             Dominion
           </a>
         </p>
