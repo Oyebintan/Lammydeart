@@ -39,14 +39,13 @@ const Timeline = () => {
                 className="vertical-timeline-element--education"
                 contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                 contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                date="2023 - present"
+                date="2023 - 2024"
                 iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-                icon={<SchoolIcon />}
+                icon={<WorkIcon />}
             >
-                <h3 className="vertical-timeline-element-title font-bold">COMPUTER SCIENCE UNDERGRADUATE</h3>
-                <h4 className="vertical-timeline-element-subtitle">Olabisi Onabanjo University</h4>
-                <p>
-                Bachelor of Science in Computer Science
+                <h3 className="vertical-timeline-element-title font-bold">Senior Graphic Designer</h3>
+                <h4 className="vertical-timeline-element-subtitle">Folanimprint LTD</h4>
+                <p>Leading creative direction and visual design with a focus on user experience, project management, and team leadership.
                 </p>
             </VerticalTimelineElement>
             <VerticalTimelineElement

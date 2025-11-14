@@ -52,6 +52,9 @@ const Navbar = () => {
           isMenuVisible ? "show" : ""
         }`}
       >
+        <Link to="/" onClick={closeMenu} className="">
+          Home
+        </Link>
         <Link to="/about" onClick={closeMenu} className="">
           About
         </Link>

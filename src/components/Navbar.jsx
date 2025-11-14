@@ -11,7 +11,7 @@ const Navbar = () => {
         <Link to="/"><img src={logo} alt="Logo" className='h-6' /></Link>
       </div>
         <div className="flex gap-6 items-center">
-            <Link to="/project" className="mx-2 font-semibold text-[#D6E8EE]">Projects</Link>
+            <Link to="/project" className="mx-2 font-semibold text-[#D6E8EE]">Projects</Link> 
             <a href="" className="mx-2 font-semibold text-[#D6E8EE]">Skills & Tools</a>
             <a href="" className="mx-2 font-semibold text-[#D6E8EE]">Contact</a>
         </div>

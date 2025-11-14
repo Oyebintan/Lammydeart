@@ -1,6 +1,6 @@
 import React from "react";
 import hand from "../assets/hand.png";
-import heroimg from "../assets/Lhero.png";
+import heroimg from "../assets/hero2.jpg";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 const Hero = () => {
@@ -18,7 +18,7 @@ const Hero = () => {
   });
 
   return (
-    <div className="flex flex-wrap justify-between lg:px-10 items-center py-10 px-7">
+    <div className="flex flex-wrap justify-between lg:px-15 items-center py-18 px-7">
       <div>
         <div className="flex">
           <h1 className="text-xl lg:text-4xl text-gray-400">hi!</h1>
@@ -52,7 +52,7 @@ const Hero = () => {
           </a>
         </div>
       </div>
-      <img src={heroimg} alt="" className="h-[500px] w-[375px] mt-8 md:mt-0" loading="lazy"/>
+      <img src={heroimg} alt="" className=" w-[375px] mt-8 md:mt-0 rounded-b-[100px] rounded-t-3xl" loading="lazy"/>
     </div>
   );
 };

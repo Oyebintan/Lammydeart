@@ -26,13 +26,13 @@ const About = () => {
       <div ref={ref}>
         <h1 className='text-3xl font-bold text-gray-200 my-2'>Tools</h1>
         {Skills.map((skill) => (
-          <div key={skill.id} className='w-[98vw] md:w-[550px]'>
+          <div key={skill.id} className='w-[400px] md:w-[550px]'>
             <h4 className="text-white font-bold my-2 ">{skill.name}</h4>
             <ProgressBar 
               completed={inView ? skill.level : 0}
               bgColor="#018aBE"
               height="27px"
-              width='90%'
+              width='95%'
               animateOnRender
               labelColor="#fff"
             />
