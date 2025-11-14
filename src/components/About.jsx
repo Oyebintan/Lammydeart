@@ -32,7 +32,7 @@ const About = () => {
               completed={inView ? skill.level : 0}
               bgColor="#018aBE"
               height="27px"
-              width='90%'
+              width='95%'
               animateOnRender
               labelColor="#fff"
             />
