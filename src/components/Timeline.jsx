@@ -25,14 +25,14 @@ const Timeline = () => {
             </VerticalTimelineElement>
             <VerticalTimelineElement
                 className="vertical-timeline-element--work"
-                date="2023 - 2024"
+                date="2024 - 2025"
                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                 icon={<WorkIcon />}
             >
                 <h3 className="vertical-timeline-element-title font-bold">Senior Graphic Designer</h3>
-                <h4 className="vertical-timeline-element-subtitle">Folanimprint LTD</h4>
+                <h4 className="vertical-timeline-element-subtitle">TransactX</h4>
                 <p>
-                Leading creative direction and visual design with a focus on user experience, project management, and team leadership.
+                Driving creative direction and visual design while prioritizing user experience, efficient project execution, and effective team leadership.
                 </p>
             </VerticalTimelineElement>
             <VerticalTimelineElement
