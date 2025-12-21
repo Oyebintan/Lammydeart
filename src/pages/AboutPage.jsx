@@ -97,7 +97,7 @@ const AboutPage = () => {
                   Olamide
                 </h1>
                 <p className="text-xl text-[#c1c1c1]">
-                  Graphic Designer & UI/UX Designer
+                  Graphic Designer & Product Designer
                 </p>
               </div>
 

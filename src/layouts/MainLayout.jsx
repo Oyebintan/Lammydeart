@@ -9,7 +9,7 @@ const MainLayout = () => {
     <div>
       <Navbar />
       <Outlet />
-      <Contact />
+      <Contact isContactPage={true}/>
       <Footer />
     </div>
   )
