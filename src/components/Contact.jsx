@@ -33,32 +33,6 @@ const Contact = ({ isContactPage = false }) => {
 
   return (
     <div className="px-4 py-12 lg:px-12 max-w-7xl mx-auto">
-      {/* Bio Section */}
-      <div className="relative">
-        <div className="flex items-start gap-6">
-          {/* Avatar Placeholder */}
-          <div className="hidden md:flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#018aBE] to-[#0156a8] flex-shrink-0 group hover:scale-110 transition-transform duration-300">
-            <User className="w-10 h-10 text-white" />
-          </div>
-
-          {/* Bio Text */}
-          <div className="flex-1 space-y-4">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#018aBE]" />
-              <span className="text-sm text-[#018aBE] font-semibold tracking-wide uppercase">
-                About Me
-              </span>
-            </div>
-            
-            <p className="text-[#c1c1c1] text-base lg:text-lg leading-relaxed max-w-3xl">
-              <span className="text-white font-bold text-xl">I'm Olamide</span>, a
-              graphic and UI/UX designer with 2+ years of experience creating clean,
-              high-performing visuals that help brands stand out and connect.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {!isContactPage && (
         <div className="mt-16 space-y-12">
           {/* CTA Section */}
