@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { FaArrowRight } from "react-icons/fa6"
-import img  from "../assets/hero2.jpg"
+import img  from "../assets/hero2.JPG"
 import { Sparkles, Palette, Layout, Lightbulb } from "lucide-react"
 
 const Skills = [
