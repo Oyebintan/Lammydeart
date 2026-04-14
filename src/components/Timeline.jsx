@@ -25,32 +25,32 @@ const Timeline = () => {
             </VerticalTimelineElement>
             <VerticalTimelineElement
                 className="vertical-timeline-element--work"
-                date="2024 - 2025"
+                date="2023 - 2024"
                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                 icon={<WorkIcon />}
             >
                 <h3 className="vertical-timeline-element-title font-bold">Senior Graphic Designer</h3>
-                <h4 className="vertical-timeline-element-subtitle">TransactX</h4>
+                <h4 className="vertical-timeline-element-subtitle">Folanimprint LTD</h4>
                 <p>
-                Driving creative direction and visual design while prioritizing user experience, efficient project execution, and effective team leadership.
+                Leading creative direction and visual design with a focus on user experience, project management, and team leadership.
                 </p>
             </VerticalTimelineElement>
             <VerticalTimelineElement
                 className="vertical-timeline-element--education"
                 contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                 contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                date="2023 - 2024"
+                date="2024 - 2025"
                 iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
                 icon={<WorkIcon />}
             >
                 <h3 className="vertical-timeline-element-title font-bold">Senior Graphic Designer</h3>
-                <h4 className="vertical-timeline-element-subtitle">Folanimprint LTD</h4>
-                <p>Leading creative direction and visual design with a focus on user experience, project management, and team leadership.
+                <h4 className="vertical-timeline-element-subtitle">TransactX</h4>
+                <p>Driving creative direction and visual design while prioritizing user experience, efficient project execution, and effective team leadership.
                 </p>
             </VerticalTimelineElement>
             <VerticalTimelineElement
                 className="vertical-timeline-element--work"
-                date="2010 - 2011"
+                date="2025 - 2025"
                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                 icon={<WorkIcon />}
             >
@@ -58,6 +58,19 @@ const Timeline = () => {
                 <h4 className="vertical-timeline-element-subtitle">Lance Trend LTD</h4>
                 <p>
                 Creative Direction, User Experience, Visual Design, SEO, Online Marketing
+                </p>
+            </VerticalTimelineElement>
+            <VerticalTimelineElement
+                className="vertical-timeline-element--education"
+                contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                date="2025 - Present"
+                iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
+                icon={<WorkIcon />}
+            >
+                <h3 className="vertical-timeline-element-title font-bold">Sub Community Manager / Design Lead</h3>
+                <h4 className="vertical-timeline-element-subtitle">OOU Tech Community (OTC)</h4>
+                <p>Shaping creative vision and design quality while keeping teams aligned, projects on track, and users at the center of every decision.
                 </p>
             </VerticalTimelineElement>
             <VerticalTimelineElement

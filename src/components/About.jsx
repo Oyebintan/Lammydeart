@@ -5,9 +5,8 @@ import { Sparkles } from 'lucide-react'
 
 const Skills = [
   { id: 1, name: 'Corel Draw', level: 95 },
-  { id: 2, name: 'Figma', level: 85 },
   { id: 3, name: 'Adobe Photoshop', level: 70 },
-  { id: 4, name: 'Adobe Illustrator', level: 80 },
+  { id: 4, name: 'Adobe Illustrator', level: 60 },
 ]
 
 

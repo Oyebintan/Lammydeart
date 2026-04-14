@@ -56,7 +56,7 @@ const AboutPage = () => {
 
 
   return (
-    <div className="bg-[#0d0d0d] min-h-screen">
+    <div className="bg-[#0d0d0d] min-h-screen py-8">
       {/* Hero Section with Stars */}
       <div className="relative overflow-hidden px-6 lg:px-12 py-16">
         {/* Starry Background */}
