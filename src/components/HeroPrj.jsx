@@ -44,7 +44,7 @@ const ProjectCard = ({ p }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative rounded-[20px] overflow-hidden border border-[rgba(147,197,253,0.14)] aspect-[4/3] block"
+      className="group relative rounded-2xl lg:rounded-[20px] overflow-hidden border border-[rgba(147,197,253,0.14)] aspect-square lg:aspect-[4/3] block"
     >
       <motion.img
         src={p.img}
@@ -54,13 +54,13 @@ const ProjectCard = ({ p }) => {
         className="w-full h-full object-cover"
         loading="lazy"
       />
-      <div className="absolute inset-0 flex flex-col justify-end p-4.5 bg-gradient-to-b from-transparent from-40% to-[rgba(2,4,10,0.85)]">
-        <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[#93C5FD] mb-1">
+      <div className="absolute inset-0 flex flex-col justify-end p-2.5 lg:p-4.5 bg-gradient-to-b from-transparent from-40% to-[rgba(2,4,10,0.85)]">
+        <div className="text-[8.5px] lg:text-[11px] font-semibold tracking-[0.1em] uppercase text-[#93C5FD] mb-0.5 lg:mb-1">
           {p.category}
         </div>
-        <div className="flex items-center justify-between">
-          <div className="font-display text-lg font-bold text-white">{p.title}</div>
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-white text-[15px]">
+        <div className="flex items-center justify-between gap-1">
+          <div className="font-display text-[13px] lg:text-lg font-bold text-white leading-tight">{p.title}</div>
+          <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-white text-[11px] lg:text-[15px] flex-none">
             &#8599;
           </div>
         </div>
@@ -129,7 +129,7 @@ const HeroPrj = ({ times = 6 }) => {
         <motion.div
           layout
           variants={fadeUp}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4"
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (

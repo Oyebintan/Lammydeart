@@ -2,29 +2,47 @@ import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Palette, Megaphone, PenTool, LayoutGrid } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../motion"
+import brandingImg from "../assets/projects/p1.jpg"
+import socialAdsImg from "../assets/projects/p4.jpg"
+import logoImg from "../assets/projects/p9.jpg"
 
 const services = [
   {
     name: "Branding",
     icon: Palette,
+    img: brandingImg,
     desc: "Distinct visual identities — logo systems, color, type, and brand guidelines that make a business instantly recognizable.",
   },
   {
     name: "Social Ads",
     icon: Megaphone,
+    img: socialAdsImg,
     desc: "Scroll-stopping ad creatives and social kits sized and paced for every platform, built to convert.",
   },
   {
     name: "Logo Design",
     icon: PenTool,
+    img: logoImg,
     desc: "Sharp, distinctive marks — from concept sketches to a full logo suite ready for any application.",
   },
   {
     name: "UI Design",
     icon: LayoutGrid,
+    img: null,
     desc: "Clean, pixel-perfect interfaces and design systems that balance usability with a strong visual point of view.",
   },
 ]
+
+const UiMockup = () => (
+  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0b1526] to-[#0a1120]">
+    <div className="w-40 rounded-xl border border-[rgba(147,197,253,0.25)] bg-[rgba(147,197,253,0.05)] p-3 space-y-2">
+      <div className="h-2 w-2/3 rounded bg-gradient-to-r from-[#1D4ED8] to-[#7DD3FC]" />
+      <div className="h-16 rounded-lg bg-[rgba(147,197,253,0.1)]" />
+      <div className="h-2 w-full rounded bg-[rgba(147,197,253,0.15)]" />
+      <div className="h-2 w-4/5 rounded bg-[rgba(147,197,253,0.15)]" />
+    </div>
+  </div>
+)
 
 const Service = () => {
   const [active, setActive] = useState(0)
@@ -94,25 +112,29 @@ const Service = () => {
             })}
           </div>
 
-          <div className="rounded-[20px] border border-[rgba(147,197,253,0.15)] bg-gradient-to-br from-[rgba(29,78,216,0.1)] to-[rgba(96,165,250,0.03)] p-7 flex flex-col justify-center overflow-hidden relative">
+          <div className="relative rounded-[20px] border border-[rgba(147,197,253,0.15)] overflow-hidden min-h-[260px] lg:min-h-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService.name}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0"
               >
-                <activeService.icon
-                  className="absolute -right-5 -bottom-6 text-[#60A5FA] opacity-[0.07] pointer-events-none"
-                  size={150}
-                  strokeWidth={1}
-                />
-                <div className="relative w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center mb-4 text-white">
-                  <activeService.icon className="w-[22px] h-[22px]" />
+                {activeService.img ? (
+                  <img src={activeService.img} alt={activeService.name} className="absolute inset-0 w-full h-full object-cover" />
+                ) : (
+                  <UiMockup />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-30% to-[rgba(2,4,10,0.92)]" />
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <div className="w-[42px] h-[42px] rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center mb-3 text-white">
+                    <activeService.icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-display text-[22px] font-bold text-white mb-2">{activeService.name}</h3>
+                  <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.75)] max-w-[90%]">{activeService.desc}</p>
                 </div>
-                <h3 className="relative font-display text-[22px] font-bold text-[#F3F6FB] mb-2.5">{activeService.name}</h3>
-                <p className="relative text-sm leading-relaxed text-[rgba(219,234,254,0.6)] max-w-[85%]">{activeService.desc}</p>
               </motion.div>
             </AnimatePresence>
           </div>
