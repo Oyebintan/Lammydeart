@@ -1,5 +1,7 @@
 import React from "react"
+import { motion } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
+import { fadeUp, stagger, viewportOnce } from "../motion"
 
 const socialLinks = [
   { icon: FaInstagram, href: "https://www.instagram.com/lammyde.art", label: "Instagram" },
@@ -9,8 +11,18 @@ const socialLinks = [
 
 const HomeContact = () => {
   return (
-    <section id="contact" className="px-6 lg:px-14 py-12 bg-[#03050a]">
-      <div className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(147,197,253,0.15)] bg-gradient-to-br from-[rgba(29,78,216,0.08)] to-[rgba(96,165,250,0.03)] p-8 lg:p-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center">
+    <motion.section
+      id="contact"
+      variants={stagger()}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewportOnce}
+      className="px-6 lg:px-14 py-12 bg-[#03050a]"
+    >
+      <motion.div
+        variants={fadeUp}
+        className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(147,197,253,0.15)] bg-gradient-to-br from-[rgba(29,78,216,0.08)] to-[rgba(96,165,250,0.03)] p-8 lg:p-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center"
+      >
         <div>
           <div className="text-[11.5px] font-bold tracking-[0.16em] text-[#60A5FA] uppercase mb-2">
             Contact
@@ -26,39 +38,48 @@ const HomeContact = () => {
             <div className="text-[13.5px] text-[rgba(219,234,254,0.75)]">Lagos, Nigeria — Remote</div>
             <div className="flex gap-3 mt-1.5">
               {socialLinks.map((s) => (
-                <a
+                <motion.a
                   key={s.label}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-[34px] h-[34px] rounded-full border border-[rgba(147,197,253,0.2)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[#60A5FA] transition-colors duration-300"
+                  whileHover={{ scale: 1.12, y: -2 }}
+                  whileTap={{ scale: 0.94 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
+                  className="w-[34px] h-[34px] rounded-full border border-[rgba(147,197,253,0.2)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[#60A5FA]"
                 >
                   <s.icon size={14} />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3.5">
-          <a
+          <motion.a
             href="mailto:lammydeart@gmail.com"
-            className="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold transition-transform duration-300 hover:scale-[1.02]"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold"
           >
             <FaEnvelope /> Send an email
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="http://Wa.me/2347015848547"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl border border-[rgba(147,197,253,0.25)] text-[#F3F6FB] text-sm font-semibold transition-colors duration-300 hover:border-[#60A5FA]"
+            whileHover={{ scale: 1.02, borderColor: "#60A5FA" }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl border border-[rgba(147,197,253,0.25)] text-[#F3F6FB] text-sm font-semibold"
           >
             <FaWhatsapp /> WhatsApp me
-          </a>
+          </motion.a>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   )
 }
 

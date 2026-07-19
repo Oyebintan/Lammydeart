@@ -1,5 +1,7 @@
 import React from "react"
+import { motion } from "framer-motion"
 import { Star } from "lucide-react"
+import { fadeUp, stagger, viewportOnce } from "../motion"
 
 const reviews = [
   {
@@ -41,19 +43,27 @@ const StarRating = ({ rating }) => (
 
 const Testimonial = () => {
   return (
-    <section className="px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120]">
+    <motion.section
+      variants={stagger()}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewportOnce}
+      className="px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="mb-6">
+        <motion.div variants={fadeUp} className="mb-6">
           <div className="text-[11.5px] font-bold tracking-[0.16em] text-[#60A5FA] uppercase mb-2">
             Testimonials
           </div>
           <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">Kind words from clients</h2>
-        </div>
+        </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4.5">
           {reviews.map((t) => (
-            <div
+            <motion.div
               key={t.id}
+              variants={fadeUp}
+              whileHover={{ y: -5, borderColor: "rgba(96,165,250,0.35)" }}
               className="rounded-[20px] border border-[rgba(147,197,253,0.14)] bg-[rgba(147,197,253,0.03)] p-6"
             >
               <StarRating rating={t.rating} />
@@ -67,11 +77,11 @@ const Testimonial = () => {
                   <div className="text-[11.5px] text-[rgba(219,234,254,0.45)]">{t.role}</div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

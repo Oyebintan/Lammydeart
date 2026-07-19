@@ -1,7 +1,9 @@
 import React from "react"
+import { motion } from "framer-motion"
 import { ArrowUp } from "lucide-react"
 import { Link } from "react-router-dom"
 import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
+import { fadeUp, viewportOnce } from "../motion"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -25,7 +27,13 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="px-6 lg:px-14 py-7 border-t border-[rgba(147,197,253,0.1)]">
+    <motion.footer
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewportOnce}
+      className="px-6 lg:px-14 py-7 border-t border-[rgba(147,197,253,0.1)]"
+    >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 flex-wrap">
         <Link to="/" className="font-display font-bold text-[15px] text-[#F3F6FB]">
           Lammy
@@ -48,24 +56,30 @@ const Footer = () => {
 
         <div className="flex items-center gap-3">
           {socialLinks.map((social) => (
-            <a
+            <motion.a
               key={social.label}
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.label}
-              className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(147,197,253,0.18)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA] transition-colors duration-300"
+              whileHover={{ scale: 1.12, y: -2 }}
+              whileTap={{ scale: 0.94 }}
+              transition={{ type: "spring", stiffness: 400, damping: 18 }}
+              className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(147,197,253,0.18)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA]"
             >
               <social.icon size={13} />
-            </a>
+            </motion.a>
           ))}
-          <button
+          <motion.button
             onClick={scrollToTop}
             aria-label="Scroll to top"
-            className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(147,197,253,0.18)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA] transition-colors duration-300"
+            whileHover={{ scale: 1.12, y: -2 }}
+            whileTap={{ scale: 0.94 }}
+            transition={{ type: "spring", stiffness: 400, damping: 18 }}
+            className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(147,197,253,0.18)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA]"
           >
             <ArrowUp size={14} />
-          </button>
+          </motion.button>
         </div>
       </div>
 
@@ -83,7 +97,7 @@ const Footer = () => {
           </a>
         </span>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
 

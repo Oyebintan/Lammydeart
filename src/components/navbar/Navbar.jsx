@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import { motion, AnimatePresence } from "framer-motion"
+
+const MotionLink = motion.create(Link)
 
 const Logo = () => (
   <Link to="/" className="font-display font-bold text-[19px] text-[#F3F6FB] tracking-[0.02em] z-50">
@@ -12,12 +15,15 @@ const Logo = () => (
 )
 
 const Button = () => (
-  <Link
+  <MotionLink
     to="/contact"
-    className="hidden lg:flex items-center gap-2 px-[18px] py-[9px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-[13.5px] font-semibold transition-transform duration-300 hover:scale-105"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.96 }}
+    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+    className="hidden lg:flex items-center gap-2 px-[18px] py-[9px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-[13.5px] font-semibold"
   >
     Let's talk <span>&#8594;</span>
-  </Link>
+  </MotionLink>
 )
 
 const Checkbox = ({ setIsMenuVisible, checkboxRef }) => (
@@ -40,13 +46,30 @@ const Checkbox = ({ setIsMenuVisible, checkboxRef }) => (
   </div>
 )
 
+const menuVariants = {
+  hidden: { x: "100%" },
+  show: { x: 0, transition: { type: "spring", stiffness: 300, damping: 32 } },
+  exit: { x: "100%", transition: { duration: 0.25, ease: "easeIn" } },
+}
+
+const linkListVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
+}
+
+const linkItemVariants = {
+  hidden: { opacity: 0, x: 20 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } },
+}
+
 const Navbar = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [hovered, setHovered] = useState(null)
   const menuRef = useRef(null)
   const checkboxRef = useRef(null)
+  const location = useLocation()
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
@@ -55,7 +78,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Handle click outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -107,17 +129,39 @@ const Navbar = () => {
             <Logo />
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="relative px-4 py-2 text-[rgba(219,234,254,0.75)] hover:text-white text-[13.5px] font-medium transition-colors duration-300 group"
-                >
-                  {link.name}
-                  <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#60A5FA] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                </Link>
-              ))}
+            <div
+              className="hidden lg:flex items-center gap-1"
+              onMouseLeave={() => setHovered(null)}
+            >
+              {navLinks.map((link, i) => {
+                const isCurrent = location.pathname === link.path
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onMouseEnter={() => setHovered(i)}
+                    className={`relative px-4 py-2 text-[13.5px] font-medium transition-colors duration-300 ${
+                      isCurrent ? "text-white" : "text-[rgba(219,234,254,0.75)] hover:text-white"
+                    }`}
+                  >
+                    {hovered === i && (
+                      <motion.span
+                        layoutId="nav-hover-pill"
+                        className="absolute inset-0 rounded-full bg-[rgba(147,197,253,0.08)] border border-[rgba(147,197,253,0.14)]"
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span className="relative z-10">{link.name}</span>
+                    {isCurrent && (
+                      <motion.span
+                        layoutId="nav-active-dot"
+                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#60A5FA]"
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                  </Link>
+                )
+              })}
             </div>
 
             {/* Desktop Right Section */}
@@ -125,16 +169,19 @@ const Navbar = () => {
               {/* Social Icons */}
               <div className="flex items-center gap-2">
                 {socialLinks.map((social) => (
-                  <a
+                  <motion.a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(147,197,253,0.2)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
+                    whileHover={{ scale: 1.12, y: -2 }}
+                    whileTap={{ scale: 0.94 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 18 }}
+                    className="flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(147,197,253,0.2)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-colors duration-300"
                     aria-label={social.label}
                   >
                     <social.icon className="w-4 h-4" />
-                  </a>
+                  </motion.a>
                 ))}
               </div>
 
@@ -152,81 +199,82 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Menu */}
-      <div
-        ref={menuRef}
-        className={`fixed top-0 right-0 h-screen w-72 bg-[#03050a] border-l border-[rgba(147,197,253,0.12)] transform transition-transform duration-300 ease-in-out z-40 lg:hidden ${
-          isMenuVisible ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex flex-col h-full pt-24 px-6">
-          {/* Mobile Navigation Links */}
-          <div className="flex flex-col gap-2 mb-8">
-            {navLinks.map((link, index) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={closeMenu}
-                className="text-[rgba(219,234,254,0.75)] hover:text-white hover:bg-[rgba(147,197,253,0.06)] px-4 py-3 rounded-lg font-medium transition-all duration-300"
-                style={{
-                  animation: isMenuVisible ? `slideIn 0.3s ease-out ${index * 0.1}s both` : 'none'
-                }}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile CTA Button */}
-          <Link
-            to="/contact"
-            onClick={closeMenu}
-            className="bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white font-semibold py-3 px-6 rounded-full text-center transition-transform duration-300 mb-8"
+      <AnimatePresence>
+        {isMenuVisible && (
+          <motion.div
+            key="mobile-menu"
+            ref={menuRef}
+            variants={menuVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="fixed top-0 right-0 h-screen w-72 bg-[#03050a] border-l border-[rgba(147,197,253,0.12)] z-40 lg:hidden"
           >
-            Let's talk
-          </Link>
+            <div className="flex flex-col h-full pt-24 px-6">
+              <motion.div
+                variants={linkListVariants}
+                initial="hidden"
+                animate="show"
+                className="flex flex-col gap-2 mb-8"
+              >
+                {navLinks.map((link) => (
+                  <motion.div key={link.path} variants={linkItemVariants}>
+                    <Link
+                      to={link.path}
+                      onClick={closeMenu}
+                      className="block text-[rgba(219,234,254,0.75)] hover:text-white hover:bg-[rgba(147,197,253,0.06)] px-4 py-3 rounded-lg font-medium transition-all duration-300"
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.div>
 
-          {/* Mobile Social Links */}
-          <div className="mt-auto pb-8">
-            <p className="text-[rgba(219,234,254,0.5)] text-sm mb-4">Follow me</p>
-            <div className="flex items-center gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(147,197,253,0.2)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
+              {/* Mobile CTA Button */}
+              <MotionLink
+                to="/contact"
+                onClick={closeMenu}
+                whileTap={{ scale: 0.96 }}
+                className="bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white font-semibold py-3 px-6 rounded-full text-center mb-8"
+              >
+                Let's talk
+              </MotionLink>
+
+              {/* Mobile Social Links */}
+              <div className="mt-auto pb-8">
+                <p className="text-[rgba(219,234,254,0.5)] text-sm mb-4">Follow me</p>
+                <div className="flex items-center gap-3">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(147,197,253,0.2)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
+                      aria-label={social.label}
+                    >
+                      <social.icon className="w-5 h-5" />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Overlay */}
-      {isMenuVisible && (
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
-          onClick={closeMenu}
-        />
-      )}
-
-      {/* CSS Animations */}
-      <style>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateX(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
+      <AnimatePresence>
+        {isMenuVisible && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
+            onClick={closeMenu}
+          />
+        )}
+      </AnimatePresence>
     </>
   )
 }
