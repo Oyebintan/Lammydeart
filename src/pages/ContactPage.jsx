@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
+import { motion } from "framer-motion"
 import {
   FaXTwitter,
   FaInstagram,
@@ -7,326 +8,133 @@ import {
   FaPhone,
   FaLocationDot,
 } from "react-icons/fa6"
-import { Sparkles, Clock, Globe, Send } from "lucide-react"
 import { usePageTitle } from "../hooks/usePageTitle"
+import { fadeUp, stagger, viewportOnce } from "../motion"
 
-// Star component
-const Star = ({ style }) => (
-  <div className="absolute rounded-full bg-white" style={style} />
-)
+const contactDetails = [
+  { icon: FaEnvelope, label: "lammydeart@gmail.com", href: "mailto:lammydeart@gmail.com" },
+  { icon: FaPhone, label: "+234 701 584 8547", href: "tel:+2347015848547" },
+  { icon: FaLocationDot, label: "Lagos, Nigeria — Remote", href: null },
+]
+
+const socialLinks = [
+  { icon: FaInstagram, href: "https://www.instagram.com/lammyde.art", label: "Instagram" },
+  { icon: FaXTwitter, href: "https://x.com/oyebintan?s=21", label: "Twitter" },
+  { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
+]
 
 const ContactPage = () => {
   usePageTitle("Contact")
-  const [stars, setStars] = useState([])
-
-  // Generate stars
-  useEffect(() => {
-    const generateStars = () => {
-      const newStars = []
-      for (let i = 0; i < 100; i++) {
-        newStars.push({
-          id: i,
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-          width: `${Math.random() * 2 + 0.5}px`,
-          height: `${Math.random() * 2 + 0.5}px`,
-          opacity: Math.random() * 0.6 + 0.2,
-          animationDelay: `${Math.random() * 3}s`,
-          animationDuration: `${Math.random() * 3 + 2}s`,
-        })
-      }
-      setStars(newStars)
-    }
-    generateStars()
-  }, [])
-
-  const contactMethods = [
-    {
-      icon: FaEnvelope,
-      title: "Email",
-      value: "lammydeart@gmail.com",
-      description: "Send me an email anytime",
-      link: "mailto:lammydeart@gmail.com",
-      color: "#018aBE"
-    },
-    {
-      icon: FaPhone,
-      title: "Phone",
-      value: "+234 701 584 8547",
-      description: "Call or WhatsApp me",
-      link: "tel:+2347015848547",
-      color: "#018aBE"
-    },
-    {
-      icon: FaLocationDot,
-      title: "Location",
-      value: "Lagos, Nigeria",
-      description: "Available for remote work",
-      link: null,
-      color: "#018aBE"
-    },
-  ]
-
-  const socialLinks = [
-    {
-      icon: FaInstagram,
-      name: "Instagram",
-      handle: "@lammyde.art",
-      url: "https://www.instagram.com/lammyde.art",
-      color: "#E4405F"
-    },
-    {
-      icon: FaXTwitter,
-      name: "Twitter",
-      handle: "@oyebintan",
-      url: "https://x.com/oyebintan?s=21",
-      color: "#1DA1F2"
-    },
-    {
-      icon: FaWhatsapp,
-      name: "WhatsApp",
-      handle: "+234 701 584 8547",
-      url: "http://Wa.me/2347015848547",
-      color: "#25D366"
-    },
-  ]
-
-  const availability = [
-    {
-      icon: Clock,
-      title: "Response Time",
-      value: "24 hours",
-      description: "I typically respond within a day"
-    },
-    {
-      icon: Globe,
-      title: "Availability",
-      value: "Open to work",
-      description: "Available for freelance projects"
-    },
-  ]
 
   return (
-    <div className="bg-[#0d0d0d] min-h-screen">
-      {/* Hero Section with Stars */}
-      <div className="relative overflow-hidden pt-32 pb-20 px-6 lg:px-12">
-        {/* Starry Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          {stars.map((star) => (
-            <Star
-              key={star.id}
-              style={{
-                left: star.left,
-                top: star.top,
-                width: star.width,
-                height: star.height,
-                opacity: star.opacity,
-                animation: `twinkle ${star.animationDuration} ease-in-out infinite`,
-                animationDelay: star.animationDelay,
-              }}
-            />
-          ))}
-        </div>
+    <div className="relative overflow-hidden bg-[#03050a] min-h-screen">
+      <motion.div
+        animate={{ opacity: [0.5, 0.85, 0.5] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.3),transparent_70%)] blur-2xl pointer-events-none"
+      />
+      <div className="absolute top-40 right-[5%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(125,211,252,0.14),transparent_70%)] blur-2xl pointer-events-none" />
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#0d0d0d]" />
-
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-[#9a9a9a] mb-8">
-            <a href="/" className="hover:text-[#018aBE] transition-colors duration-300">
-              Home
-            </a>
-            <span>/</span>
-            <span className="text-white">Contact</span>
-          </div>
-
-          {/* Hero Content */}
-          <div className="text-center max-w-3xl mx-auto space-y-6">
-            <div className="flex items-center justify-center gap-3">
-              <Sparkles className="w-8 h-8 text-[#018aBE]" />
-            </div>
-            
-            <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight">
-              Let's Work Together
-            </h1>
-            
-            <p className="text-[#D6E8EE] text-lg lg:text-xl leading-relaxed">
-              Have a project in mind? I'd love to hear about it. Reach out and let's create something amazing together.
-            </p>
-
-            {/* Availability Badge */}
-            <div className="inline-flex items-center gap-2 bg-black/40 backdrop-blur-md border border-gray-700 rounded-full px-6 py-3">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-white font-semibold">Available for new projects</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Contact Methods Section */}
-      <div className="relative px-6 lg:px-12 pb-16">
+      <motion.section
+        variants={stagger()}
+        initial="hidden"
+        animate="show"
+        className="relative z-10 px-6 lg:px-14 pt-28 pb-10"
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-6">
-            {contactMethods.map((method, index) => (
-              <div
-                key={index}
-                className="group bg-black/40 backdrop-blur-md border border-gray-700 hover:border-[#018aBE] rounded-2xl p-8 transition-all duration-300"
-                style={{
-                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
-                }}
-              >
-                <div className="flex flex-col items-center text-center space-y-4">
-                  <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-[#018aBE]/10 group-hover:bg-[#018aBE]/20 transition-colors duration-300">
-                    <method.icon className="w-8 h-8 text-[#018aBE]" />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-white font-bold text-xl mb-2">
-                      {method.title}
-                    </h3>
-                    <p className="text-[#9a9a9a] text-sm mb-3">
-                      {method.description}
-                    </p>
-                    {method.link ? (
-                      <a
-                        href={method.link}
-                        className="text-white font-semibold hover:text-[#018aBE] transition-colors duration-300 break-all"
-                      >
-                        {method.value}
-                      </a>
-                    ) : (
-                      <p className="text-white font-semibold">
-                        {method.value}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <motion.div
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(59,130,246,0.08)] border border-[rgba(96,165,250,0.25)] text-[11px] font-semibold tracking-[0.14em] text-[#93C5FD] uppercase w-fit mb-4"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
+            Available for new projects
+          </motion.div>
+          <motion.h1 variants={fadeUp} className="font-display font-bold text-4xl lg:text-5xl text-[#F3F6FB] mb-3">
+            Let's Work Together
+          </motion.h1>
+          <motion.p variants={fadeUp} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] max-w-lg">
+            Have a project in mind? Tell me about it — I usually reply within a day.
+          </motion.p>
         </div>
-      </div>
+      </motion.section>
 
-      {/* Social Media Section */}
-      <div className="relative px-6 lg:px-12 pb-16">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-12">
-            <div className="inline-block">
-              <h3 className="text-[#018aBE] font-bold text-sm uppercase tracking-wider mb-2">
-                Social Media
-              </h3>
-              <div className="h-1 w-full bg-gradient-to-r from-[#018aBE] via-[#018aBE]/50 to-transparent rounded-full" />
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+        className="relative z-10 px-6 lg:px-14 pb-20"
+      >
+        <div className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(147,197,253,0.15)] bg-gradient-to-br from-[rgba(29,78,216,0.08)] to-[rgba(96,165,250,0.03)] p-8 lg:p-12 grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <div className="text-[11.5px] font-bold tracking-[0.16em] text-[#60A5FA] uppercase mb-4">
+              Contact Details
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mt-6">
-              Connect With Me
-            </h2>
+            <div className="flex flex-col gap-4 mb-6">
+              {contactDetails.map((d) => {
+                const Content = (
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[rgba(147,197,253,0.08)] flex items-center justify-center flex-none">
+                      <d.icon className="text-[#93C5FD]" size={16} />
+                    </div>
+                    <span className="text-[14px] text-[rgba(219,234,254,0.8)]">{d.label}</span>
+                  </div>
+                )
+                return d.href ? (
+                  <a key={d.label} href={d.href} className="hover:opacity-80 transition-opacity duration-300">
+                    {Content}
+                  </a>
+                ) : (
+                  <div key={d.label}>{Content}</div>
+                )
+              })}
+            </div>
+            <div className="flex gap-3">
+              {socialLinks.map((s) => (
+                <motion.a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  whileHover={{ scale: 1.12, y: -2 }}
+                  whileTap={{ scale: 0.94 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
+                  className="w-[38px] h-[38px] rounded-full border border-[rgba(147,197,253,0.2)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[#60A5FA]"
+                >
+                  <s.icon size={15} />
+                </motion.a>
+              ))}
+            </div>
           </div>
 
-          {/* Social Links */}
-          <div className="grid md:grid-cols-3 gap-6">
-            {socialLinks.map((social, index) => (
-              <a
-                key={index}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-black/40 backdrop-blur-md border border-gray-700 hover:border-[#018aBE] rounded-2xl p-8 transition-all duration-300 hover:scale-105"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-[#018aBE]/10 group-hover:bg-[#018aBE]/20 transition-colors duration-300">
-                    <social.icon className="w-7 h-7 text-[#018aBE]" />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-white font-bold text-lg">
-                      {social.name}
-                    </h3>
-                    <p className="text-[#9a9a9a] text-sm">
-                      {social.handle}
-                    </p>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Availability Info */}
-      <div className="relative px-6 lg:px-12 pb-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-6">
-            {availability.map((item, index) => (
-              <div
-                key={index}
-                className="bg-black/40 backdrop-blur-md border border-gray-700 rounded-2xl p-8"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-[#018aBE]/10">
-                    <item.icon className="w-6 h-6 text-[#018aBE]" />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-white font-bold text-lg mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-[#018aBE] font-semibold text-xl mb-2">
-                      {item.value}
-                    </p>
-                    <p className="text-[#9a9a9a] text-sm">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="relative px-6 lg:px-12 pb-20">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-black/40 backdrop-blur-md border border-gray-700 rounded-2xl p-10 lg:p-16 text-center">
-            <Send className="w-12 h-12 text-[#018aBE] mx-auto mb-6" />
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-              Ready to Start?
-            </h2>
-            <p className="text-[#D6E8EE] text-lg mb-8 max-w-2xl mx-auto">
-              Whether you need a logo, flyer, or complete brand identity, I'm here to help bring your vision to life.
-            </p>
-            <a
+          <div className="flex flex-col gap-3.5">
+            <motion.a
               href="mailto:lammydeart@gmail.com"
-              className="inline-flex items-center gap-3 bg-[#018aBE] hover:bg-[#0156a8] text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-300"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              className="flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold"
             >
-              <FaEnvelope />
-              <span>Send Me an Email</span>
-            </a>
+              <FaEnvelope /> Send an email
+            </motion.a>
+            <motion.a
+              href="http://Wa.me/2347015848547"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02, borderColor: "#60A5FA" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              className="flex items-center justify-center gap-2 py-4 px-6 rounded-2xl border border-[rgba(147,197,253,0.25)] text-[#F3F6FB] text-sm font-semibold"
+            >
+              <FaWhatsapp /> WhatsApp me
+            </motion.a>
+            <div className="flex items-center justify-center gap-2 text-[12.5px] text-[rgba(219,234,254,0.45)] pt-2">
+              Response time: <span className="text-[rgba(219,234,254,0.75)] font-semibold">within 24 hours</span>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* CSS Animations */}
-      <style jsx>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 0.6; }
-        }
-        
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+      </motion.section>
     </div>
   )
 }

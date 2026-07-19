@@ -112,7 +112,7 @@ const Service = () => {
             })}
           </div>
 
-          <div className="relative rounded-[20px] border border-[rgba(147,197,253,0.15)] overflow-hidden min-h-[260px] lg:min-h-0">
+          <div className="rounded-[20px] border border-[rgba(147,197,253,0.15)] overflow-hidden flex flex-col">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService.name}
@@ -120,20 +120,23 @@ const Service = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute inset-0"
               >
-                {activeService.img ? (
-                  <img src={activeService.img} alt={activeService.name} className="absolute inset-0 w-full h-full object-cover" />
-                ) : (
-                  <UiMockup />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-30% to-[rgba(2,4,10,0.92)]" />
-                <div className="absolute inset-x-0 bottom-0 p-6">
+                {/* Image caption, not overlay — keeps the write-up legible regardless of what's in the photo */}
+                <div className="relative h-[140px] lg:h-[160px]">
+                  {activeService.img ? (
+                    <img src={activeService.img} alt={activeService.name} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <UiMockup />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] to-transparent" />
+                </div>
+
+                <div className="p-6 bg-gradient-to-br from-[rgba(29,78,216,0.1)] to-[rgba(96,165,250,0.03)]">
                   <div className="w-[42px] h-[42px] rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center mb-3 text-white">
                     <activeService.icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-display text-[22px] font-bold text-white mb-2">{activeService.name}</h3>
-                  <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.75)] max-w-[90%]">{activeService.desc}</p>
+                  <h3 className="font-display text-[22px] font-bold text-[#F3F6FB] mb-2">{activeService.name}</h3>
+                  <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.6)]">{activeService.desc}</p>
                 </div>
               </motion.div>
             </AnimatePresence>
