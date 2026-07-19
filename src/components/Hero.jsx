@@ -1,6 +1,7 @@
 import React from "react"
-import { motion } from "framer-motion"
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
+import { useTypewriter } from "../hooks/useTypewriter"
 import heroImage from "../assets/hero2.JPG"
 
 const stats = [
@@ -15,6 +16,8 @@ const socialLinks = [
   { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
 ]
 
+const roles = ["a Graphic Designer.", "a Web Designer.", "a UI/UX Designer."]
+
 const container = {
   hidden: {},
   show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
@@ -25,9 +28,41 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
 }
 
+const Cursor = () => (
+  <motion.span
+    animate={{ opacity: [1, 1, 0, 0] }}
+    transition={{ duration: 1, repeat: Infinity, times: [0, 0.5, 0.5, 1] }}
+    className="inline-block w-[2px] h-[0.85em] bg-current ml-0.5 align-middle"
+  />
+)
+
 const Hero = () => {
+  const greeting = useTypewriter(["Hi, I'm Lammy"], { loop: false, typingSpeed: 55 })
+  const role = useTypewriter(roles, {
+    loop: true,
+    typingSpeed: 65,
+    deletingSpeed: 32,
+    pauseTime: 1600,
+    startDelay: 1300,
+  })
+
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [7, -7]), { stiffness: 150, damping: 16 })
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-7, 7]), { stiffness: 150, damping: 16 })
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    x.set((e.clientX - rect.left) / rect.width - 0.5)
+    y.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
   return (
-    <section className="relative overflow-hidden bg-[#03050a] pt-24 pb-10 px-6 lg:px-14">
+    <section className="relative overflow-hidden bg-[#03050a] pt-24 pb-8 px-6 lg:px-14">
       {/* Ambient glows */}
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5] }}
@@ -54,17 +89,21 @@ const Hero = () => {
 
           <motion.h1
             variants={item}
-            className="font-display font-bold text-4xl lg:text-5xl leading-[1.1] tracking-[-0.01em] text-[#F3F6FB]"
+            className="font-display font-bold text-4xl lg:text-5xl leading-[1.15] tracking-[-0.01em] text-[#F3F6FB] min-h-[4.6em] lg:min-h-[3.7em]"
           >
-            Designing brands and websites people{" "}
+            <span>
+              {greeting}
+              <Cursor />
+            </span>
+            <br />
             <span className="bg-gradient-to-r from-[#1D4ED8] via-[#60A5FA] to-[#BAE6FD] bg-clip-text text-transparent">
-              actually remember.
+              {role}
+              <Cursor />
             </span>
           </motion.h1>
 
           <motion.p variants={item} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] max-w-md">
-            I'm Olamidé — a graphic and web designer crafting bold visual
-            identities and clean, functional websites.
+            Crafting bold visual identities and clean, functional websites — one project at a time.
           </motion.p>
 
           <motion.div variants={item} className="flex items-center gap-3 flex-wrap">
@@ -135,13 +174,21 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            whileHover={{ y: -4 }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ rotateX, rotateY, transformPerspective: 800 }}
             className="relative w-full max-w-md mx-auto lg:mx-0 aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(147,197,253,0.18)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,30,0.7)] z-[2]"
           >
             <div className="w-full h-full rounded-[20px] overflow-hidden">
-              <img src={heroImage} alt="Olamidé" className="w-full h-full object-cover" loading="lazy" />
+              <img
+                src={heroImage}
+                alt="Olamidé"
+                className="w-full h-full object-cover object-[50%_12%]"
+                loading="lazy"
+              />
             </div>
 
+            {/* Floating badge: rating */}
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
@@ -151,6 +198,26 @@ const Hero = () => {
                 &#9733;
               </div>
               <div className="text-[11px] font-bold text-[#F3F6FB] whitespace-nowrap">4.9 client rating</div>
+            </motion.div>
+
+            {/* Floating badge: availability */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+              className="absolute bottom-4 -left-4 flex items-center gap-2 py-2 px-3 rounded-2xl bg-[rgba(11,21,38,0.85)] backdrop-blur-md border border-[rgba(147,197,253,0.2)] shadow-[0_10px_24px_-10px_rgba(0,0,20,0.6)]"
+            >
+              <span className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
+              <div className="text-[11px] font-bold text-[#F3F6FB] whitespace-nowrap">Available for freelance</div>
+            </motion.div>
+
+            {/* Floating decorative shape cluster */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+              className="absolute -top-5 -left-5 w-12 h-12 pointer-events-none"
+            >
+              <div className="absolute inset-0 rounded-xl border border-[rgba(125,211,252,0.4)]" />
+              <div className="absolute top-2 left-2 w-6 h-6 rounded-lg bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] rotate-12 shadow-[0_6px_16px_-6px_rgba(29,78,216,0.7)]" />
             </motion.div>
           </motion.div>
 

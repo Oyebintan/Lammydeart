@@ -37,7 +37,7 @@ const Service = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
+      className="px-6 lg:px-14 py-10 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
     >
       <div className="max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-6 flex-wrap mb-6">
@@ -52,7 +52,7 @@ const Service = () => {
           </p>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="grid lg:grid-cols-[1fr_1.3fr] gap-5">
+        <motion.div variants={fadeUp} className="grid lg:grid-cols-[1fr_1.15fr] gap-4">
           <div className="flex flex-col gap-2.5">
             {services.map((s, i) => {
               const Icon = s.icon
@@ -94,7 +94,7 @@ const Service = () => {
             })}
           </div>
 
-          <div className="rounded-[20px] border border-[rgba(147,197,253,0.15)] bg-gradient-to-br from-[rgba(29,78,216,0.1)] to-[rgba(96,165,250,0.03)] p-8 flex flex-col justify-center overflow-hidden relative min-h-[220px]">
+          <div className="rounded-[20px] border border-[rgba(147,197,253,0.15)] bg-gradient-to-br from-[rgba(29,78,216,0.1)] to-[rgba(96,165,250,0.03)] p-7 flex flex-col justify-center overflow-hidden relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService.name}
@@ -103,11 +103,16 @@ const Service = () => {
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center mb-4 text-white">
+                <activeService.icon
+                  className="absolute -right-5 -bottom-6 text-[#60A5FA] opacity-[0.07] pointer-events-none"
+                  size={150}
+                  strokeWidth={1}
+                />
+                <div className="relative w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center mb-4 text-white">
                   <activeService.icon className="w-[22px] h-[22px]" />
                 </div>
-                <h3 className="font-display text-[22px] font-bold text-[#F3F6FB] mb-2.5">{activeService.name}</h3>
-                <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.6)]">{activeService.desc}</p>
+                <h3 className="relative font-display text-[22px] font-bold text-[#F3F6FB] mb-2.5">{activeService.name}</h3>
+                <p className="relative text-sm leading-relaxed text-[rgba(219,234,254,0.6)] max-w-[85%]">{activeService.desc}</p>
               </motion.div>
             </AnimatePresence>
           </div>

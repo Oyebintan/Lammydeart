@@ -10,6 +10,10 @@ body {
   background-color: #03050a;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 ::selection {
   background: #3b82f6;
   color: #fff;
@@ -23,16 +27,6 @@ body {
   box-shadow: 0 0 700px 15px white;
   rotate: -30deg;
   z-index: -1;
-}
-
-@keyframes floaty2 {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(12px); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.85; }
 }
 
 @keyframes twinkle {
