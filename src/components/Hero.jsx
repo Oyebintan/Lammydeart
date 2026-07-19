@@ -1,241 +1,140 @@
-import React, { useEffect, useState } from "react"
-import { Sparkles, Palette, PenTool, Layers } from "lucide-react"
-import heroImage from "../assets/hero2.JPG";
+import React from "react"
+import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
+import heroImage from "../assets/hero2.JPG"
 
+const stats = [
+  { value: "3+", label: "Years Experience" },
+  { value: "20+", label: "Projects Done" },
+  { value: "10+", label: "Happy Clients" },
+]
 
-const handEmoji = "👋"
-
-// Typewriter effect component (simplified replacement for react-simple-typewriter)
-const TypewriterText = ({ words }) => {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0)
-  const [currentText, setCurrentText] = useState("")
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  useEffect(() => {
-    const word = words[currentWordIndex]
-    const timeout = setTimeout(
-      () => {
-        if (!isDeleting) {
-          if (currentText.length < word.length) {
-            setCurrentText(word.slice(0, currentText.length + 1))
-          } else {
-            setTimeout(() => setIsDeleting(true), 1000)
-          }
-        } else {
-          if (currentText.length > 0) {
-            setCurrentText(currentText.slice(0, -1))
-          } else {
-            setIsDeleting(false)
-            setCurrentWordIndex((prev) => (prev + 1) % words.length)
-          }
-        }
-      },
-      isDeleting ? 50 : 100
-    )
-    return () => clearTimeout(timeout)
-  }, [currentText, isDeleting, currentWordIndex, words])
-
-  return (
-    <>
-      {currentText}
-      <span className="animate-pulse">|</span>
-    </>
-  )
-}
-
-const HeroCardsData = [
-  {
-    id: 1,
-    title: "Cross-Platform Design",
-    icon: Layers,
-    description: "Crafting cohesive and visually stunning designs for print, digital, and web platforms.",
-  },
-  {
-    id: 2,
-    title: "Logo Design Specialist",
-    icon: Palette,
-    description: "Creating timeless, memorable logos that capture brand identity with clarity and creativity.",
-  },
-  {
-    id: 3,
-    title: "Visual Editing Expert",
-    icon: PenTool,
-    description: "Precision-crafted visuals—skilled in retouching, color correction, and storytelling.",
-  },
+const socialLinks = [
+  { icon: FaInstagram, href: "https://www.instagram.com/lammyde.art", label: "Instagram" },
+  { icon: FaXTwitter, href: "https://x.com/oyebintan?s=21", label: "Twitter" },
+  { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
 ]
 
 const Hero = () => {
-  const words = ["Olamidé", "A CS Student", "A Graphic Designer", "A UI/UX Designer"]
-
   return (
-    <div className="relative overflow-hidden bg-[#0d0d0d] pt-24 pb-16 px-6 lg:px-12">
-      {/* Subtle gradient background that matches navbar */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
-      
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <div className="space-y-6">
-            {/* Greeting */}
-            <div className="flex items-center gap-3">
-              <span className="text-3xl lg:text-4xl animate-wave inline-block origin-[70%_70%]">
-                {handEmoji}
-              </span>
-              <h2 className="text-2xl lg:text-3xl text-[#D6E8EE] font-light">
-                Hi there!
-              </h2>
-            </div>
+    <section className="relative overflow-hidden bg-[#03050a] pt-24 pb-10 px-6 lg:px-14">
+      {/* Ambient glows */}
+      <div className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.3),transparent_70%)] blur-2xl pointer-events-none" />
+      <div className="absolute bottom-[-200px] right-[10%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(125,211,252,0.14),transparent_70%)] blur-2xl pointer-events-none" />
 
-            {/* Main Heading with Typewriter */}
-            <div className="space-y-2">
-              <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
-                I'm{" "}
-                <span className="text-[#018aBE]">
-                  <TypewriterText words={words} />
-                </span>
-              </h1>
-            </div>
-
-            {/* Description */}
-            <p className="text-[#9a9a9a] text-base lg:text-lg leading-relaxed max-w-2xl">
-              A <span className="text-white font-semibold">Graphic Designer</span> passionate
-              about crafting visually compelling, clean, and modern designs that
-              communicate clearly and captivate users across both digital and print
-              media.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <a
-                href="/project"
-                className="group bg-[#018aBE] hover:bg-[#0156a8] text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 flex items-center gap-2"
-              >
-                <span>View My Work</span>
-                <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-              </a>
-              <a
-                href="/contact"
-                className="bg-transparent border border-gray-200 hover:border-[#018aBE] text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300"
-              >
-                Contact Me
-              </a>
-            </div>
-
-            {/* Stats/Tags */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <div className="flex items-center gap-2 text-[#9a9a9a] text-sm">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span>Available for freelance</span>
-              </div>
-              <div className="w-px h-5 bg-gray-700" />
-              <div className="text-[#9a9a9a] text-sm">
-                <span className="text-white font-semibold">3+</span> years experience
-              </div>
-            </div>
+      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+        {/* Text content */}
+        <div className="flex flex-col gap-5">
+          <div className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(59,130,246,0.08)] border border-[rgba(96,165,250,0.25)] text-[11px] font-semibold tracking-[0.14em] text-[#93C5FD] uppercase w-fit">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] shadow-[0_0_8px_#60A5FA]" />
+            Graphic Designer + Web Designer
           </div>
 
-          {/* Hero Image */}
-          <div className="relative lg:ml-auto">
-            {/* Glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#018aBE]/20 to-transparent rounded-3xl blur-3xl" />
-            
-            {/* Image */}
-            <div className="relative">
-              <img
-                src={heroImage}
-                alt="Olamidé"
-                className="w-full max-w-md mx-auto rounded-3xl rounded-b-[100px] shadow-2xl"
-                loading="lazy"
-              />
-              
-              {/* Floating badge */}
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-md border border-gray-700 rounded-full px-6 py-3 flex items-center gap-3 shadow-xl">
-                <div className="w-3 h-3 rounded-full bg-[#018aBE] animate-pulse" />
-                <span className="text-white font-semibold text-xs lg:text-base">Open to work</span>
+          <h1 className="font-display font-bold text-4xl lg:text-5xl leading-[1.1] tracking-[-0.01em] text-[#F3F6FB]">
+            Designing brands and websites people{" "}
+            <span className="bg-gradient-to-r from-[#1D4ED8] via-[#60A5FA] to-[#BAE6FD] bg-clip-text text-transparent">
+              actually remember.
+            </span>
+          </h1>
+
+          <p className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] max-w-md">
+            I'm Olamidé — a graphic and web designer crafting bold visual
+            identities and clean, functional websites.
+          </p>
+
+          <div className="flex items-center gap-3 flex-wrap">
+            <a
+              href="/project"
+              className="flex items-center gap-2 px-[22px] py-[10px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)] transition-transform duration-300 hover:scale-105"
+            >
+              View my work <span>&#8594;</span>
+            </a>
+            <a
+              href="/contact"
+              className="flex items-center gap-2 px-[22px] py-[10px] rounded-full border border-[rgba(147,197,253,0.25)] text-[#F3F6FB] text-sm font-semibold transition-colors duration-300 hover:border-[#60A5FA]"
+            >
+              Let's talk
+            </a>
+          </div>
+
+          <div className="flex items-center gap-4">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="w-[30px] h-[30px] rounded-full border border-[rgba(147,197,253,0.2)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[#60A5FA] transition-colors duration-300"
+              >
+                <social.icon className="w-3.5 h-3.5" />
+              </a>
+            ))}
+          </div>
+
+          <div className="flex gap-7 pt-3 border-t border-[rgba(147,197,253,0.12)]">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <div className="font-display text-xl font-bold text-[#F3F6FB]">{stat.value}</div>
+                <div className="text-[11px] text-[rgba(219,234,254,0.5)] mt-0.5">{stat.label}</div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* Wave animation keyframes */}
-      <style jsx>{`
-        @keyframes wave {
-          0%, 100% { transform: rotate(0deg); }
-          10%, 30% { transform: rotate(14deg); }
-          20% { transform: rotate(-8deg); }
-          40% { transform: rotate(-4deg); }
-          50% { transform: rotate(10deg); }
-        }
-        .animate-wave {
-          animation: wave 2.5s ease-in-out infinite;
-        }
-      `}</style>
-    </div>
-  )
-}
+        {/* Visual */}
+        <div className="relative flex flex-col gap-4">
+          <div className="absolute -top-4 right-0 w-44 h-44 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.28),rgba(29,78,216,0.1)_60%,transparent_75%)] blur-sm animate-[pulseGlow_4.5s_ease-in-out_infinite] pointer-events-none" />
 
-const HeroCards = () => {
-  return (
-    <div className="relative bg-[#0d0d0d] px-6 lg:px-12 py-16">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {HeroCardsData.map((card, index) => {
-            const Icon = card.icon
-            return (
-              <div
-                key={card.id}
-                className="group bg-black/40 backdrop-blur-md border border-gray-700 hover:border-[#018aBE] rounded-lg p-6 transition-all duration-300"
-                style={{
-                  animation: `fadeInUp 0.6s ease-out ${index * 0.15}s both`
-                }}
-              >
-                {/* Header */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-[#018aBE]/10 group-hover:bg-[#018aBE]/20 transition-colors duration-300">
-                    <Icon className="w-6 h-6 text-[#018aBE]" />
-                  </div>
-                  <h3 className="text-white font-bold text-base leading-tight">
-                    {card.title}
-                  </h3>
+          <div className="relative w-full max-w-md mx-auto lg:mx-0 aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(147,197,253,0.18)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,30,0.7)] z-[2]">
+            <div className="w-full h-full rounded-[20px] overflow-hidden">
+              <img src={heroImage} alt="Olamidé" className="w-full h-full object-cover" loading="lazy" />
+            </div>
+
+            <div className="absolute top-3 -right-3.5 flex items-center gap-2 py-2 px-3 rounded-2xl bg-[rgba(11,21,38,0.85)] backdrop-blur-md border border-[rgba(147,197,253,0.2)] shadow-[0_10px_24px_-10px_rgba(0,0,20,0.6)] animate-[floaty2_5.5s_ease-in-out_infinite]">
+              <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-[11px] text-white">
+                &#9733;
+              </div>
+              <div className="text-[11px] font-bold text-[#F3F6FB] whitespace-nowrap">4.9 client rating</div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0 w-full">
+            <div className="rounded-[18px] bg-[rgba(147,197,253,0.04)] border border-[rgba(147,197,253,0.14)] p-3.5 flex flex-col justify-between gap-2">
+              <div className="text-[10.5px] font-bold tracking-[0.08em] uppercase text-[rgba(219,234,254,0.5)]">
+                Palette
+              </div>
+              <div className="flex gap-1.5">
+                <span className="w-4.5 h-4.5 rounded-md bg-[#0b1526]" />
+                <span className="w-4.5 h-4.5 rounded-md bg-[#1D4ED8]" />
+                <span className="w-4.5 h-4.5 rounded-md bg-[#60A5FA]" />
+                <span className="w-4.5 h-4.5 rounded-md bg-[#BAE6FD]" />
+              </div>
+            </div>
+            <div className="rounded-[18px] bg-gradient-to-br from-[rgba(29,78,216,0.14)] to-[rgba(96,165,250,0.05)] border border-[rgba(147,197,253,0.14)] p-3.5 flex flex-col justify-between items-start gap-2">
+              <div className="text-[10.5px] font-bold tracking-[0.08em] uppercase text-[rgba(219,234,254,0.5)]">
+                Mark
+              </div>
+              <div className="font-display text-[26px] font-bold bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent">
+                L.
+              </div>
+            </div>
+            <div className="relative rounded-[18px] bg-[rgba(147,197,253,0.04)] border border-[rgba(147,197,253,0.14)] p-3.5 flex flex-col justify-between gap-2 overflow-hidden">
+              <div className="absolute -top-2.5 -right-2.5 w-9 h-9 rounded-[10px] bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] opacity-50" />
+              <div className="text-[10.5px] font-bold tracking-[0.08em] uppercase text-[rgba(219,234,254,0.5)]">
+                In progress
+              </div>
+              <div>
+                <div className="text-[11.5px] font-bold text-[#F3F6FB] mb-1.5">Ad Campaign</div>
+                <div className="h-1 rounded-full bg-[rgba(147,197,253,0.15)] overflow-hidden">
+                  <div className="h-full w-[65%] rounded-full bg-gradient-to-r from-[#1D4ED8] to-[#7DD3FC]" />
                 </div>
-
-                {/* Description */}
-                <p className="text-[#9a9a9a] text-sm leading-relaxed">
-                  {card.description}
-                </p>
-
-                {/* Bottom accent line */}
-                <div className="mt-4 h-1 w-0 bg-gradient-to-r from-[#018aBE] to-transparent group-hover:w-full transition-all duration-500" />
               </div>
-            )
-          })}
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Animations */}
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
-    </div>
+    </section>
   )
 }
 
-// Combined export for demo
-export default function HeroSection() {
-  return (
-    <>
-      <Hero />
-      <HeroCards />
-    </>
-  )
-}
+export default Hero

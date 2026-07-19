@@ -1,11 +1,23 @@
 import React, { useState, useEffect, useRef } from "react"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
-import logo from "../../assets/logo.png"
+import { Link } from "react-router-dom"
+
+const Logo = () => (
+  <Link to="/" className="font-display font-bold text-[19px] text-[#F3F6FB] tracking-[0.02em] z-50">
+    Lammy
+    <span className="bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent">
+      deart
+    </span>
+  </Link>
+)
 
 const Button = () => (
-  <button className="hidden lg:block bg-[#018aBE] hover:bg-[#0156a8] px-4 py-2 rounded-lg font-semibold text-white transition-colors duration-300">
-    Hire Me!
-  </button>
+  <Link
+    to="/contact"
+    className="hidden lg:flex items-center gap-2 px-[18px] py-[9px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-[13.5px] font-semibold transition-transform duration-300 hover:scale-105"
+  >
+    Let's talk <span>&#8594;</span>
+  </Link>
 )
 
 const Checkbox = ({ setIsMenuVisible, checkboxRef }) => (
@@ -84,30 +96,27 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(147,197,253,0.1)] ${
           scrolled
-            ? "bg-[#0d0d0d]/95 backdrop-blur-xl shadow-lg shadow-black/20"
-            : "bg-[#0d0d0d]/80 backdrop-blur-sm"
+            ? "bg-[#03050a]/95 backdrop-blur-xl shadow-lg shadow-black/20"
+            : "bg-[#03050a]/75 backdrop-blur-md"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <a href="/" className="flex items-center z-50">
-              <img src={logo} alt="Logo" className="h-8 lg:h-6 transition-all duration-300" />
-            </a>
+          <div className="flex items-center justify-between h-16 lg:h-[72px]">
+            <Logo />
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.path}
-                  href={link.path}
-                  className="relative px-4 py-2 text-[#c1c1c1] hover:text-white font-medium transition-colors duration-300 group"
+                  to={link.path}
+                  className="relative px-4 py-2 text-[rgba(219,234,254,0.75)] hover:text-white text-[13.5px] font-medium transition-colors duration-300 group"
                 >
                   {link.name}
-                  <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#018aBE] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                </a>
+                  <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#60A5FA] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </Link>
               ))}
             </div>
 
@@ -121,7 +130,7 @@ const Navbar = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#1a1a1a] text-[#c1c1c1] hover:bg-[#018aBE] hover:text-white transition-all duration-300"
+                    className="flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(147,197,253,0.2)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
                     aria-label={social.label}
                   >
                     <social.icon className="w-4 h-4" />
@@ -130,7 +139,7 @@ const Navbar = () => {
               </div>
 
               {/* Divider */}
-              <div className="w-px h-6 bg-[#202020]"></div>
+              <div className="w-px h-6 bg-[rgba(147,197,253,0.15)]"></div>
 
               {/* Button */}
               <Button />
@@ -145,7 +154,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div
         ref={menuRef}
-        className={`fixed top-0 right-0 h-screen w-72 bg-[#0d0d0d] border-l border-[#202020] transform transition-transform duration-300 ease-in-out z-40 lg:hidden ${
+        className={`fixed top-0 right-0 h-screen w-72 bg-[#03050a] border-l border-[rgba(147,197,253,0.12)] transform transition-transform duration-300 ease-in-out z-40 lg:hidden ${
           isMenuVisible ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -153,31 +162,32 @@ const Navbar = () => {
           {/* Mobile Navigation Links */}
           <div className="flex flex-col gap-2 mb-8">
             {navLinks.map((link, index) => (
-              <a
+              <Link
                 key={link.path}
-                href={link.path}
+                to={link.path}
                 onClick={closeMenu}
-                className="text-[#c1c1c1] hover:text-white hover:bg-[#1a1a1a] px-4 py-3 rounded-lg font-medium transition-all duration-300"
+                className="text-[rgba(219,234,254,0.75)] hover:text-white hover:bg-[rgba(147,197,253,0.06)] px-4 py-3 rounded-lg font-medium transition-all duration-300"
                 style={{
                   animation: isMenuVisible ? `slideIn 0.3s ease-out ${index * 0.1}s both` : 'none'
                 }}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
 
           {/* Mobile CTA Button */}
-          <a
-            href="/contact"
-            className="bg-[#018aBE] hover:bg-[#0156a8] text-white font-semibold py-3 px-6 rounded-lg text-center transition-colors duration-300 mb-8"
+          <Link
+            to="/contact"
+            onClick={closeMenu}
+            className="bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white font-semibold py-3 px-6 rounded-full text-center transition-transform duration-300 mb-8"
           >
-            Hire Me!
-          </a>
+            Let's talk
+          </Link>
 
           {/* Mobile Social Links */}
           <div className="mt-auto pb-8">
-            <p className="text-[#9a9a9a] text-sm mb-4">Follow me</p>
+            <p className="text-[rgba(219,234,254,0.5)] text-sm mb-4">Follow me</p>
             <div className="flex items-center gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -185,7 +195,7 @@ const Navbar = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#1a1a1a] text-[#c1c1c1] hover:bg-[#018aBE] hover:text-white transition-all duration-300"
+                  className="flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(147,197,253,0.2)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
@@ -205,7 +215,7 @@ const Navbar = () => {
       )}
 
       {/* CSS Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes slideIn {
           from {
             opacity: 0;
