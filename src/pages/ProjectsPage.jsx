@@ -1,8 +1,10 @@
 import React from 'react'
 import gradient from '../assets/lgradient.png'
 import Projects from '../components/Projects'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 const ProjectsPage = () => {
+  usePageTitle("Projects")
   return (
     <div className='min-h-screen'>
       <img 

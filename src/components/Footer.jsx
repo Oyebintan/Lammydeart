@@ -1,159 +1,103 @@
-import React from 'react'
-import { Heart, ArrowUp } from 'lucide-react'
-import {
-  FaXTwitter,
-  FaInstagram,
-  FaWhatsapp,
-  FaEnvelope,
-} from "react-icons/fa6"
+import React from "react"
+import { motion } from "framer-motion"
+import { ArrowUp } from "lucide-react"
+import { Link } from "react-router-dom"
+import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
+import { fadeUp, viewportOnce } from "../motion"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const socialLinks = [
-    {
-      icon: FaInstagram,
-      url: "https://www.instagram.com/lammyde.art?igsh=MWs5b2ZjOWFjeHBvMQ%3D%3D&utm_source=qr",
-      label: "Instagram"
-    },
-    {
-      icon: FaXTwitter,
-      url: "https://x.com/oyebintan?s=21",
-      label: "Twitter"
-    },
-    {
-      icon: FaWhatsapp,
-      url: "http://Wa.me/2347015848547",
-      label: "WhatsApp"
-    },
-    {
-      icon: FaEnvelope,
-      url: "mailto:lammydeart@gmail.com",
-      label: "Email"
-    },
+    { icon: FaInstagram, url: "https://www.instagram.com/lammyde.art?igsh=MWs5b2ZjOWFjeHBvMQ%3D%3D&utm_source=qr", label: "Instagram" },
+    { icon: FaXTwitter, url: "https://x.com/oyebintan?s=21", label: "Twitter" },
+    { icon: FaWhatsapp, url: "http://Wa.me/2347015848547", label: "WhatsApp" },
+    { icon: FaEnvelope, url: "mailto:lammydeart@gmail.com", label: "Email" },
   ]
 
   const quickLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
+    { name: "Projects", href: "/project" },
     { name: "Contact", href: "/contact" },
   ]
 
   return (
-    <footer className="relative mt-10 px-6 lg:px-12 pb-6">
-      {/* Decorative gradient line */}
-      <div className="h-[2px] bg-gradient-to-r from-transparent via-[#018aBE] to-transparent mb-12" />
+    <motion.footer
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewportOnce}
+      className="px-6 lg:px-14 py-7 border-t border-[rgba(147,197,253,0.1)]"
+    >
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 flex-wrap">
+        <Link to="/" className="font-display font-bold text-[15px] text-[#F3F6FB]">
+          Lammy
+          <span className="bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent">
+            deart
+          </span>
+        </Link>
 
-      {/* Main footer content */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-        {/* Brand Section */}
-        <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-white">Olamide</h3>
-          <p className="text-[#9a9a9a] text-sm leading-relaxed">
-            Crafting memorable designs that help brands stand out and connect with their audience.
-          </p>
-          <div className="flex items-center gap-2 text-[#9a9a9a] text-sm">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span>Available for freelance</span>
-          </div>
+        <div className="flex gap-6 flex-wrap justify-center">
+          {quickLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              className="text-[12.5px] text-[rgba(219,234,254,0.55)] hover:text-white transition-colors duration-300"
+            >
+              {link.name}
+            </Link>
+          ))}
         </div>
 
-        {/* Quick Links */}
-        <div className="space-y-4">
-          <h4 className="text-white font-semibold text-lg">Quick Links</h4>
-          <ul className="space-y-2">
-            {quickLinks.map((link, index) => (
-              <li key={index}>
-                <a
-                  href={link.href}
-                  className="text-[#9a9a9a] hover:text-[#018aBE] transition-colors duration-300 text-sm flex items-center gap-2 group"
-                >
-                  <span className="w-0 h-[2px] bg-[#018aBE] group-hover:w-4 transition-all duration-300" />
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Services */}
-        <div className="space-y-4">
-          <h4 className="text-white font-semibold text-lg">Services</h4>
-          <ul className="space-y-2 text-[#9a9a9a] text-sm">
-            <li>Logo Design</li>
-            <li>Flyer Design</li>
-            <li>UI & UX Design</li>
-            <li>Branding</li>
-          </ul>
-        </div>
-
-        {/* Connect */}
-        <div className="space-y-4">
-          <h4 className="text-white font-semibold text-lg">Connect</h4>
-          <div className="flex items-center gap-3">
-            {socialLinks.map((social, index) => (
-              <a
-                key={index}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#1a1a1a] text-[#9a9a9a] hover:bg-[#018aBE] hover:text-white transition-all duration-300 hover:scale-110 hover:-translate-y-1"
-                aria-label={social.label}
-              >
-                <social.icon size={18} />
-              </a>
-            ))}
-          </div>
-          <a
-            href="mailto:lammydeart@gmail.com"
-            className="text-[#9a9a9a] hover:text-[#018aBE] transition-colors duration-300 text-sm block"
-          >
-            lammydeart@gmail.com
-          </a>
-        </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-[#202020] pt-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Copyright */}
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-sm text-[#9a9a9a]">
-            <span>© {currentYear} Olamide.</span>
-            <span className="hidden md:inline">•</span>
-            <span>All rights reserved</span>
-          </div>
-
-          {/* Credit */}
-          <div className="flex items-center gap-2 text-sm text-[#9a9a9a]">
-            <span>Designed with</span>
-            <Heart className="w-4 h-4 text-red-500 animate-pulse" />
-            <span>by</span>
-            <a
-              href="https://domstack.vercel.app"
+        <div className="flex items-center gap-3">
+          {socialLinks.map((social) => (
+            <motion.a
+              key={social.label}
+              href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white font-semibold hover:text-[#018aBE] transition-colors duration-300"
+              aria-label={social.label}
+              whileHover={{ scale: 1.12, y: -2 }}
+              whileTap={{ scale: 0.94 }}
+              transition={{ type: "spring", stiffness: 400, damping: 18 }}
+              className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(147,197,253,0.18)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA]"
             >
-              Dominion
-            </a>
-            {/* Scroll to top button */}
-          <button
+              <social.icon size={13} />
+            </motion.a>
+          ))}
+          <motion.button
             onClick={scrollToTop}
-            className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#1a1a1a] text-[#9a9a9a] hover:bg-[#018aBE] hover:text-white mx-4 transition-all duration-300 hover:scale-110 group"
             aria-label="Scroll to top"
+            whileHover={{ scale: 1.12, y: -2 }}
+            whileTap={{ scale: 0.94 }}
+            transition={{ type: "spring", stiffness: 400, damping: 18 }}
+            className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(147,197,253,0.18)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA]"
           >
-            <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
-          </button>
-          </div>
-
+            <ArrowUp size={14} />
+          </motion.button>
         </div>
       </div>
-    </footer>
+
+      <div className="max-w-7xl mx-auto mt-5 pt-4 border-t border-[rgba(147,197,253,0.08)] flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-[rgba(219,234,254,0.35)]">
+        <span>&copy; {currentYear} Lammydeart. All rights reserved.</span>
+        <span>
+          Designed with care by{" "}
+          <a
+            href="https://domstack.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[rgba(219,234,254,0.55)] hover:text-white transition-colors duration-300"
+          >
+            Dominion
+          </a>
+        </span>
+      </div>
+    </motion.footer>
   )
 }
 

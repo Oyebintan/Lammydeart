@@ -8,6 +8,7 @@ import {
   FaLocationDot,
 } from "react-icons/fa6"
 import { Sparkles, Clock, Globe, Send } from "lucide-react"
+import { usePageTitle } from "../hooks/usePageTitle"
 
 // Star component
 const Star = ({ style }) => (
@@ -15,6 +16,7 @@ const Star = ({ style }) => (
 )
 
 const ContactPage = () => {
+  usePageTitle("Contact")
   const [stars, setStars] = useState([])
 
   // Generate stars

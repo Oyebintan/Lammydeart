@@ -1,103 +1,88 @@
-import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import ReactStars from "react-stars";
+import React from "react"
+import { motion } from "framer-motion"
+import { Star } from "lucide-react"
+import { fadeUp, stagger, viewportOnce } from "../motion"
 
-const Review = [
+const reviews = [
   {
     id: 1,
     name: "Becky B.",
-    message:
-      "Choosing Olamide for my flyer project was a game-changer. He captured the message perfectly and delivered a bold, eye-catching design that brought the vision to life. Professional, timely, and full of creative energy",
-    rating: 4.5,
+    initials: "BB",
     role: "Beauty brand Founder",
+    rating: 4.5,
+    message:
+      "Choosing Olamide for my flyer project was a game-changer. He captured the message perfectly and delivered a bold, eye-catching design that brought the vision to life.",
   },
   {
     id: 2,
     name: "Funbi O.",
-    message:
-      "Olamide transformed my product with thoughtful, intuitive UI/UX design. He grasped my goals quickly and crafted an experience that feels effortless and on-brand. Super professional and a pleasure to work with",
-    rating: 4.5,
+    initials: "FO",
     role: "E-commerce Merchant",
+    rating: 4.5,
+    message:
+      "Olamide transformed my product with thoughtful, intuitive UI/UX design. He grasped my goals quickly and crafted an experience that feels effortless and on-brand.",
   },
   {
     id: 3,
     name: "Bola A.",
-    message:
-      "Working with Olamide on my logo was the best decisions I made for my brand. He immediately understood my vision and created a mark that truly represents my identity. Clean and delivered with precision.",
-    rating: 5,
+    initials: "BA",
     role: "Real Estate Founder",
+    rating: 5,
+    message:
+      "Working with Olamide on my logo was the best decision I made for my brand. He immediately understood my vision and created a mark that truly represents my identity.",
   },
-];
+]
+
+const StarRating = ({ rating }) => (
+  <div className="flex items-center gap-0.5 text-[#60A5FA] mb-3">
+    {[1, 2, 3, 4, 5].map((n) => (
+      <Star key={n} size={14} fill={n <= rating ? "currentColor" : "none"} strokeWidth={1.5} />
+    ))}
+  </div>
+)
 
 const Testimonial = () => {
-  const settings = {
-    dots: false,
-    arrows: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
-
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          infinite: true,
-          arrows: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          infinite: true,
-          arrows: true,
-          dots: true,
-        },
-      },
-    ],
-  };
-
   return (
-    <div className="lg:px-12 px-6 mt-20">
-      {/* header */}
-      <div className="flex flex-wrap items-center gap-6">
-        <h1 className="text-4xl font-semibold text-white">My Clients</h1>
-        <div className="w-[500px] bg-[#202020] h-[1px] lg:w-[920px]"></div>
-      </div>
-      {/* body */}
-      <div className="my-12">
-        <Slider {...settings}>
-          {Review.map((item) => (
-            <div key={item.id}>
-              <div className="py-5 px-6 rounded-xl bg-[#121212] w-92">
-                <p className="text-[#c1c1c1] font-semibold">"{item.message}"</p>
-                <div className="mt-8 flex gap-2 items-center">
-                  <p className="text-white">{item.name}</p>
-                  <div className=" bg-[#202020] h-[1px] w-50"></div>
+    <motion.section
+      variants={stagger()}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewportOnce}
+      className="px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
+    >
+      <div className="max-w-7xl mx-auto">
+        <motion.div variants={fadeUp} className="mb-6">
+          <div className="text-[11.5px] font-bold tracking-[0.16em] text-[#60A5FA] uppercase mb-2">
+            Testimonials
+          </div>
+          <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">Kind words from clients</h2>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4.5">
+          {reviews.map((t) => (
+            <motion.div
+              key={t.id}
+              variants={fadeUp}
+              whileHover={{ y: -5, borderColor: "rgba(96,165,250,0.35)" }}
+              className="rounded-[20px] border border-[rgba(147,197,253,0.14)] bg-[rgba(147,197,253,0.03)] p-6"
+            >
+              <StarRating rating={t.rating} />
+              <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.75)] mb-4">&ldquo;{t.message}&rdquo;</p>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-[12.5px] font-bold text-white">
+                  {t.initials}
                 </div>
-                <div className="mt-8 flex justify-between items-center">
-                  <p className="text-white text-sm text-[#c1c1c1]">
-                    {item.role}
-                  </p>
-                  <ReactStars
-                    count={5}
-                    value={item.rating}
-                    size={24}
-                    color2={"#fbc800"}
-                    edit={false}
-                  />
+                <div>
+                  <div className="text-[13px] font-bold text-[#F3F6FB]">{t.name}</div>
+                  <div className="text-[11.5px] text-[rgba(219,234,254,0.45)]">{t.role}</div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </Slider>
+        </div>
       </div>
-    </div>
-  );
-};
+    </motion.section>
+  )
+}
 
-export default Testimonial;
+export default Testimonial
