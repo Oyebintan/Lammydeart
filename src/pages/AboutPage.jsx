@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { FaArrowRight } from "react-icons/fa6"
 import img  from "../assets/hero2.JPG"
 import { Sparkles, Palette, Layout, Lightbulb } from "lucide-react"
+import { usePageTitle } from "../hooks/usePageTitle"
 
 const Skills = [
   "Branding",
@@ -31,8 +32,9 @@ const Star = ({ style }) => (
 )
 
 const AboutPage = () => {
+  usePageTitle("About")
   const [stars, setStars] = useState([])
-  
+
   // Generate stars
   useEffect(() => {
     const generateStars = () => {

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion"
 import { fadeUp, stagger, viewportOnce } from "../motion"
 import p1 from "../assets/projects/p1.jpg"
 import p2 from "../assets/projects/p2.jpg"
@@ -18,6 +18,66 @@ const projects = [
 ]
 
 const filterList = ["All", "Logo Design", "Flyer Design", "Poster Design"]
+
+const ProjectCard = ({ p }) => {
+  const [hovered, setHovered] = useState(false)
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const springX = useSpring(x, { stiffness: 300, damping: 28 })
+  const springY = useSpring(y, { stiffness: 300, damping: 28 })
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    x.set(e.clientX - rect.left)
+    y.set(e.clientY - rect.top)
+  }
+
+  return (
+    <motion.a
+      layout
+      href="/project"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -4 }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative rounded-[20px] overflow-hidden border border-[rgba(147,197,253,0.14)] aspect-[4/3] block"
+    >
+      <motion.img
+        src={p.img}
+        alt={p.title}
+        whileHover={{ scale: 1.1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 flex flex-col justify-end p-4.5 bg-gradient-to-b from-transparent from-40% to-[rgba(2,4,10,0.85)]">
+        <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[#93C5FD] mb-1">
+          {p.category}
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="font-display text-lg font-bold text-white">{p.title}</div>
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-white text-[15px]">
+            &#8599;
+          </div>
+        </div>
+      </div>
+
+      {/* Cursor-follow hint (pointer devices only) */}
+      <motion.div
+        style={{ left: springX, top: springY }}
+        animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.8 }}
+        transition={{ duration: 0.15 }}
+        className="hidden lg:flex absolute -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 py-2 px-4 rounded-full bg-white text-[#03050a] text-xs font-bold pointer-events-none z-20 whitespace-nowrap"
+      >
+        View Project <span>&#8599;</span>
+      </motion.div>
+    </motion.a>
+  )
+}
 
 const HeroPrj = ({ times = 6 }) => {
   const [filter, setFilter] = useState("All")
@@ -73,37 +133,7 @@ const HeroPrj = ({ times = 6 }) => {
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (
-              <motion.a
-                key={p.id}
-                layout
-                href="/project"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -4 }}
-                className="group relative rounded-[20px] overflow-hidden border border-[rgba(147,197,253,0.14)] aspect-[4/3] block"
-              >
-                <motion.img
-                  src={p.img}
-                  alt={p.title}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 flex flex-col justify-end p-4.5 bg-gradient-to-b from-transparent from-40% to-[rgba(2,4,10,0.85)]">
-                  <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[#93C5FD] mb-1">
-                    {p.category}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="font-display text-lg font-bold text-white">{p.title}</div>
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-white text-[15px]">
-                      &#8599;
-                    </div>
-                  </div>
-                </div>
-              </motion.a>
+              <ProjectCard key={p.id} p={p} />
             ))}
           </AnimatePresence>
         </motion.div>

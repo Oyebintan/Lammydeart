@@ -1,9 +1,10 @@
 import HomePage from "./pages/HomePage"
-import ProjectsPage from "./pages/ProjectsPage" 
+import ProjectsPage from "./pages/ProjectsPage"
 import Mainlayout from "./layouts/MainLayout"
 import AboutPage from "./pages/AboutPage"
 import ContactPage from "./pages/ContactPage"
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom"
+import { MotionConfig } from "framer-motion"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +22,9 @@ const router = createBrowserRouter(
 function App() {
 
   return (
-    <RouterProvider router={router} />
+    <MotionConfig reducedMotion="user">
+      <RouterProvider router={router} />
+    </MotionConfig>
   )
 }
 
