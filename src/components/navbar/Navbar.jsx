@@ -131,7 +131,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(147,197,253,0.1)] ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(147,197,253,0.1)] will-change-transform ${
           scrolled || isMenuVisible
             ? "bg-[#03050a]/95 backdrop-blur-xl shadow-lg shadow-black/20"
             : "bg-[#03050a]/75 backdrop-blur-md"
@@ -221,7 +221,7 @@ const Navbar = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="fixed top-0 right-0 h-dvh w-72 bg-[#03050a] border-l border-[rgba(147,197,253,0.12)] z-40 lg:hidden overflow-y-auto"
+            className="fixed inset-y-0 right-0 w-72 bg-[#03050a] border-l border-[rgba(147,197,253,0.12)] z-40 lg:hidden overflow-y-auto"
           >
             <div className="flex flex-col h-full pt-24 px-6">
               <motion.div
