@@ -9,15 +9,15 @@ import p8 from "../assets/projects/p8.jpg"
 import p9 from "../assets/projects/p9.jpg"
 
 export const projects = [
-  { id: 1, title: "Brand Identity Design", category: "Logo Design", img: p1, description: "Modern logo concept with clean typography and a distinctive brand mark." },
+  { id: 1, title: "Campus Election Campaign", category: "Poster Design", img: p1, description: "Campaign poster for a student union candidate, built around a bold portrait and clear ballot messaging." },
   { id: 2, title: "Event Promotion", category: "Flyer Design", img: p2, description: "Eye-catching promotional flyer with bold colors and a dynamic layout." },
-  { id: 3, title: "Corporate Branding", category: "Logo Design", img: p3, description: "Professional business logo featuring minimalist design principles." },
-  { id: 4, title: "Social Media Campaign", category: "Poster Design", img: p4, description: "Vibrant poster design optimized for digital marketing channels." },
-  { id: 5, title: "Product Launch", category: "Flyer Design", img: p5, description: "Creative product showcase with emphasis on visual hierarchy." },
-  { id: 6, title: "Startup Branding", category: "Logo Design", img: p6, description: "Innovative logo combining modern aesthetics with brand storytelling." },
-  { id: 7, title: "Concert Advertisement", category: "Poster Design", img: p7, description: "Bold event poster with striking typography and color scheme." },
-  { id: 8, title: "Business Promotion", category: "Flyer Design", img: p8, description: "Professional marketing flyer with clear call-to-action elements." },
-  { id: 9, title: "Tech Company Branding", category: "Logo Design", img: p9, description: "Contemporary tech logo with geometric shapes and a modern palette." },
+  { id: 3, title: "Rexona Giveaway Campaign", category: "Flyer Design", img: p3, description: "Promotional flyer for a campus product giveaway, designed to grab attention and drive turnout." },
+  { id: 4, title: "Cultural Festival Poster", category: "Poster Design", img: p4, description: "Vibrant festival poster blending traditional imagery with bold modern typography." },
+  { id: 5, title: "Laundry Service Flyer", category: "Flyer Design", img: p5, description: "Clean service flyer for a laundry and dry-cleaning business, built for quick scanning and easy contact." },
+  { id: 6, title: "Eid Mubarak Greeting", category: "Poster Design", img: p6, description: "Festive seasonal greeting poster combining warm imagery with elegant typography." },
+  { id: 7, title: "Gadget Store Promo", category: "Flyer Design", img: p7, description: "Product-forward promotional flyer for an electronics and gadgets store." },
+  { id: 8, title: "Perfume & Skincare Flyer", category: "Flyer Design", img: p8, description: "Brand flyer for a beauty vendor, pairing product photography with a clean, feminine layout." },
+  { id: 9, title: "Happy New Month Poster", category: "Poster Design", img: p9, description: "Uplifting monthly greeting poster designed for social media sharing." },
 ]
 
-export const projectCategories = ["All", "Logo Design", "Flyer Design", "Poster Design"]
+export const projectCategories = ["All", "Flyer Design", "Poster Design"]

@@ -4,7 +4,6 @@ import { Palette, Megaphone, PenTool, LayoutGrid, ArrowRight } from "lucide-reac
 import { fadeUp, stagger, viewportOnce } from "../motion"
 import brandingImg from "../assets/projects/p1.jpg"
 import socialAdsImg from "../assets/projects/p4.jpg"
-import logoImg from "../assets/projects/p9.jpg"
 
 const services = [
   {
@@ -22,13 +21,15 @@ const services = [
   {
     name: "Logo Design",
     icon: PenTool,
-    img: logoImg,
+    img: null,
+    mockup: "logo",
     desc: "Sharp, distinctive marks — from concept sketches to a full logo suite ready for any application.",
   },
   {
     name: "UI Design",
     icon: LayoutGrid,
     img: null,
+    mockup: "ui",
     desc: "Clean, pixel-perfect interfaces and design systems that balance usability with a strong visual point of view.",
   },
 ]
@@ -40,6 +41,22 @@ const UiMockup = () => (
       <div className="h-16 rounded-lg bg-[rgba(147,197,253,0.1)]" />
       <div className="h-2 w-full rounded bg-[rgba(147,197,253,0.15)]" />
       <div className="h-2 w-4/5 rounded bg-[rgba(147,197,253,0.15)]" />
+    </div>
+  </div>
+)
+
+const LogoMockup = () => (
+  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0b1526] to-[#0a1120]">
+    <div className="flex items-center gap-5">
+      {["L", "D", "A"].map((letter, i) => (
+        <div
+          key={letter}
+          className="w-16 h-16 rounded-2xl border border-[rgba(147,197,253,0.2)] bg-[rgba(147,197,253,0.05)] flex items-center justify-center font-display text-2xl font-bold bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent"
+          style={{ transform: `translateY(${i === 1 ? -8 : 0}px)` }}
+        >
+          {letter}
+        </div>
+      ))}
     </div>
   </div>
 )
@@ -124,6 +141,8 @@ const Service = () => {
               >
                 {activeService.img ? (
                   <img src={activeService.img} alt={activeService.name} className="absolute inset-0 w-full h-full object-cover" />
+                ) : activeService.mockup === "logo" ? (
+                  <LogoMockup />
                 ) : (
                   <UiMockup />
                 )}
