@@ -57,7 +57,7 @@ const HeroVisual = () => {
   }
 
   return (
-    <div className="relative w-full flex flex-col gap-4">
+    <div className="relative w-full flex flex-col items-center lg:items-start gap-4">
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
@@ -71,7 +71,7 @@ const HeroVisual = () => {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{ rotateX, rotateY, transformPerspective: 800 }}
-        className="relative w-full lg:max-w-md aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(147,197,253,0.18)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,30,0.7)] z-[2]"
+        className="relative w-full max-w-[300px] mx-auto lg:max-w-md lg:mx-0 aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(147,197,253,0.18)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,30,0.7)] z-[2]"
       >
         <div className="w-full h-full rounded-[20px] overflow-hidden">
           <img
@@ -174,64 +174,68 @@ const Hero = () => {
             <HeroVisual />
           </div>
 
-          <motion.p variants={item} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] max-w-md">
-            Crafting bold visual identities and clean, functional websites — one project at a time.
-          </motion.p>
+          {/* Matches the photo's width/centering on mobile so everything below it
+              lines up with its edges instead of spanning the full column */}
+          <div className="w-full max-w-[300px] mx-auto lg:max-w-none lg:mx-0 lg:contents flex flex-col gap-6">
+            <motion.p variants={item} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] lg:max-w-md">
+              Crafting bold visual identities and clean, functional websites — one project at a time.
+            </motion.p>
 
-          <motion.div variants={item} className="flex items-center gap-3 flex-wrap">
-            <motion.a
-              href="/project"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.96 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="flex items-center gap-2 px-[22px] py-[10px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)]"
-            >
-              View my work <ArrowRight size={15} strokeWidth={2.5} />
-            </motion.a>
-            <motion.a
-              href="/contact"
-              whileHover={{ scale: 1.05, borderColor: "#60A5FA" }}
-              whileTap={{ scale: 0.96 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="flex items-center gap-2 px-[22px] py-[10px] rounded-full border border-[rgba(147,197,253,0.25)] text-[#F3F6FB] text-sm font-semibold"
-            >
-              Let's talk
-            </motion.a>
-          </motion.div>
-
-          <motion.div variants={item} className="flex items-center justify-between max-w-[170px]">
-            {socialLinks.map((social) => (
+            <motion.div variants={item} className="flex items-center gap-3 flex-wrap">
               <motion.a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                whileHover={{ scale: 1.15, y: -2 }}
-                whileTap={{ scale: 0.92 }}
-                transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                className="w-[30px] h-[30px] rounded-full border border-[rgba(147,197,253,0.2)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[#60A5FA]"
+                href="/project"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                className="flex items-center gap-2 px-[22px] py-[10px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)]"
               >
-                <social.icon className="w-3.5 h-3.5" />
+                View my work <ArrowRight size={15} strokeWidth={2.5} />
               </motion.a>
-            ))}
-          </motion.div>
+              <motion.a
+                href="/contact"
+                whileHover={{ scale: 1.05, borderColor: "#60A5FA" }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                className="flex items-center gap-2 px-[22px] py-[10px] rounded-full border border-[rgba(147,197,253,0.25)] text-[#F3F6FB] text-sm font-semibold"
+              >
+                Let's talk
+              </motion.a>
+            </motion.div>
 
-          <motion.div variants={item} className="flex gap-7 pt-3 border-t border-[rgba(147,197,253,0.12)]">
-            {stats.map((stat, i) => (
-              <div key={stat.label}>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6 + i * 0.1, duration: 0.4 }}
-                  className="font-display text-xl font-bold text-[#F3F6FB]"
+            <motion.div variants={item} className="flex items-center justify-between w-full lg:max-w-[170px]">
+              {socialLinks.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  whileHover={{ scale: 1.15, y: -2 }}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
+                  className="w-[30px] h-[30px] rounded-full border border-[rgba(147,197,253,0.2)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[#60A5FA]"
                 >
-                  {stat.value}
-                </motion.div>
-                <div className="text-[11px] text-[rgba(219,234,254,0.5)] mt-0.5">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
+                  <social.icon className="w-3.5 h-3.5" />
+                </motion.a>
+              ))}
+            </motion.div>
+
+            <motion.div variants={item} className="flex gap-7 pt-3 border-t border-[rgba(147,197,253,0.12)]">
+              {stats.map((stat, i) => (
+                <div key={stat.label}>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.6 + i * 0.1, duration: 0.4 }}
+                    className="font-display text-xl font-bold text-[#F3F6FB]"
+                  >
+                    {stat.value}
+                  </motion.div>
+                  <div className="text-[11px] text-[rgba(219,234,254,0.5)] mt-0.5">{stat.label}</div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
 
         {/* Photo column — desktop only */}
