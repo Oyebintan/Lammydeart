@@ -83,19 +83,8 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-5 pt-4 border-t border-[rgba(147,197,253,0.08)] flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-[rgba(219,234,254,0.35)]">
+      <div className="max-w-7xl mx-auto mt-5 pt-4 border-t border-[rgba(147,197,253,0.08)] text-center text-[12px] text-[rgba(219,234,254,0.35)]">
         <span>&copy; {currentYear} Lammydeart. All rights reserved.</span>
-        <span>
-          Designed with care by{" "}
-          <a
-            href="https://domstack.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[rgba(219,234,254,0.55)] hover:text-white transition-colors duration-300"
-          >
-            Dominion
-          </a>
-        </span>
       </div>
     </motion.footer>
   )
