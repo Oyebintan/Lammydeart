@@ -1,6 +1,7 @@
 import React from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
+import { ArrowRight } from "lucide-react"
 import { useTypewriter } from "../hooks/useTypewriter"
 import heroImage from "../assets/hero2.JPG"
 
@@ -56,7 +57,7 @@ const HeroVisual = () => {
   }
 
   return (
-    <div className="relative w-full flex flex-col items-center lg:items-start gap-4">
+    <div className="relative w-full flex flex-col gap-4">
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
@@ -70,7 +71,7 @@ const HeroVisual = () => {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{ rotateX, rotateY, transformPerspective: 800 }}
-        className="relative w-full max-w-[300px] lg:max-w-md aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(147,197,253,0.18)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,30,0.7)] z-[2]"
+        className="relative w-full lg:max-w-md aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(147,197,253,0.18)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,30,0.7)] z-[2]"
       >
         <div className="w-full h-full rounded-[20px] overflow-hidden">
           <img
@@ -185,7 +186,7 @@ const Hero = () => {
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
               className="flex items-center gap-2 px-[22px] py-[10px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)]"
             >
-              View my work <span>&#8594;</span>
+              View my work <ArrowRight size={15} strokeWidth={2.5} />
             </motion.a>
             <motion.a
               href="/contact"
@@ -198,7 +199,7 @@ const Hero = () => {
             </motion.a>
           </motion.div>
 
-          <motion.div variants={item} className="flex items-center gap-4">
+          <motion.div variants={item} className="flex items-center justify-between max-w-[170px]">
             {socialLinks.map((social) => (
               <motion.a
                 key={social.label}

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
+import { ArrowUpRight } from "lucide-react"
 
 const ProjectCard = ({ p }) => {
   const [hovered, setHovered] = useState(false)
@@ -42,8 +43,9 @@ const ProjectCard = ({ p }) => {
         </div>
         <div className="flex items-center justify-between gap-1">
           <div className="font-display text-[13px] lg:text-lg font-bold text-white leading-tight">{p.title}</div>
-          <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-white text-[11px] lg:text-[15px] flex-none">
-            &#8599;
+          <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-white flex-none">
+            <ArrowUpRight size={14} className="lg:hidden" strokeWidth={2.5} />
+            <ArrowUpRight size={17} className="hidden lg:block" strokeWidth={2.5} />
           </div>
         </div>
       </div>
@@ -55,7 +57,7 @@ const ProjectCard = ({ p }) => {
         transition={{ duration: 0.15 }}
         className="hidden lg:flex absolute -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 py-2 px-4 rounded-full bg-white text-[#03050a] text-xs font-bold pointer-events-none z-20 whitespace-nowrap"
       >
-        View Project <span>&#8599;</span>
+        View Project <ArrowUpRight size={14} strokeWidth={2.5} />
       </motion.div>
     </motion.a>
   )

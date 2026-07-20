@@ -3,10 +3,10 @@ import { motion } from "framer-motion"
 import { fadeUp, stagger, viewportOnce } from "../motion"
 
 const experience = [
-  { years: "2025—Now", role: "Sub Community Manager / Design Lead", company: "OOU Tech Community (OTC)" },
-  { years: "2025", role: "Digital Marketing Intern", company: "Lance Trend LTD" },
-  { years: "2024—25", role: "Senior Graphic Designer", company: "TransactX" },
   { years: "2023—24", role: "Senior Graphic Designer", company: "Folanimprint LTD" },
+  { years: "2024—25", role: "Senior Graphic Designer", company: "TransactX" },
+  { years: "2025", role: "Digital Marketing Intern", company: "Lance Trend LTD" },
+  { years: "2025—Now", role: "Sub Community Manager / Design Lead", company: "OOU Tech Community (OTC)" },
 ]
 
 const education = [
