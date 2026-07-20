@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { ArrowRight } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../motion"
 import { projects, projectCategories } from "../data/projects"
 import ProjectCard from "./ProjectCard"
@@ -71,7 +72,7 @@ const HeroPrj = ({ times = 6 }) => {
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
             className="flex items-center gap-2 border border-[rgba(147,197,253,0.2)] hover:border-[#60A5FA] text-[#F3F6FB] text-sm font-semibold px-6 py-2.5 rounded-full"
           >
-            View all projects <span>&#8594;</span>
+            View all projects <ArrowRight size={15} strokeWidth={2.5} />
           </motion.a>
         </motion.div>
       </div>

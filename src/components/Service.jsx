@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Palette, Megaphone, PenTool, LayoutGrid } from "lucide-react"
+import { Palette, Megaphone, PenTool, LayoutGrid, ArrowRight } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../motion"
 import brandingImg from "../assets/projects/p1.jpg"
 import socialAdsImg from "../assets/projects/p4.jpg"
@@ -102,9 +102,9 @@ const Service = () => {
                     <motion.div
                       initial={{ opacity: 0, x: -6 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className="relative z-10 text-[17px] text-[rgba(147,197,253,0.5)]"
+                      className="relative z-10 text-[rgba(147,197,253,0.5)]"
                     >
-                      &#8594;
+                      <ArrowRight size={17} strokeWidth={2.5} />
                     </motion.div>
                   )}
                 </motion.button>
@@ -112,7 +112,7 @@ const Service = () => {
             })}
           </div>
 
-          <div className="rounded-[20px] border border-[rgba(147,197,253,0.15)] overflow-hidden flex flex-col">
+          <div className="relative rounded-[20px] border border-[rgba(147,197,253,0.15)] overflow-hidden h-[300px] lg:h-[320px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService.name}
@@ -120,23 +120,21 @@ const Service = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0"
               >
-                {/* Image caption, not overlay — keeps the write-up legible regardless of what's in the photo */}
-                <div className="relative h-[140px] lg:h-[160px]">
-                  {activeService.img ? (
-                    <img src={activeService.img} alt={activeService.name} className="absolute inset-0 w-full h-full object-cover" />
-                  ) : (
-                    <UiMockup />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] to-transparent" />
-                </div>
-
-                <div className="p-6 bg-gradient-to-br from-[rgba(29,78,216,0.1)] to-[rgba(96,165,250,0.03)]">
+                {activeService.img ? (
+                  <img src={activeService.img} alt={activeService.name} className="absolute inset-0 w-full h-full object-cover" />
+                ) : (
+                  <UiMockup />
+                )}
+                {/* Strong bottom gradient — dark enough that the photo's own text never collides with the write-up */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(3,5,10,0.97)_0%,rgba(3,5,10,0.88)_38%,rgba(3,5,10,0.4)_62%,transparent_85%)]" />
+                <div className="absolute inset-x-0 bottom-0 p-6">
                   <div className="w-[42px] h-[42px] rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center mb-3 text-white">
                     <activeService.icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-display text-[22px] font-bold text-[#F3F6FB] mb-2">{activeService.name}</h3>
-                  <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.6)]">{activeService.desc}</p>
+                  <h3 className="font-display text-[22px] font-bold text-white mb-2">{activeService.name}</h3>
+                  <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.8)]">{activeService.desc}</p>
                 </div>
               </motion.div>
             </AnimatePresence>

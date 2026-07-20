@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
+import { ArrowRight } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -22,7 +23,7 @@ const Button = () => (
     transition={{ type: "spring", stiffness: 400, damping: 20 }}
     className="hidden lg:flex items-center gap-2 px-[18px] py-[9px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-[13.5px] font-semibold"
   >
-    Let's talk <span>&#8594;</span>
+    Let's talk <ArrowRight size={15} strokeWidth={2.5} />
   </MotionLink>
 )
 
