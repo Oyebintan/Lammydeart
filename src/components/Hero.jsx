@@ -113,65 +113,6 @@ const HeroVisual = () => {
           <div className="absolute top-1.5 left-1.5 w-4.5 h-4.5 rounded-lg bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] rotate-12 shadow-[0_6px_16px_-6px_rgba(29,78,216,0.7)]" />
         </motion.div>
       </motion.div>
-
-      <motion.div
-        variants={{
-          hidden: {},
-          show: { transition: { staggerChildren: 0.1, delayChildren: 0.6 } },
-        }}
-        initial="hidden"
-        animate="show"
-        className="grid grid-cols-3 gap-3 max-w-[300px] lg:max-w-md w-full"
-      >
-        <motion.div
-          variants={item}
-          whileHover={{ y: -3 }}
-          className="rounded-[18px] bg-[rgba(147,197,253,0.04)] border border-[rgba(147,197,253,0.14)] p-3 flex flex-col justify-between gap-2"
-        >
-          <div className="text-[9.5px] font-bold tracking-[0.08em] uppercase text-[rgba(219,234,254,0.5)]">
-            Palette
-          </div>
-          <div className="flex gap-1.5">
-            <span className="w-4 h-4 rounded-md bg-[#0b1526]" />
-            <span className="w-4 h-4 rounded-md bg-[#1D4ED8]" />
-            <span className="w-4 h-4 rounded-md bg-[#60A5FA]" />
-            <span className="w-4 h-4 rounded-md bg-[#BAE6FD]" />
-          </div>
-        </motion.div>
-        <motion.div
-          variants={item}
-          whileHover={{ y: -3 }}
-          className="rounded-[18px] bg-gradient-to-br from-[rgba(29,78,216,0.14)] to-[rgba(96,165,250,0.05)] border border-[rgba(147,197,253,0.14)] p-3 flex flex-col justify-between items-start gap-2"
-        >
-          <div className="text-[9.5px] font-bold tracking-[0.08em] uppercase text-[rgba(219,234,254,0.5)]">
-            Mark
-          </div>
-          <div className="font-display text-[22px] font-bold bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent">
-            L.
-          </div>
-        </motion.div>
-        <motion.div
-          variants={item}
-          whileHover={{ y: -3 }}
-          className="relative rounded-[18px] bg-[rgba(147,197,253,0.04)] border border-[rgba(147,197,253,0.14)] p-3 flex flex-col justify-between gap-2 overflow-hidden"
-        >
-          <div className="absolute -top-2.5 -right-2.5 w-9 h-9 rounded-[10px] bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] opacity-50" />
-          <div className="text-[9.5px] font-bold tracking-[0.08em] uppercase text-[rgba(219,234,254,0.5)]">
-            In progress
-          </div>
-          <div>
-            <div className="text-[10.5px] font-bold text-[#F3F6FB] mb-1.5">Ad Campaign</div>
-            <div className="h-1 rounded-full bg-[rgba(147,197,253,0.15)] overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: "65%" }}
-                transition={{ duration: 1, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="h-full rounded-full bg-gradient-to-r from-[#1D4ED8] to-[#7DD3FC]"
-              />
-            </div>
-          </div>
-        </motion.div>
-      </motion.div>
     </div>
   )
 }
@@ -200,10 +141,10 @@ const Hero = () => {
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-10 lg:items-center"
+        className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 lg:items-center"
       >
         {/* Text column */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-6">
           <motion.div
             variants={item}
             className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(59,130,246,0.08)] border border-[rgba(96,165,250,0.25)] text-[11px] font-semibold tracking-[0.14em] text-[#93C5FD] uppercase w-fit"

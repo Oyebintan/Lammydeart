@@ -78,6 +78,18 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Lock background scroll while the mobile menu is open
+  useEffect(() => {
+    if (isMenuVisible) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isMenuVisible])
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -119,7 +131,7 @@ const Navbar = () => {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(147,197,253,0.1)] ${
-          scrolled
+          scrolled || isMenuVisible
             ? "bg-[#03050a]/95 backdrop-blur-xl shadow-lg shadow-black/20"
             : "bg-[#03050a]/75 backdrop-blur-md"
         }`}
@@ -208,7 +220,7 @@ const Navbar = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="fixed top-0 right-0 h-screen w-72 bg-[#03050a] border-l border-[rgba(147,197,253,0.12)] z-40 lg:hidden"
+            className="fixed top-0 right-0 h-dvh w-72 bg-[#03050a] border-l border-[rgba(147,197,253,0.12)] z-40 lg:hidden overflow-y-auto"
           >
             <div className="flex flex-col h-full pt-24 px-6">
               <motion.div
@@ -270,7 +282,7 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
+            className="fixed inset-0 bg-[#03050a]/95 backdrop-blur-md z-30 lg:hidden"
             onClick={closeMenu}
           />
         )}
