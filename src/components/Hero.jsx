@@ -54,8 +54,10 @@ const Cursor = () => (
 const HeroVisual = () => {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [7, -7]), { stiffness: 150, damping: 16 })
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-7, 7]), { stiffness: 150, damping: 16 })
+  // Base tilt sits around 16° even at rest — reads as laid flat on the floor
+  // and viewed from above, rather than propped upright — with mouse sway on top.
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [24, 8]), { stiffness: 150, damping: 16 })
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-9, 9]), { stiffness: 150, damping: 16 })
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -78,8 +80,15 @@ const HeroVisual = () => {
       <motion.div
         animate={{ y: [0, -9, 0] }}
         transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-        className="relative w-full max-w-[260px] mx-auto lg:max-w-sm lg:mx-0"
+        className="relative w-full max-w-[300px] mx-auto lg:max-w-md lg:mx-0"
       >
+        {/* Floor contact shadow — shrinks/fades as the card floats up, grounding it */}
+        <motion.div
+          animate={{ opacity: [0.6, 0.3, 0.6], scaleX: [1, 0.86, 1] }}
+          transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-1/2 -translate-x-1/2 bottom-[-8%] w-[85%] h-10 lg:h-14 rounded-[50%] bg-black blur-2xl pointer-events-none z-[1]"
+        />
+
         <motion.a
           href="/project"
           initial={{ opacity: 0, scale: 0.94 }}
@@ -87,8 +96,8 @@ const HeroVisual = () => {
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          style={{ rotateX, rotateY, rotate: -4, transformPerspective: 800 }}
-          className="relative block w-full aspect-[4/5] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.75)] z-[2] cursor-pointer"
+          style={{ rotateX, rotateY, rotate: -7, transformPerspective: 650 }}
+          className="relative block w-full aspect-[4/5] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_45px_90px_-20px_rgba(0,0,0,0.85)] z-[2] cursor-pointer"
         >
           <div className="w-full h-full rounded-[20px] overflow-hidden">
             <img
