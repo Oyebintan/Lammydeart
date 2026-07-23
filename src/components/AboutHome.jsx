@@ -2,6 +2,9 @@ import React from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Palette, Code2, Gem, Zap } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../motion"
+import { gridBg } from "../decor"
+import CornerMarks from "./decor/CornerMarks"
+import LineBox from "./decor/LineBox"
 import Timeline from "./Timeline"
 import Skills from "./Skills"
 
@@ -20,9 +23,11 @@ const AboutHome = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
+      className={`relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120] ${gridBg}`}
     >
-      <div className="max-w-7xl mx-auto">
+      <CornerMarks />
+      <LineBox className="hidden lg:block -top-10 right-[6%]" size={150} duration={28} reverse />
+      <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
           <span>( 02 )</span>
           <span>About Me</span>

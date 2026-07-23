@@ -3,9 +3,18 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
 import { ArrowRight, Sparkle } from "lucide-react"
 import { useTypewriter } from "../hooks/useTypewriter"
-import { projects } from "../data/projects"
+import { gridBg } from "../decor"
+import CornerMarks from "./decor/CornerMarks"
+import LineBox from "./decor/LineBox"
+import zookImg from "../assets/brand/zook.jpg"
 
-const flagshipProject = projects.find((p) => p.id === 4) ?? projects[0]
+// Swap `img` below to feature a different flagship project — used here and
+// in the "Branding" tab of Service.jsx.
+const flagshipProject = {
+  title: "ZOOK Fabrics",
+  category: "Brand Identity",
+  img: zookImg,
+}
 
 const stats = [
   { value: "3+", label: "Years Experience" },
@@ -69,7 +78,7 @@ const HeroVisual = () => {
       <motion.div
         animate={{ y: [0, -9, 0] }}
         transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-        className="relative w-full max-w-[300px] mx-auto lg:max-w-md lg:mx-0"
+        className="relative w-full max-w-[260px] mx-auto lg:max-w-sm lg:mx-0"
       >
         <motion.a
           href="/project"
@@ -78,14 +87,14 @@ const HeroVisual = () => {
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          style={{ rotateX, rotateY, transformPerspective: 800 }}
-          className="relative block w-full aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.75)] z-[2] cursor-pointer"
+          style={{ rotateX, rotateY, rotate: -4, transformPerspective: 800 }}
+          className="relative block w-full aspect-[4/5] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.75)] z-[2] cursor-pointer"
         >
           <div className="w-full h-full rounded-[20px] overflow-hidden">
             <img
               src={flagshipProject.img}
               alt={flagshipProject.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-[50%_22%]"
               loading="lazy"
             />
           </div>
@@ -136,7 +145,11 @@ const Hero = () => {
   })
 
   return (
-    <section className="relative overflow-hidden bg-[#03050a] pt-20 pb-8 lg:pt-24 lg:pb-10 px-6 lg:px-14">
+    <section className={`relative overflow-hidden bg-[#03050a] pt-20 pb-8 lg:pt-24 lg:pb-10 px-6 lg:px-14 ${gridBg}`}>
+      <CornerMarks />
+      <LineBox className="hidden lg:block -top-16 right-[28%]" size={180} duration={30} />
+      <LineBox className="-bottom-20 -left-16" size={140} duration={24} reverse />
+
       {/* Ambient glows */}
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5] }}
