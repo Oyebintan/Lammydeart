@@ -102,7 +102,7 @@ const HeroVisual = () => {
       <motion.div
         animate={{ y: [0, -9, 0] }}
         transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-        className="relative w-full max-w-[300px] mx-auto lg:max-w-md lg:mx-0"
+        className="relative w-full max-w-[235px] mx-auto lg:max-w-md lg:mx-0"
       >
         {/* Soft pool of light on the "floor" around the object — reads as a
             surface it's resting on instead of empty space */}
@@ -194,7 +194,7 @@ const Hero = () => {
     <section className={`relative overflow-hidden bg-[#03050a] pt-20 pb-8 lg:pt-24 lg:pb-10 px-6 lg:px-14 ${gridBg}`}>
       <CornerMarks />
       <LineBox className="hidden lg:block -top-16 right-[28%]" size={180} duration={30} />
-      <LineBox className="-bottom-20 -left-16" size={140} duration={24} reverse />
+      <LineBox className="hidden lg:block -bottom-20 -left-16" size={140} duration={24} reverse />
 
       {/* Ambient glows */}
       <motion.div

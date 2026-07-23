@@ -8,7 +8,7 @@ const LineBox = ({ className, size = 220, duration = 26, reverse = false }) => (
     animate={{ rotate: reverse ? -360 : 360 }}
     transition={{ duration, repeat: Infinity, ease: "linear" }}
     style={{ width: size, height: size }}
-    className={`absolute border border-[rgba(255,255,255,0.07)] rounded-[28px] pointer-events-none ${className}`}
+    className={`absolute border border-[rgba(255,255,255,0.035)] rounded-[28px] pointer-events-none ${className}`}
   />
 )
 
