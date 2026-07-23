@@ -1,9 +1,11 @@
 import React from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Sparkle } from "lucide-react"
 import { useTypewriter } from "../hooks/useTypewriter"
-import heroImage from "../assets/hero2.JPG"
+import { projects } from "../data/projects"
+
+const flagshipProject = projects.find((p) => p.id === 4) ?? projects[0]
 
 const stats = [
   { value: "3+", label: "Years Experience" },
@@ -61,58 +63,63 @@ const HeroVisual = () => {
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-4 right-6 lg:right-0 w-32 h-32 lg:w-44 lg:h-44 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.28),rgba(29,78,216,0.1)_60%,transparent_75%)] blur-sm pointer-events-none"
+        className="absolute -top-4 right-6 lg:right-0 w-32 h-32 lg:w-44 lg:h-44 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.24),rgba(29,78,216,0.08)_60%,transparent_75%)] blur-sm pointer-events-none"
       />
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.94 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY, transformPerspective: 800 }}
-        className="relative w-full max-w-[300px] mx-auto lg:max-w-md lg:mx-0 aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(147,197,253,0.18)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,30,0.7)] z-[2]"
+        animate={{ y: [0, -9, 0] }}
+        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+        className="relative w-full max-w-[300px] mx-auto lg:max-w-md lg:mx-0"
       >
-        <div className="w-full h-full rounded-[20px] overflow-hidden">
-          <img
-            src={heroImage}
-            alt="Olamidé"
-            className="w-full h-full object-cover object-[50%_12%]"
-            loading="lazy"
-          />
-        </div>
-
-        {/* Floating badge: rating (inset, inside the frame) */}
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-3 right-3 flex items-center gap-1.5 py-1.5 px-2.5 rounded-2xl bg-[rgba(11,21,38,0.85)] backdrop-blur-md border border-[rgba(147,197,253,0.2)] shadow-[0_10px_24px_-10px_rgba(0,0,20,0.6)]"
+        <motion.a
+          href="/project"
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{ rotateX, rotateY, transformPerspective: 800 }}
+          className="relative block w-full aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.75)] z-[2] cursor-pointer"
         >
-          <div className="w-5 h-5 rounded-lg bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-[10px] text-white">
-            &#9733;
+          <div className="w-full h-full rounded-[20px] overflow-hidden">
+            <img
+              src={flagshipProject.img}
+              alt={flagshipProject.title}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
           </div>
-          <div className="text-[10px] font-bold text-[#F3F6FB] whitespace-nowrap">4.9 rating</div>
-        </motion.div>
 
-        {/* Floating badge: availability (inset, inside the frame) */}
-        <motion.div
-          animate={{ y: [0, -6, 0] }}
-          transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-          className="absolute bottom-3 left-3 flex items-center gap-1.5 py-1.5 px-2.5 rounded-2xl bg-[rgba(11,21,38,0.85)] backdrop-blur-md border border-[rgba(147,197,253,0.2)] shadow-[0_10px_24px_-10px_rgba(0,0,20,0.6)]"
-        >
-          <span className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
-          <div className="text-[10px] font-bold text-[#F3F6FB] whitespace-nowrap">Available</div>
-        </motion.div>
+          {/* Floating badge: category (inset, inside the frame) */}
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-3 right-3 flex items-center gap-1.5 py-1.5 px-2.5 rounded-2xl bg-[rgba(5,8,15,0.85)] backdrop-blur-md border border-[rgba(255,255,255,0.14)] shadow-[0_10px_24px_-10px_rgba(0,0,0,0.6)]"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
+            <div className="text-[10px] font-bold text-[#F3F6FB] whitespace-nowrap">{flagshipProject.category}</div>
+          </motion.div>
 
-        {/* Floating decorative shape cluster */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-3 -left-3 w-9 h-9 pointer-events-none"
-        >
-          <div className="absolute inset-0 rounded-xl border border-[rgba(125,211,252,0.4)]" />
-          <div className="absolute top-1.5 left-1.5 w-4.5 h-4.5 rounded-lg bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] rotate-12 shadow-[0_6px_16px_-6px_rgba(29,78,216,0.7)]" />
-        </motion.div>
+          {/* Floating badge: featured tag (inset, inside the frame) */}
+          <motion.div
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+            className="absolute bottom-3 left-3 flex items-center gap-1.5 py-1.5 px-2.5 rounded-2xl bg-[rgba(5,8,15,0.85)] backdrop-blur-md border border-[rgba(255,255,255,0.14)] shadow-[0_10px_24px_-10px_rgba(0,0,0,0.6)]"
+          >
+            <Sparkle size={11} className="text-[#F3F6FB]" />
+            <div className="text-[10px] font-bold text-[#F3F6FB] whitespace-nowrap">Featured Work</div>
+          </motion.div>
+
+          {/* Floating decorative shape cluster */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+            className="absolute -top-3 -left-3 w-9 h-9 pointer-events-none"
+          >
+            <div className="absolute inset-0 rounded-xl border border-[rgba(255,255,255,0.25)]" />
+            <div className="absolute top-1.5 left-1.5 w-4.5 h-4.5 rounded-lg bg-gradient-to-br from-[#F3F6FB] to-[rgba(219,234,254,0.6)] rotate-12 shadow-[0_6px_16px_-6px_rgba(0,0,0,0.5)]" />
+          </motion.div>
+        </motion.a>
       </motion.div>
     </div>
   )
@@ -134,9 +141,9 @@ const Hero = () => {
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.3),transparent_70%)] blur-2xl pointer-events-none"
+        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.24),transparent_70%)] blur-2xl pointer-events-none"
       />
-      <div className="absolute bottom-[-200px] right-[10%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(125,211,252,0.14),transparent_70%)] blur-2xl pointer-events-none" />
+      <div className="absolute bottom-[-200px] right-[10%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05),transparent_70%)] blur-2xl pointer-events-none" />
 
       <motion.div
         variants={container}
@@ -148,7 +155,7 @@ const Hero = () => {
         <div className="flex flex-col gap-6">
           <motion.div
             variants={item}
-            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(59,130,246,0.08)] border border-[rgba(96,165,250,0.25)] text-[11px] font-semibold tracking-[0.14em] text-[#93C5FD] uppercase w-fit"
+            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(219,234,254,0.8)] uppercase w-fit"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] shadow-[0_0_8px_#60A5FA]" />
             Graphic Designer + Web Designer
@@ -169,12 +176,12 @@ const Hero = () => {
             </span>
           </motion.h1>
 
-          {/* Photo shows right here on mobile, between the headline and the copy */}
+          {/* Flagship project shows right here on mobile, between the headline and the copy */}
           <div className="lg:hidden">
             <HeroVisual />
           </div>
 
-          {/* Matches the photo's width/centering on mobile so everything below it
+          {/* Matches the visual's width/centering on mobile so everything below it
               lines up with its edges instead of spanning the full column */}
           <div className="w-full max-w-[300px] mx-auto lg:max-w-none lg:mx-0 lg:contents flex flex-col gap-6">
             <motion.p variants={item} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] lg:max-w-md">
@@ -193,10 +200,10 @@ const Hero = () => {
               </motion.a>
               <motion.a
                 href="/contact"
-                whileHover={{ scale: 1.05, borderColor: "#60A5FA" }}
+                whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.4)" }}
                 whileTap={{ scale: 0.96 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="flex items-center gap-2 px-[22px] py-[10px] rounded-full border border-[rgba(147,197,253,0.25)] text-[#F3F6FB] text-sm font-semibold"
+                className="flex items-center gap-2 px-[22px] py-[10px] rounded-full border border-[rgba(255,255,255,0.16)] text-[#F3F6FB] text-sm font-semibold"
               >
                 Let's talk
               </motion.a>
@@ -213,14 +220,14 @@ const Hero = () => {
                   whileHover={{ scale: 1.15, y: -2 }}
                   whileTap={{ scale: 0.92 }}
                   transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                  className="w-[30px] h-[30px] rounded-full border border-[rgba(147,197,253,0.2)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[#60A5FA]"
+                  className="w-[30px] h-[30px] rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[rgba(255,255,255,0.4)]"
                 >
                   <social.icon className="w-3.5 h-3.5" />
                 </motion.a>
               ))}
             </motion.div>
 
-            <motion.div variants={item} className="flex gap-7 pt-3 border-t border-[rgba(147,197,253,0.12)]">
+            <motion.div variants={item} className="flex gap-7 pt-3 border-t border-[rgba(255,255,255,0.1)]">
               {stats.map((stat, i) => (
                 <div key={stat.label}>
                   <motion.div
@@ -238,7 +245,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Photo column — desktop only */}
+        {/* Flagship project column — desktop only */}
         <div className="hidden lg:block">
           <HeroVisual />
         </div>
