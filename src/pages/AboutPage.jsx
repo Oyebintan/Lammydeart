@@ -6,7 +6,7 @@ import { fadeUp, stagger, viewportOnce } from "../motion"
 import { gridBg } from "../decor"
 import CornerMarks from "../components/decor/CornerMarks"
 import LineBox from "../components/decor/LineBox"
-import img from "../assets/hero2.JPG"
+import img from "../assets/profile.jpg"
 
 const highlights = [
   { icon: Palette, text: "3+ Years Experience" },
@@ -85,7 +85,7 @@ const AboutPage = () => {
             className="relative w-full max-w-[300px] aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.75)]"
           >
             <div className="w-full h-full rounded-[20px] overflow-hidden">
-              <img src={img} alt="Olamide" className="w-full h-full object-cover object-[50%_12%]" loading="lazy" />
+              <img src={img} alt="Olamide" className="w-full h-full object-cover" loading="lazy" />
             </div>
             <div className="absolute bottom-3 left-3 flex items-center gap-1.5 py-1.5 px-2.5 rounded-2xl bg-[rgba(5,8,15,0.85)] backdrop-blur-md border border-[rgba(255,255,255,0.14)]">
               <span className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
