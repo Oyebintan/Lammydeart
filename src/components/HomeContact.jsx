@@ -21,13 +21,14 @@ const HomeContact = () => {
     >
       <motion.div
         variants={fadeUp}
-        className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(147,197,253,0.15)] bg-gradient-to-br from-[rgba(29,78,216,0.08)] to-[rgba(96,165,250,0.03)] p-8 lg:p-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center"
+        className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#05080f] p-8 lg:p-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center"
       >
         <div>
-          <div className="text-[11.5px] font-bold tracking-[0.16em] text-[#60A5FA] uppercase mb-2">
-            Contact
+          <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
+            <span>( 04 )</span>
+            <span>Contact</span>
           </div>
-          <h2 className="font-display font-bold text-[28px] text-[#F3F6FB] mb-3">Let's work together</h2>
+          <h2 className="font-display font-bold text-[28px] text-[#F3F6FB] mb-3">Let's build something exceptional</h2>
           <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.6)] mb-5">
             Have a project in mind? Tell me about it — I usually reply within a day.
           </p>
@@ -47,7 +48,7 @@ const HomeContact = () => {
                   whileHover={{ scale: 1.12, y: -2 }}
                   whileTap={{ scale: 0.94 }}
                   transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                  className="w-[34px] h-[34px] rounded-full border border-[rgba(147,197,253,0.2)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[#60A5FA]"
+                  className="w-[34px] h-[34px] rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[rgba(255,255,255,0.4)]"
                 >
                   <s.icon size={14} />
                 </motion.a>
@@ -70,10 +71,10 @@ const HomeContact = () => {
             href="http://Wa.me/2347015848547"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.02, borderColor: "#60A5FA" }}
+            whileHover={{ scale: 1.02, borderColor: "rgba(255,255,255,0.4)" }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl border border-[rgba(147,197,253,0.25)] text-[#F3F6FB] text-sm font-semibold"
+            className="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl border border-[rgba(255,255,255,0.16)] text-[#F3F6FB] text-sm font-semibold"
           >
             <FaWhatsapp /> WhatsApp me
           </motion.a>

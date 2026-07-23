@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Sparkle } from "lucide-react"
 
-const ProjectCard = ({ p }) => {
+const ProjectCard = ({ p, featured = false }) => {
   const [hovered, setHovered] = useState(false)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -27,7 +27,7 @@ const ProjectCard = ({ p }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative rounded-2xl lg:rounded-[20px] overflow-hidden border border-[rgba(147,197,253,0.14)] aspect-square lg:aspect-[4/3] block"
+      className="group relative rounded-2xl lg:rounded-[20px] overflow-hidden border border-[rgba(255,255,255,0.1)] aspect-square lg:aspect-[4/3] block"
     >
       <motion.img
         src={p.img}
@@ -37,13 +37,21 @@ const ProjectCard = ({ p }) => {
         className="w-full h-full object-cover"
         loading="lazy"
       />
-      <div className="absolute inset-0 flex flex-col justify-end p-2.5 lg:p-4.5 bg-gradient-to-b from-transparent from-40% to-[rgba(2,4,10,0.85)]">
-        <div className="text-[8.5px] lg:text-[11px] font-semibold tracking-[0.1em] uppercase text-[#93C5FD] mb-0.5 lg:mb-1">
+
+      {featured && (
+        <div className="absolute top-2.5 left-2.5 lg:top-3.5 lg:left-3.5 flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-[rgba(3,5,10,0.7)] backdrop-blur-md border border-[rgba(255,255,255,0.18)] z-10">
+          <Sparkle size={10} className="text-[#60A5FA]" />
+          <span className="text-[9.5px] lg:text-[10.5px] font-bold uppercase tracking-[0.08em] text-white">Featured</span>
+        </div>
+      )}
+
+      <div className="absolute inset-0 flex flex-col justify-end p-2.5 lg:p-4.5 bg-gradient-to-b from-transparent from-40% to-[rgba(2,4,10,0.88)]">
+        <div className="text-[8.5px] lg:text-[11px] font-semibold tracking-[0.1em] uppercase text-[rgba(219,234,254,0.6)] mb-0.5 lg:mb-1">
           {p.category}
         </div>
         <div className="flex items-center justify-between gap-1">
           <div className="font-display text-[13px] lg:text-lg font-bold text-white leading-tight">{p.title}</div>
-          <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center text-white flex-none">
+          <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-white flex items-center justify-center text-[#03050a] flex-none">
             <ArrowUpRight size={14} className="lg:hidden" strokeWidth={2.5} />
             <ArrowUpRight size={17} className="hidden lg:block" strokeWidth={2.5} />
           </div>

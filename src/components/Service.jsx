@@ -77,7 +77,7 @@ const Service = () => {
       <div className="max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-6 flex-wrap mb-6">
           <div>
-            <div className="text-[11.5px] font-bold tracking-[0.16em] text-[#60A5FA] uppercase mb-2">
+            <div className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
               Quality Services
             </div>
             <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">What I can do for you</h2>
@@ -98,13 +98,13 @@ const Service = () => {
                   onClick={() => setActive(i)}
                   whileHover={{ x: isActive ? 0 : 3 }}
                   whileTap={{ scale: 0.98 }}
-                  className="relative cursor-pointer flex items-center gap-4 py-[15px] px-[18px] rounded-2xl border text-left overflow-hidden border-[rgba(147,197,253,0.12)]"
+                  className="relative cursor-pointer flex items-center gap-4 py-[15px] px-[18px] rounded-2xl border text-left overflow-hidden border-[rgba(255,255,255,0.08)]"
                 >
                   {isActive && (
                     <motion.div
                       layoutId="service-active-bg"
                       transition={{ type: "spring", stiffness: 350, damping: 32 }}
-                      className="absolute inset-0 border border-[rgba(96,165,250,0.45)] rounded-2xl bg-gradient-to-r from-[rgba(29,78,216,0.14)] to-[rgba(96,165,250,0.05)]"
+                      className="absolute inset-0 border border-[rgba(96,165,250,0.4)] rounded-2xl bg-gradient-to-r from-[rgba(29,78,216,0.14)] to-[rgba(96,165,250,0.05)]"
                     />
                   )}
                   <div
@@ -129,7 +129,7 @@ const Service = () => {
             })}
           </div>
 
-          <div className="relative rounded-[20px] border border-[rgba(147,197,253,0.15)] overflow-hidden h-[300px] lg:h-[320px]">
+          <div className="relative rounded-[20px] border border-[rgba(255,255,255,0.1)] overflow-hidden h-[300px] lg:h-[320px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService.name}

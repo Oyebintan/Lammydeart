@@ -22,10 +22,11 @@ const HeroPrj = ({ times = 6 }) => {
       <div className="max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between flex-wrap gap-4 mb-6">
           <div>
-            <div className="text-[11.5px] font-bold tracking-[0.16em] text-[#60A5FA] uppercase mb-2">
-              Recent Works
+            <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
+              <span>( 01 )</span>
+              <span>Featured Work</span>
             </div>
-            <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">Selected projects</h2>
+            <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">Work worth talking about</h2>
           </div>
           <div className="flex gap-2 flex-wrap">
             {projectCategories.map((f) => {
@@ -34,16 +35,16 @@ const HeroPrj = ({ times = 6 }) => {
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className="relative cursor-pointer py-2 px-[17px] rounded-full text-[12.5px] font-semibold border overflow-hidden transition-colors duration-300 border-[rgba(147,197,253,0.15)] hover:border-[rgba(147,197,253,0.3)]"
+                  className="relative cursor-pointer py-2 px-[17px] rounded-full text-[12.5px] font-semibold border overflow-hidden transition-colors duration-300 border-[rgba(255,255,255,0.12)] hover:border-[rgba(255,255,255,0.28)]"
                 >
                   {isActive && (
                     <motion.div
                       layoutId="filter-active-bg-home"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      className="absolute inset-0 bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA]"
+                      className="absolute inset-0 bg-white"
                     />
                   )}
-                  <span className={`relative z-10 ${isActive ? "text-white" : "text-[rgba(219,234,254,0.6)]"}`}>
+                  <span className={`relative z-10 ${isActive ? "text-[#03050a]" : "text-[rgba(219,234,254,0.6)]"}`}>
                     {f}
                   </span>
                 </button>
@@ -59,7 +60,7 @@ const HeroPrj = ({ times = 6 }) => {
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (
-              <ProjectCard key={p.id} p={p} />
+              <ProjectCard key={p.id} p={p} featured={filter === "All" && p.id === 1} />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -70,7 +71,7 @@ const HeroPrj = ({ times = 6 }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="flex items-center gap-2 border border-[rgba(147,197,253,0.2)] hover:border-[#60A5FA] text-[#F3F6FB] text-sm font-semibold px-6 py-2.5 rounded-full"
+            className="flex items-center gap-2 border border-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.4)] text-[#F3F6FB] text-sm font-semibold px-6 py-2.5 rounded-full"
           >
             View all projects <ArrowRight size={15} strokeWidth={2.5} />
           </motion.a>
