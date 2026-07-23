@@ -2,7 +2,10 @@ import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Palette, Megaphone, PenTool, LayoutGrid, ArrowRight } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../motion"
-import brandingImg from "../assets/projects/p1.jpg"
+import { gridBg } from "../decor"
+import CornerMarks from "./decor/CornerMarks"
+// Same flagship brand asset used in Hero.jsx — swap that one file to update both.
+import brandingImg from "../assets/brand/zook.jpg"
 import socialAdsImg from "../assets/projects/p4.jpg"
 
 const services = [
@@ -72,9 +75,10 @@ const Service = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="px-6 lg:px-14 py-10 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
+      className={`relative overflow-hidden px-6 lg:px-14 py-10 bg-gradient-to-b from-[#05080f] to-[#0a1120] ${gridBg}`}
     >
-      <div className="max-w-7xl mx-auto">
+      <CornerMarks />
+      <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-6 flex-wrap mb-6">
           <div>
             <div className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
