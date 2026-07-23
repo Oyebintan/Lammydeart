@@ -1,6 +1,7 @@
 import React from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
+import { SiCoreldraw, SiAdobephotoshop } from "react-icons/si"
 import { ArrowRight, Sparkle } from "lucide-react"
 import { useTypewriter } from "../hooks/useTypewriter"
 import { gridBg } from "../decor"
@@ -38,6 +39,26 @@ const container = {
 const item = {
   hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+}
+
+// Floating "app icon" badge for a design tool — real brand mark, not a
+// literal 3D render (no 3D asset source available), but the squircle shape +
+// gradient + drop shadow + independent float reads as tactile depth.
+const FloatingToolIcon = ({ icon, color, className, duration = 5.5, delay = 0, tilt = 0 }) => {
+  const Icon = icon
+  return (
+    <motion.div
+      animate={{ y: [0, -8, 0], rotate: [tilt, tilt + 3, tilt] }}
+      transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}
+      className={`absolute z-10 w-9 h-9 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center pointer-events-none border border-white/15 ${className}`}
+      style={{
+        background: `linear-gradient(135deg, ${color}, ${color}99)`,
+        boxShadow: `0 18px 30px -12px ${color}66, 0 10px 20px -8px rgba(0,0,0,0.6)`,
+      }}
+    >
+      <Icon className="w-4 h-4 lg:w-6 lg:h-6 text-white" />
+    </motion.div>
+  )
 }
 
 const Cursor = () => (
@@ -135,15 +156,24 @@ const HeroVisual = () => {
             <div className="text-[10px] font-bold text-[#F3F6FB] whitespace-nowrap">Featured Work</div>
           </motion.div>
 
-          {/* Floating decorative shape cluster */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-            className="absolute -top-3 -left-3 w-9 h-9 pointer-events-none"
-          >
-            <div className="absolute inset-0 rounded-xl border border-[rgba(255,255,255,0.25)]" />
-            <div className="absolute top-1.5 left-1.5 w-4.5 h-4.5 rounded-lg bg-gradient-to-br from-[#F3F6FB] to-[rgba(219,234,254,0.6)] rotate-12 shadow-[0_6px_16px_-6px_rgba(0,0,0,0.5)]" />
-          </motion.div>
+          {/* Design-tool badges — pinned to the same rotated frame as the
+              rest of the corner badges, so they never drift out of place
+              as the tilt shifts with the mouse */}
+          <FloatingToolIcon
+            icon={SiCoreldraw}
+            color="#1AAB8A"
+            className="top-2 left-2 lg:-top-3 lg:-left-3"
+            duration={5.5}
+            tilt={-6}
+          />
+          <FloatingToolIcon
+            icon={SiAdobephotoshop}
+            color="#31A8FF"
+            className="bottom-2 right-2 lg:-bottom-3 lg:-right-3"
+            duration={6.2}
+            delay={0.8}
+            tilt={5}
+          />
         </motion.a>
       </motion.div>
     </div>
