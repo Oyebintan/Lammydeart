@@ -27,8 +27,8 @@ const Button = () => (
   </MotionLink>
 )
 
-const Checkbox = ({ setIsMenuVisible, checkboxRef }) => (
-  <div className="lg:hidden">
+const Checkbox = ({ setIsMenuVisible, checkboxRef, toggleRef }) => (
+  <div ref={toggleRef} className="lg:hidden">
     <input
       ref={checkboxRef}
       type="checkbox"
@@ -69,6 +69,7 @@ const Navbar = () => {
   const [hovered, setHovered] = useState(null)
   const menuRef = useRef(null)
   const checkboxRef = useRef(null)
+  const toggleRef = useRef(null)
   const location = useLocation()
 
   useEffect(() => {
@@ -93,10 +94,15 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // The hamburger must be excluded here. It sits outside the drawer, so
+      // without this its mousedown ran closeMenu() (un-checking the box) and
+      // then the label's own click re-checked it — the toggle could open the
+      // menu but never close it, leaving body scroll locked.
       if (
         isMenuVisible &&
         menuRef.current &&
-        !menuRef.current.contains(event.target)
+        !menuRef.current.contains(event.target) &&
+        !toggleRef.current?.contains(event.target)
       ) {
         closeMenu()
       }
@@ -131,10 +137,11 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] will-change-transform ${
-          scrolled || isMenuVisible
-            ? "bg-[#03050a]/95 backdrop-blur-xl shadow-lg shadow-black/20"
-            : "bg-[#03050a]/75 backdrop-blur-md"
+        // Fully opaque, not /75–/95 as before: at those values 5–25% of the page
+        // scrolled through the bar by design, which read as content bleeding
+        // above the nav. Depth now comes from the border + shadow instead.
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] will-change-transform bg-[#03050a] ${
+          scrolled || isMenuVisible ? "shadow-lg shadow-black/30" : ""
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -206,7 +213,11 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Toggle */}
-            <Checkbox setIsMenuVisible={setIsMenuVisible} checkboxRef={checkboxRef} />
+            <Checkbox
+              setIsMenuVisible={setIsMenuVisible}
+              checkboxRef={checkboxRef}
+              toggleRef={toggleRef}
+            />
           </div>
         </div>
       </nav>
@@ -254,7 +265,9 @@ const Navbar = () => {
               </MotionLink>
 
               {/* Mobile Social Links */}
-              <div className="mt-auto pb-8">
+              {/* Extra bottom room so "Follow me" clears the mobile browser's
+                  bottom toolbar instead of sitting underneath it */}
+              <div className="mt-auto pb-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
                 <p className="text-[rgba(219,234,254,0.5)] text-sm mb-4">Follow me</p>
                 <div className="flex items-center gap-3">
                   {socialLinks.map((social) => (
@@ -283,7 +296,9 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-[#03050a]/95 backdrop-blur-md z-30 lg:hidden"
+            // Opaque: at /95 the remaining 5% let section headings show through
+            // behind the open menu
+            className="fixed inset-0 bg-[#03050a] z-30 lg:hidden"
             onClick={closeMenu}
           />
         )}
