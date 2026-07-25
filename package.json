@@ -10,26 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.1.2",
-    "@ramonak/react-progress-bar": "^5.4.0",
     "@tailwindcss/vite": "^4.1.10",
-    "emailjs-com": "^3.2.0",
     "framer-motion": "^12.42.2",
     "lucide-react": "^0.562.0",
-    "prop-types": "^15.8.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
-    "react-intersection-observer": "^9.16.0",
     "react-router-dom": "^7.6.2",
-    "react-simple-typewriter": "^5.0.1",
-    "react-slick": "^0.30.3",
-    "react-stars": "^2.2.5",
-    "react-vertical-timeline-component": "^3.5.3",
-    "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.19",
-    "sweetalert2": "^11.26.4",
     "tailwindcss": "^4.1.10"
   },
   "devDependencies": {

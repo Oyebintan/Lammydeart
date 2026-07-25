@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Palette, Megaphone, PenTool, LayoutGrid } from "lucide-react"
+import { Palette, Megaphone, PenTool, LayoutGrid, ArrowRight } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../motion"
-import brandingImg from "../assets/projects/p1.jpg"
-import socialAdsImg from "../assets/projects/p4.jpg"
-import logoImg from "../assets/projects/p9.jpg"
+import { gridBg } from "../decor"
+import CornerMarks from "./decor/CornerMarks"
+// Same flagship brand asset used in Hero.jsx — swap that one file to update both.
+import brandingImg from "../assets/images/projects/zook-fabrics/preview.jpg"
+import socialAdsImg from "../assets/images/projects/cultural-festival-poster/preview.jpg"
 
 const services = [
   {
@@ -22,24 +24,42 @@ const services = [
   {
     name: "Logo Design",
     icon: PenTool,
-    img: logoImg,
+    img: null,
+    mockup: "logo",
     desc: "Sharp, distinctive marks — from concept sketches to a full logo suite ready for any application.",
   },
   {
     name: "UI Design",
     icon: LayoutGrid,
     img: null,
+    mockup: "ui",
     desc: "Clean, pixel-perfect interfaces and design systems that balance usability with a strong visual point of view.",
   },
 ]
 
 const UiMockup = () => (
   <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0b1526] to-[#0a1120]">
-    <div className="w-40 rounded-xl border border-[rgba(147,197,253,0.25)] bg-[rgba(147,197,253,0.05)] p-3 space-y-2">
+    <div className="w-40 rounded-xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.04)] p-3 space-y-2">
       <div className="h-2 w-2/3 rounded bg-gradient-to-r from-[#1D4ED8] to-[#7DD3FC]" />
-      <div className="h-16 rounded-lg bg-[rgba(147,197,253,0.1)]" />
-      <div className="h-2 w-full rounded bg-[rgba(147,197,253,0.15)]" />
-      <div className="h-2 w-4/5 rounded bg-[rgba(147,197,253,0.15)]" />
+      <div className="h-16 rounded-lg bg-[rgba(255,255,255,0.08)]" />
+      <div className="h-2 w-full rounded bg-[rgba(255,255,255,0.12)]" />
+      <div className="h-2 w-4/5 rounded bg-[rgba(255,255,255,0.12)]" />
+    </div>
+  </div>
+)
+
+const LogoMockup = () => (
+  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0b1526] to-[#0a1120]">
+    <div className="flex items-center gap-5">
+      {["L", "D", "A"].map((letter, i) => (
+        <div
+          key={letter}
+          className="w-16 h-16 rounded-2xl border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.04)] flex items-center justify-center font-display text-2xl font-bold bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent"
+          style={{ transform: `translateY(${i === 1 ? -8 : 0}px)` }}
+        >
+          {letter}
+        </div>
+      ))}
     </div>
   </div>
 )
@@ -55,12 +75,13 @@ const Service = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="px-6 lg:px-14 py-10 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
+      className={`relative overflow-hidden px-6 lg:px-14 py-10 bg-gradient-to-b from-[#05080f] to-[#0a1120] ${gridBg}`}
     >
-      <div className="max-w-7xl mx-auto">
+      <CornerMarks />
+      <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-6 flex-wrap mb-6">
           <div>
-            <div className="text-[11.5px] font-bold tracking-[0.16em] text-[#60A5FA] uppercase mb-2">
+            <div className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
               Quality Services
             </div>
             <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">What I can do for you</h2>
@@ -81,18 +102,18 @@ const Service = () => {
                   onClick={() => setActive(i)}
                   whileHover={{ x: isActive ? 0 : 3 }}
                   whileTap={{ scale: 0.98 }}
-                  className="relative cursor-pointer flex items-center gap-4 py-[15px] px-[18px] rounded-2xl border text-left overflow-hidden border-[rgba(147,197,253,0.12)]"
+                  className="relative cursor-pointer flex items-center gap-4 py-[15px] px-[18px] rounded-2xl border text-left overflow-hidden border-[rgba(255,255,255,0.08)]"
                 >
                   {isActive && (
                     <motion.div
                       layoutId="service-active-bg"
                       transition={{ type: "spring", stiffness: 350, damping: 32 }}
-                      className="absolute inset-0 border border-[rgba(96,165,250,0.45)] rounded-2xl bg-gradient-to-r from-[rgba(29,78,216,0.14)] to-[rgba(96,165,250,0.05)]"
+                      className="absolute inset-0 border border-[rgba(96,165,250,0.4)] rounded-2xl bg-gradient-to-r from-[rgba(29,78,216,0.14)] to-[rgba(96,165,250,0.05)]"
                     />
                   )}
                   <div
                     className={`relative z-10 w-[38px] h-[38px] rounded-[11px] flex items-center justify-center flex-none text-white transition-colors duration-300 ${
-                      isActive ? "bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA]" : "bg-[rgba(147,197,253,0.08)]"
+                      isActive ? "bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA]" : "bg-[rgba(255,255,255,0.06)]"
                     }`}
                   >
                     <Icon className="w-[18px] h-[18px]" />
@@ -102,9 +123,9 @@ const Service = () => {
                     <motion.div
                       initial={{ opacity: 0, x: -6 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className="relative z-10 text-[17px] text-[rgba(147,197,253,0.5)]"
+                      className="relative z-10 text-[rgba(219,234,254,0.5)]"
                     >
-                      &#8594;
+                      <ArrowRight size={17} strokeWidth={2.5} />
                     </motion.div>
                   )}
                 </motion.button>
@@ -112,7 +133,7 @@ const Service = () => {
             })}
           </div>
 
-          <div className="relative rounded-[20px] border border-[rgba(147,197,253,0.15)] overflow-hidden min-h-[260px] lg:min-h-0">
+          <div className="relative rounded-[20px] border border-[rgba(255,255,255,0.1)] overflow-hidden h-[300px] lg:h-[320px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService.name}
@@ -124,16 +145,19 @@ const Service = () => {
               >
                 {activeService.img ? (
                   <img src={activeService.img} alt={activeService.name} className="absolute inset-0 w-full h-full object-cover" />
+                ) : activeService.mockup === "logo" ? (
+                  <LogoMockup />
                 ) : (
                   <UiMockup />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-30% to-[rgba(2,4,10,0.92)]" />
+                {/* Strong bottom gradient — dark enough that the photo's own text never collides with the write-up */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(3,5,10,0.97)_0%,rgba(3,5,10,0.88)_38%,rgba(3,5,10,0.4)_62%,transparent_85%)]" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <div className="w-[42px] h-[42px] rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center mb-3 text-white">
                     <activeService.icon className="w-5 h-5" />
                   </div>
                   <h3 className="font-display text-[22px] font-bold text-white mb-2">{activeService.name}</h3>
-                  <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.75)] max-w-[90%]">{activeService.desc}</p>
+                  <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.8)]">{activeService.desc}</p>
                 </div>
               </motion.div>
             </AnimatePresence>

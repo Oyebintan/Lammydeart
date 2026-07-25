@@ -8,10 +8,16 @@
 
 body {
   background-color: #03050a;
+  overscroll-behavior-y: none;
 }
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior-y: none;
+  /* Keeps native UI (scrollbars, form controls, overscroll gutter) dark so no
+     light strip appears at the edges of the page */
+  color-scheme: dark;
+  background-color: #03050a;
 }
 
 body::after {

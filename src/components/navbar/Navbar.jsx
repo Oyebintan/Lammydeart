@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
+import { ArrowRight } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -22,12 +23,12 @@ const Button = () => (
     transition={{ type: "spring", stiffness: 400, damping: 20 }}
     className="hidden lg:flex items-center gap-2 px-[18px] py-[9px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-[13.5px] font-semibold"
   >
-    Let's talk <span>&#8594;</span>
+    Let's talk <ArrowRight size={15} strokeWidth={2.5} />
   </MotionLink>
 )
 
-const Checkbox = ({ setIsMenuVisible, checkboxRef }) => (
-  <div className="lg:hidden">
+const Checkbox = ({ setIsMenuVisible, checkboxRef, toggleRef }) => (
+  <div ref={toggleRef} className="lg:hidden">
     <input
       ref={checkboxRef}
       type="checkbox"
@@ -68,6 +69,7 @@ const Navbar = () => {
   const [hovered, setHovered] = useState(null)
   const menuRef = useRef(null)
   const checkboxRef = useRef(null)
+  const toggleRef = useRef(null)
   const location = useLocation()
 
   useEffect(() => {
@@ -78,12 +80,29 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Lock background scroll while the mobile menu is open
+  useEffect(() => {
+    if (isMenuVisible) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isMenuVisible])
+
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // The hamburger must be excluded here. It sits outside the drawer, so
+      // without this its mousedown ran closeMenu() (un-checking the box) and
+      // then the label's own click re-checked it — the toggle could open the
+      // menu but never close it, leaving body scroll locked.
       if (
         isMenuVisible &&
         menuRef.current &&
-        !menuRef.current.contains(event.target)
+        !menuRef.current.contains(event.target) &&
+        !toggleRef.current?.contains(event.target)
       ) {
         closeMenu()
       }
@@ -118,10 +137,11 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(147,197,253,0.1)] ${
-          scrolled
-            ? "bg-[#03050a]/95 backdrop-blur-xl shadow-lg shadow-black/20"
-            : "bg-[#03050a]/75 backdrop-blur-md"
+        // Fully opaque, not /75–/95 as before: at those values 5–25% of the page
+        // scrolled through the bar by design, which read as content bleeding
+        // above the nav. Depth now comes from the border + shadow instead.
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] will-change-transform bg-[#03050a] ${
+          scrolled || isMenuVisible ? "shadow-lg shadow-black/30" : ""
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -147,7 +167,7 @@ const Navbar = () => {
                     {hovered === i && (
                       <motion.span
                         layoutId="nav-hover-pill"
-                        className="absolute inset-0 rounded-full bg-[rgba(147,197,253,0.08)] border border-[rgba(147,197,253,0.14)]"
+                        className="absolute inset-0 rounded-full bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.12)]"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
@@ -177,7 +197,7 @@ const Navbar = () => {
                     whileHover={{ scale: 1.12, y: -2 }}
                     whileTap={{ scale: 0.94 }}
                     transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                    className="flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(147,197,253,0.2)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-colors duration-300"
+                    className="flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(255,255,255,0.16)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-colors duration-300"
                     aria-label={social.label}
                   >
                     <social.icon className="w-4 h-4" />
@@ -186,14 +206,18 @@ const Navbar = () => {
               </div>
 
               {/* Divider */}
-              <div className="w-px h-6 bg-[rgba(147,197,253,0.15)]"></div>
+              <div className="w-px h-6 bg-[rgba(255,255,255,0.12)]"></div>
 
               {/* Button */}
               <Button />
             </div>
 
             {/* Mobile Menu Toggle */}
-            <Checkbox setIsMenuVisible={setIsMenuVisible} checkboxRef={checkboxRef} />
+            <Checkbox
+              setIsMenuVisible={setIsMenuVisible}
+              checkboxRef={checkboxRef}
+              toggleRef={toggleRef}
+            />
           </div>
         </div>
       </nav>
@@ -208,7 +232,7 @@ const Navbar = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="fixed top-0 right-0 h-screen w-72 bg-[#03050a] border-l border-[rgba(147,197,253,0.12)] z-40 lg:hidden"
+            className="fixed inset-y-0 right-0 w-72 bg-[#03050a] border-l border-[rgba(255,255,255,0.1)] z-40 lg:hidden overflow-y-auto"
           >
             <div className="flex flex-col h-full pt-24 px-6">
               <motion.div
@@ -222,7 +246,7 @@ const Navbar = () => {
                     <Link
                       to={link.path}
                       onClick={closeMenu}
-                      className="block text-[rgba(219,234,254,0.75)] hover:text-white hover:bg-[rgba(147,197,253,0.06)] px-4 py-3 rounded-lg font-medium transition-all duration-300"
+                      className="block text-[rgba(219,234,254,0.75)] hover:text-white hover:bg-[rgba(255,255,255,0.05)] px-4 py-3 rounded-lg font-medium transition-all duration-300"
                     >
                       {link.name}
                     </Link>
@@ -241,7 +265,9 @@ const Navbar = () => {
               </MotionLink>
 
               {/* Mobile Social Links */}
-              <div className="mt-auto pb-8">
+              {/* Extra bottom room so "Follow me" clears the mobile browser's
+                  bottom toolbar instead of sitting underneath it */}
+              <div className="mt-auto pb-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
                 <p className="text-[rgba(219,234,254,0.5)] text-sm mb-4">Follow me</p>
                 <div className="flex items-center gap-3">
                   {socialLinks.map((social) => (
@@ -250,7 +276,7 @@ const Navbar = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(147,197,253,0.2)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
+                      className="flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(255,255,255,0.16)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
                       aria-label={social.label}
                     >
                       <social.icon className="w-5 h-5" />
@@ -270,7 +296,9 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
+            // Opaque: at /95 the remaining 5% let section headings show through
+            // behind the open menu
+            className="fixed inset-0 bg-[#03050a] z-30 lg:hidden"
             onClick={closeMenu}
           />
         )}
