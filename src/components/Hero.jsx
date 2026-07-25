@@ -9,13 +9,12 @@ import CornerMarks from "./decor/CornerMarks"
 import LineBox from "./decor/LineBox"
 import zookImg from "../assets/images/projects/zook-fabrics/preview.jpg"
 import rexonaImg from "../assets/images/projects/rexona-giveaway-campaign/preview.jpg"
-// Portrait pieces only in the collage — the frames are upright, so a landscape
-// design (the festival poster is 3:2) would sit in a thick letterbox.
-import perfumeImg from "../assets/images/projects/perfume-skincare-flyer/preview.jpg"
+import festivalImg from "../assets/images/projects/cultural-festival-poster/preview.jpg"
 
-// The hero collage: one tall flagship frame beside two stacked smaller ones.
-// Swap the `img` values to feature different work — each `label` shows in the
-// tinted strip at the bottom of its own frame.
+// The hero collage: one large flagship frame beside two stacked smaller ones.
+// Every frame is 4:5, matching the artwork, so designs fit without cropping.
+// Swap the `img` values to feature different work — each frame's category and
+// title show in the tinted band across its bottom.
 const heroFrames = {
   tall: {
     img: zookImg,
@@ -30,10 +29,10 @@ const heroFrames = {
     accent: "16,122,90",
   },
   bottomSmall: {
-    img: perfumeImg,
+    img: festivalImg,
     category: "Social Ads",
-    title: "Beauty Brand Flyer",
-    accent: "146,54,110",
+    title: "Cultural Festival",
+    accent: "168,64,20",
   },
 }
 
@@ -89,10 +88,9 @@ const Cursor = () => (
   />
 )
 
-// One frame of the hero collage. The artwork is contained rather than cropped —
-// these are 4:5 designs and cropping them to fit lost real content — so the
-// frame mats the leftover space in the project's own accent tint and gives the
-// category its own strip underneath, never sitting over the design.
+// One frame of the hero collage. The frame is 4:5 like the artwork, so
+// object-contain fills it edge to edge with nothing cropped, and the category
+// sits in a tinted band overlaid across the bottom of the design.
 const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
   <motion.div
     initial={{ opacity: 0, y: 16 }}
@@ -105,30 +103,31 @@ const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
       animate={{ y: [0, -float, 0] }}
       transition={{ duration: 6.5 + delay, repeat: Infinity, ease: "easeInOut" }}
       whileHover={{ scale: 1.025 }}
-      className="group flex flex-col h-full overflow-hidden rounded-[18px] lg:rounded-[22px] border border-[rgba(255,255,255,0.12)] shadow-[0_24px_50px_-18px_rgba(0,0,0,0.85)]"
+      className="group relative block w-full h-full overflow-hidden rounded-[18px] lg:rounded-[22px] border border-[rgba(255,255,255,0.12)] shadow-[0_24px_50px_-18px_rgba(0,0,0,0.85)]"
       style={{
-        // Matting picks up a hint of the project's colour so the letterboxed
-        // area reads as a deliberate mount rather than empty space
-        background: `linear-gradient(160deg, rgba(${frame.accent},0.22), rgba(6,10,18,0.96) 70%)`,
+        // Shows only where a design isn't exactly 4:5, as a thin mount
+        background: `linear-gradient(160deg, rgba(${frame.accent},0.28), rgba(6,10,18,0.96) 70%)`,
       }}
     >
-      <div className="relative flex-1 min-h-0 flex items-center justify-center p-2 lg:p-2.5">
-        <img
-          src={frame.img}
-          alt={`${frame.category} — ${frame.title}`}
-          className="max-w-full max-h-full object-contain rounded-[10px] lg:rounded-xl shadow-[0_10px_28px_-12px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:scale-[1.03]"
-          loading="lazy"
-        />
-      </div>
+      <img
+        src={frame.img}
+        alt={`${frame.category} — ${frame.title}`}
+        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+        loading="lazy"
+      />
 
       <div
-        className="flex-none px-3 py-2 lg:px-3.5 lg:py-2.5 border-t border-[rgba(255,255,255,0.1)]"
-        style={{ background: `rgba(${frame.accent},0.88)` }}
+        className="absolute inset-x-0 bottom-0 px-3 pt-8 pb-2.5 lg:px-4 lg:pb-3 pointer-events-none"
+        style={{
+          background: `linear-gradient(to top, rgba(${frame.accent},0.94) 0%, rgba(${frame.accent},0.6) 45%, transparent 100%)`,
+        }}
       >
-        <div className="text-[8.5px] lg:text-[9.5px] font-bold uppercase tracking-[0.14em] text-white/70 leading-none mb-0.5 lg:mb-1">
+        <div className="text-[8.5px] lg:text-[9.5px] font-bold uppercase tracking-[0.14em] text-white/75 leading-none mb-1">
           {frame.category}
         </div>
-        <div className="font-display text-[11.5px] lg:text-[14px] font-bold text-white leading-tight truncate">
+        {/* Wraps rather than truncating — the narrow frames are only ~110px wide
+            on a phone, where a single line clipped most of the title */}
+        <div className="font-display text-[10.5px] lg:text-[14px] font-bold text-white leading-[1.2]">
           {frame.title}
         </div>
       </div>
@@ -147,13 +146,24 @@ const HeroVisual = () => (
       className="absolute -top-8 -right-6 w-40 h-40 lg:w-56 lg:h-56 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.22),rgba(29,78,216,0.08)_60%,transparent_75%)] blur-sm pointer-events-none"
     />
 
-    {/* Two stacked frames beside one tall frame, still flush top and bottom via
-        equal rows. The tall column is roughly double the narrow one because the
-        work is 4:5 — at that ratio a full-height frame needs twice the width of
-        a half-height one to hold the whole design without letterboxing. */}
-    <div className="relative grid grid-cols-[1fr_2.15fr] grid-rows-2 gap-2.5 lg:gap-3.5 h-[400px] sm:h-[470px] lg:h-[540px]">
-      <HeroFrame frame={heroFrames.topSmall} className="col-start-1 row-start-1" delay={0.35} float={5} />
-      <HeroFrame frame={heroFrames.bottomSmall} className="col-start-1 row-start-2" delay={0.5} float={7} />
+    {/* The two small frames are 4:5 and set the row heights; ZOOK spans both
+        rows, and the 1:2.056 column ratio is what makes its resulting box 4:5
+        as well (a full-height frame needs ~2x the width of a half-height one at
+        that aspect, plus a share of the gap). So all three are 4:5, flush top
+        and bottom, with no fixed pixel heights to break at other widths. */}
+    <div className="relative grid grid-cols-[1fr_2.056fr] gap-2.5 lg:gap-3.5">
+      <HeroFrame
+        frame={heroFrames.topSmall}
+        className="col-start-1 row-start-1 aspect-[4/5]"
+        delay={0.35}
+        float={5}
+      />
+      <HeroFrame
+        frame={heroFrames.bottomSmall}
+        className="col-start-1 row-start-2 aspect-[4/5]"
+        delay={0.5}
+        float={7}
+      />
       <HeroFrame
         frame={heroFrames.tall}
         className="col-start-2 row-start-1 row-span-2"
