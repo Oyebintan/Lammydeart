@@ -26,7 +26,7 @@ const Skills = () => {
               whileInView={{ width: `${s.pct}%` }}
               viewport={viewportOnce}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="h-full rounded-full bg-gradient-to-r from-[#1D4ED8] to-[#7DD3FC]"
+              className="animate-gradient h-full rounded-full bg-gradient-to-r from-[#1D4ED8] via-[#38BDF8] to-[#7DD3FC]"
             />
           </div>
         </motion.div>

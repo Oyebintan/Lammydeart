@@ -9,7 +9,7 @@ const MotionLink = motion.create(Link)
 const Logo = () => (
   <Link to="/" className="font-display font-bold text-[19px] text-[#F3F6FB] tracking-[0.02em] z-50">
     Lammy
-    <span className="bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent">
+    <span className="animate-gradient bg-gradient-to-br from-[#1D4ED8] via-[#38BDF8] to-[#7DD3FC] bg-clip-text text-transparent">
       deart
     </span>
   </Link>
@@ -21,7 +21,7 @@ const Button = () => (
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.96 }}
     transition={{ type: "spring", stiffness: 400, damping: 20 }}
-    className="hidden lg:flex items-center gap-2 px-[18px] py-[9px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-[13.5px] font-semibold"
+    className="animate-gradient hidden lg:flex items-center gap-2 px-[18px] py-[9px] rounded-full bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-[13.5px] font-semibold"
   >
     Let's talk <ArrowRight size={15} strokeWidth={2.5} />
   </MotionLink>
@@ -140,10 +140,6 @@ const Navbar = () => {
         // Fully opaque, not /75–/95 as before: at those values 5–25% of the page
         // scrolled through the bar by design, which read as content bleeding
         // above the nav. Depth now comes from the border + shadow instead.
-        // pt-[safe-area-inset-top] makes the bar's own opaque background extend up
-        // through the status-bar strip, so it seals against the top of the screen
-        // instead of leaving page content visible beside the clock and battery.
-        style={{ paddingTop: "env(safe-area-inset-top)" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] will-change-transform bg-[#03050a] ${
           scrolled || isMenuVisible ? "shadow-lg shadow-black/30" : ""
         }`}
@@ -238,11 +234,7 @@ const Navbar = () => {
             exit="exit"
             className="fixed inset-y-0 right-0 w-72 bg-[#03050a] border-l border-[rgba(255,255,255,0.1)] z-40 lg:hidden overflow-y-auto"
           >
-            {/* Clears the nav, which is now taller by the safe-area inset */}
-            <div
-              className="flex flex-col h-full px-6"
-              style={{ paddingTop: "calc(6rem + env(safe-area-inset-top))" }}
-            >
+            <div className="flex flex-col h-full pt-24 px-6">
               <motion.div
                 variants={linkListVariants}
                 initial="hidden"
@@ -267,7 +259,7 @@ const Navbar = () => {
                 to="/contact"
                 onClick={closeMenu}
                 whileTap={{ scale: 0.96 }}
-                className="bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white font-semibold py-3 px-6 rounded-full text-center mb-8"
+                className="animate-gradient bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white font-semibold py-3 px-6 rounded-full text-center mb-8"
               >
                 Let's talk
               </MotionLink>

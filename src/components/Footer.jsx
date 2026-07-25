@@ -37,7 +37,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 flex-wrap">
         <Link to="/" className="font-display font-bold text-[15px] text-[#F3F6FB]">
           Lammy
-          <span className="bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent">
+          <span className="animate-gradient bg-gradient-to-br from-[#1D4ED8] via-[#38BDF8] to-[#7DD3FC] bg-clip-text text-transparent">
             deart
           </span>
         </Link>

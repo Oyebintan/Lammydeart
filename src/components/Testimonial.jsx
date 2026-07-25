@@ -2,8 +2,6 @@ import React, { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../motion"
-import { gridBg } from "../decor"
-import CornerMarks from "./decor/CornerMarks"
 
 const reviews = [
   {
@@ -75,9 +73,8 @@ const Testimonial = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className={`relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120] ${gridBg}`}
+      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
     >
-      <CornerMarks />
       <div className="relative max-w-3xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-4 mb-8">
           <div>

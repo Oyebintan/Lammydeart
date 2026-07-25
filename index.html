@@ -2,11 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- viewport-fit=cover lets the layout extend into the phone's safe areas, so
-         the fixed nav can pad itself by env(safe-area-inset-top) and seal its
-         background right up under the status bar. Without it those insets are
-         always 0 and page content shows through beside the clock/battery. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Deliberately NO viewport-fit=cover. That extends the layout viewport up
+         into the safe area, but in ordinary iOS Safari browsing
+         env(safe-area-inset-top) resolves to 0, so nothing compensates and page
+         content ends up painting behind the status bar. Left off, the viewport
+         starts below the status bar and theme-color tints that strip instead. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Tints the mobile browser's own chrome (the iOS status-bar strip above the
          page and the toolbar strip below it) to match the site background.
          Without this Safari leaves those strips translucent, so page content is

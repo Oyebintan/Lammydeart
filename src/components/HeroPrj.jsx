@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../motion"
-import { gridBg } from "../decor"
-import CornerMarks from "./decor/CornerMarks"
 import { projects, projectCategories } from "../data/projects"
 import ProjectCard from "./ProjectCard"
 
@@ -19,9 +17,8 @@ const HeroPrj = ({ times = 6 }) => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className={`relative overflow-hidden px-6 lg:px-14 py-12 bg-[#03050a] ${gridBg}`}
+      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-[#03050a]"
     >
-      <CornerMarks />
       <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between flex-wrap gap-4 mb-6">
           <div>

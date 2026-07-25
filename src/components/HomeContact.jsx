@@ -2,8 +2,6 @@ import React from "react"
 import { motion } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
 import { fadeUp, stagger, viewportOnce } from "../motion"
-import { gridBg } from "../decor"
-import CornerMarks from "./decor/CornerMarks"
 
 const socialLinks = [
   { icon: FaInstagram, href: "https://www.instagram.com/lammyde.art", label: "Instagram" },
@@ -21,10 +19,9 @@ const HomeContact = () => {
       viewport={viewportOnce}
       className="relative overflow-hidden px-6 lg:px-14 py-12 bg-[#03050a]"
     >
-      <CornerMarks />
       <motion.div
         variants={fadeUp}
-        className={`relative max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#05080f] p-8 lg:p-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center ${gridBg}`}
+        className="relative max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#05080f] p-8 lg:p-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center"
       >
         <div>
           <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
@@ -66,7 +63,7 @@ const HomeContact = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold"
+            className="animate-gradient flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold"
           >
             <FaEnvelope /> Send an email
           </motion.a>

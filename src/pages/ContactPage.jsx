@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa6"
 import { usePageTitle } from "../hooks/usePageTitle"
 import { fadeUp, stagger, viewportOnce } from "../motion"
-import { gridBg } from "../decor"
+import { gridBg, boxTint } from "../decor"
 import CornerMarks from "../components/decor/CornerMarks"
 import LineBox from "../components/decor/LineBox"
 
@@ -85,7 +85,7 @@ const ContactPage = () => {
         variants={stagger()}
         initial="hidden"
         animate="show"
-        className="relative z-10 px-6 lg:px-14 pt-[calc(7rem+env(safe-area-inset-top))] pb-10"
+        className="relative z-10 px-6 lg:px-14 pt-28 pb-10"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -160,7 +160,7 @@ const ContactPage = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold"
+              className="animate-gradient flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold"
             >
               <FaEnvelope /> Send an email
             </motion.a>
@@ -204,7 +204,7 @@ const ContactPage = () => {
               variants={fadeUp}
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
-              className="rounded-[20px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] p-6"
+              className={`rounded-[20px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] p-6 ${boxTint}`}
             >
               <div className="font-display text-[13px] font-bold text-[rgba(219,234,254,0.35)] mb-3">
                 {s.step}
