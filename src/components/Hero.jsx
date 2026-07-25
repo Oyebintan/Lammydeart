@@ -2,7 +2,7 @@ import React from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
 import { SiCoreldraw, SiAdobephotoshop } from "react-icons/si"
-import { ArrowRight, Sparkle } from "lucide-react"
+import { ArrowRight, ArrowDown, Sparkle } from "lucide-react"
 import { useTypewriter } from "../hooks/useTypewriter"
 import { gridBg } from "../decor"
 import CornerMarks from "./decor/CornerMarks"
@@ -102,7 +102,7 @@ const HeroVisual = () => {
       <motion.div
         animate={{ y: [0, -9, 0] }}
         transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-        className="relative w-full max-w-[235px] mx-auto lg:max-w-md lg:mx-0"
+        className="relative w-full max-w-[235px] mx-auto lg:max-w-[360px] lg:mx-0"
       >
         {/* Soft pool of light on the "floor" around the object — reads as a
             surface it's resting on instead of empty space */}
@@ -176,6 +176,20 @@ const HeroVisual = () => {
           />
         </motion.a>
       </motion.div>
+
+      {/* Caption under the card — names the featured piece and gives the
+          space below the tilted frame a purpose instead of reading as a gap */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
+        className="hidden lg:flex items-center gap-3 w-full max-w-[360px] pt-2"
+      >
+        <span className="h-px flex-1 bg-gradient-to-r from-[rgba(255,255,255,0.22)] to-transparent" />
+        <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[rgba(219,234,254,0.5)] whitespace-nowrap">
+          {flagshipProject.title}
+        </span>
+      </motion.div>
     </div>
   )
 }
@@ -190,8 +204,11 @@ const Hero = () => {
     startDelay: 1300,
   })
 
+  // Generous lg bottom padding: the card's steep 3D tilt makes its rendered box
+  // taller than its layout box, and the section clips overflow — without the
+  // extra room the bottom of the card gets sliced off.
   return (
-    <section className={`relative overflow-hidden bg-[#03050a] pt-20 pb-8 lg:pt-24 lg:pb-10 px-6 lg:px-14 ${gridBg}`}>
+    <section className={`relative overflow-hidden bg-[#03050a] pt-20 pb-8 lg:pt-24 lg:pb-12 px-6 lg:px-14 ${gridBg}`}>
       <CornerMarks />
       <LineBox className="hidden lg:block -top-16 right-[28%]" size={180} duration={30} />
       <LineBox className="hidden lg:block -bottom-20 -left-16" size={140} duration={24} reverse />
@@ -222,7 +239,7 @@ const Hero = () => {
 
           <motion.h1
             variants={item}
-            className="font-display font-bold text-[32px] lg:text-5xl leading-[1.15] tracking-[-0.01em] text-[#F3F6FB] lg:min-h-[3.7em]"
+            className="font-display font-bold text-[32px] lg:text-5xl leading-[1.15] tracking-[-0.01em] text-[#F3F6FB] min-h-[2.4em]"
           >
             <span>
               {greeting}
@@ -308,6 +325,35 @@ const Hero = () => {
         <div className="hidden lg:block">
           <HeroVisual />
         </div>
+      </motion.div>
+
+      {/* Bottom strip — gives the clearance the tilted card needs a purpose
+          (scroll cue + availability) instead of leaving it as dead space */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.1, duration: 0.6 }}
+        className="hidden lg:flex relative z-10 max-w-7xl mx-auto mt-10 items-center gap-6"
+      >
+        <a
+          href="#services"
+          className="group flex items-center gap-3 text-[11px] font-semibold tracking-[0.16em] uppercase text-[rgba(219,234,254,0.45)] hover:text-[rgba(219,234,254,0.85)] transition-colors duration-300"
+        >
+          <span className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center group-hover:border-[rgba(255,255,255,0.35)] transition-colors duration-300">
+            <motion.span
+              animate={{ y: [0, 3, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowDown size={14} strokeWidth={2.5} />
+            </motion.span>
+          </span>
+          Scroll to explore
+        </a>
+        <span className="h-px flex-1 bg-gradient-to-r from-[rgba(255,255,255,0.12)] via-[rgba(255,255,255,0.06)] to-transparent" />
+        <span className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.14em] uppercase text-[rgba(219,234,254,0.45)]">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
+          Available for work
+        </span>
       </motion.div>
     </section>
   )

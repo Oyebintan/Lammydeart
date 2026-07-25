@@ -45,7 +45,10 @@ const ProjectCard = ({ p, featured = false }) => {
         </div>
       )}
 
-      <div className="absolute inset-0 flex flex-col justify-end p-2.5 lg:p-4.5 bg-gradient-to-b from-transparent from-40% to-[rgba(2,4,10,0.88)]">
+      {/* Near-opaque at the caption zone: several of these posters have their own
+          "POSTER DESIGN"/"FLYER DESIGN" text baked in, which showed through and
+          collided with the card's own label under a softer gradient */}
+      <div className="absolute inset-0 flex flex-col justify-end p-2.5 lg:p-4.5 bg-[linear-gradient(to_top,rgba(2,4,10,0.98)_0%,rgba(2,4,10,0.95)_30%,rgba(2,4,10,0.6)_48%,transparent_76%)]">
         <div className="text-[8.5px] lg:text-[11px] font-semibold tracking-[0.1em] uppercase text-[rgba(219,234,254,0.6)] mb-0.5 lg:mb-1">
           {p.category}
         </div>
