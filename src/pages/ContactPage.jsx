@@ -85,7 +85,7 @@ const ContactPage = () => {
         variants={stagger()}
         initial="hidden"
         animate="show"
-        className="relative z-10 px-6 lg:px-14 pt-28 pb-10"
+        className="relative z-10 px-6 lg:px-14 pt-[calc(7rem+env(safe-area-inset-top))] pb-10"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div

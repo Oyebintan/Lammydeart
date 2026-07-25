@@ -43,7 +43,7 @@ const AboutPage = () => {
         variants={stagger()}
         initial="hidden"
         animate="show"
-        className="relative z-10 px-6 lg:px-14 pt-28 pb-12 grid lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto"
+        className="relative z-10 px-6 lg:px-14 pt-[calc(7rem+env(safe-area-inset-top))] pb-12 grid lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto"
       >
         <div className="flex flex-col gap-5">
           <motion.div
