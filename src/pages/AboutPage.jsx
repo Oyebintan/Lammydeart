@@ -6,7 +6,7 @@ import { fadeUp, stagger, viewportOnce } from "../motion"
 import { gridBg } from "../decor"
 import CornerMarks from "../components/decor/CornerMarks"
 import LineBox from "../components/decor/LineBox"
-import img from "../assets/profile.jpg"
+import img from "../assets/images/profile/preview.jpg"
 
 const highlights = [
   { icon: Palette, text: "3+ Years Experience" },
