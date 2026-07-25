@@ -26,14 +26,17 @@ const socialLinks = [
   { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
 ]
 
-// Quick answers to what clients ask before they get in touch. The two
-// business-specific figures below (turnaround windows and revision count) are
-// sensible defaults — adjust them to match how you actually work, since they
-// read as commitments to anyone about to message you.
+// Quick answers to what clients ask before they get in touch. Turnaround
+// windows below are Olamide's own figures. The revision count is still a
+// placeholder default — confirm it before treating it as a commitment.
 const quickAnswers = [
   {
     q: "Typical turnaround",
-    a: "Flyers and posters usually take 2–4 days. A full brand identity runs closer to 1–2 weeks, depending on scope.",
+    a: "Flyers and posters take 2–3 days. A full brand identity runs a week to two, depending on scope.",
+  },
+  {
+    q: "Need it sooner?",
+    a: "Rush delivery is available — a day or two for most flyers and posters. It costs extra, so mention your deadline when you get in touch and I'll quote it.",
   },
   {
     q: "What to include in your brief",
