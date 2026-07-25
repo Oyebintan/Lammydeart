@@ -82,7 +82,8 @@ const AboutPage = () => {
         <motion.div variants={fadeUp} className="relative flex justify-center lg:justify-end">
           <div
             style={{ rotate: "-3deg" }}
-            className="relative w-full max-w-[300px] aspect-[4/3] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.75)]"
+            // 4:5 to match the illustration's own ratio, so it isn't cropped
+            className="relative w-full max-w-[300px] aspect-[4/5] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.75)]"
           >
             <div className="w-full h-full rounded-[20px] overflow-hidden">
               <img src={img} alt="Olamide" className="w-full h-full object-cover" loading="lazy" />
