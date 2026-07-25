@@ -2,12 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Deliberately NO viewport-fit=cover. That extends the layout viewport up
-         into the safe area, but in ordinary iOS Safari browsing
-         env(safe-area-inset-top) resolves to 0, so nothing compensates and page
-         content ends up painting behind the status bar. Left off, the viewport
-         starts below the status bar and theme-color tints that strip instead. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport-fit=cover is required here, not optional.
+         Without it the layout viewport stops below the status bar, but the page
+         still PAINTS up into that strip once Safari collapses its top toolbar —
+         and `position: fixed; top: 0` anchors to the layout viewport, so the nav
+         sits below the strip and scrolling content shows above it.
+         With cover, the layout viewport covers the whole screen, so the nav's
+         opaque background reaches the true top edge. env(safe-area-inset-*) only
+         resolves to real values under cover, which is what the padding on the
+         nav, hero, page headers and footer relies on to stay clear of the
+         status bar and home indicator. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <!-- Tints the mobile browser's own chrome (the iOS status-bar strip above the
          page and the toolbar strip below it) to match the site background.
          Without this Safari leaves those strips translucent, so page content is

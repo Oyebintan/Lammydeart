@@ -32,7 +32,7 @@ const Footer = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="px-6 lg:px-14 py-7 border-t border-[rgba(255,255,255,0.08)]"
+      className="px-6 lg:px-14 pt-7 pb-[calc(1.75rem+env(safe-area-inset-bottom,0px))] border-t border-[rgba(255,255,255,0.08)]"
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 flex-wrap">
         <Link to="/" className="font-display font-bold text-[15px] text-[#F3F6FB]">

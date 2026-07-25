@@ -222,7 +222,7 @@ const Hero = () => {
   })
 
   return (
-    <section className="relative overflow-hidden bg-[#03050a] pt-20 pb-8 lg:pt-24 lg:pb-12 px-6 lg:px-14">
+    <section className="relative overflow-hidden bg-[#03050a] pt-[calc(5rem+env(safe-area-inset-top,0px))] pb-8 lg:pt-[calc(6rem+env(safe-area-inset-top,0px))] lg:pb-12 px-6 lg:px-14">
       {/* Texture lives on its own masked layer rather than on the section, so it
           can fade to nothing well before the section ends — everything from the
           stats row down is plain colour, matching the rest of the page. The

@@ -140,7 +140,7 @@ const Navbar = () => {
         // Fully opaque, not /75–/95 as before: at those values 5–25% of the page
         // scrolled through the bar by design, which read as content bleeding
         // above the nav. Depth now comes from the border + shadow instead.
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] will-change-transform bg-[#03050a] ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] will-change-transform bg-[#03050a] pt-[env(safe-area-inset-top,0px)] ${
           scrolled || isMenuVisible ? "shadow-lg shadow-black/30" : ""
         }`}
       >
@@ -234,7 +234,7 @@ const Navbar = () => {
             exit="exit"
             className="fixed inset-y-0 right-0 w-72 bg-[#03050a] border-l border-[rgba(255,255,255,0.1)] z-40 lg:hidden overflow-y-auto"
           >
-            <div className="flex flex-col h-full pt-24 px-6">
+            <div className="flex flex-col h-full pt-[calc(6rem+env(safe-area-inset-top,0px))] px-6">
               <motion.div
                 variants={linkListVariants}
                 initial="hidden"
