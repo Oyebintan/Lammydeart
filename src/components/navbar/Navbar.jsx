@@ -144,6 +144,18 @@ const Navbar = () => {
           scrolled || isMenuVisible ? "shadow-lg shadow-black/30" : ""
         }`}
       >
+        {/* Opaque shim pinned directly above the nav, independent of any
+            safe-area reasoning. If the nav's top edge is the true top of the
+            screen this sits off-screen and does nothing. If anything ever
+            insets the nav downward — safe area, browser chrome, a future
+            layout change — this covers the gap so page content can never
+            appear above the bar. Cheap insurance for a failure mode that
+            can't be reproduced outside a real device. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-full h-60 bg-[#03050a] pointer-events-none"
+        />
+
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
             <Logo />
