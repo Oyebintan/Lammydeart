@@ -9,7 +9,9 @@ import CornerMarks from "./decor/CornerMarks"
 import LineBox from "./decor/LineBox"
 import zookImg from "../assets/images/projects/zook-fabrics/preview.jpg"
 import rexonaImg from "../assets/images/projects/rexona-giveaway-campaign/preview.jpg"
-import festivalImg from "../assets/images/projects/cultural-festival-poster/preview.jpg"
+// Portrait pieces only in the collage — the frames are upright, so a landscape
+// design (the festival poster is 3:2) would sit in a thick letterbox.
+import perfumeImg from "../assets/images/projects/perfume-skincare-flyer/preview.jpg"
 
 // The hero collage: one tall flagship frame beside two stacked smaller ones.
 // Swap the `img` values to feature different work — each `label` shows in the
@@ -28,10 +30,10 @@ const heroFrames = {
     accent: "16,122,90",
   },
   bottomSmall: {
-    img: festivalImg,
+    img: perfumeImg,
     category: "Social Ads",
-    title: "Cultural Festival",
-    accent: "168,64,20",
+    title: "Beauty Brand Flyer",
+    accent: "146,54,110",
   },
 }
 
@@ -87,47 +89,51 @@ const Cursor = () => (
   />
 )
 
-// One frame of the hero collage. The category strip sits flush at the bottom
-// over a tinted scrim: it reads clearly without hiding the artwork behind it.
-const HeroFrame = ({ frame, className, objectPosition = "50% 50%", delay = 0, float = 7 }) => (
-  <motion.a
-    href="/project"
+// One frame of the hero collage. The artwork is contained rather than cropped —
+// these are 4:5 designs and cropping them to fit lost real content — so the
+// frame mats the leftover space in the project's own accent tint and gives the
+// category its own strip underneath, never sitting over the design.
+const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
+  <motion.div
     initial={{ opacity: 0, y: 16 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
-    whileHover={{ y: -6 }}
-    className={`group relative block overflow-hidden rounded-[18px] lg:rounded-[22px] border border-[rgba(255,255,255,0.12)] bg-[#0b1526] shadow-[0_24px_50px_-18px_rgba(0,0,0,0.85)] ${className}`}
+    className={className}
   >
-    <motion.div
+    <motion.a
+      href="/project"
       animate={{ y: [0, -float, 0] }}
       transition={{ duration: 6.5 + delay, repeat: Infinity, ease: "easeInOut" }}
-      className="absolute inset-0"
-    >
-      <img
-        src={frame.img}
-        alt={`${frame.category} — ${frame.title}`}
-        style={{ objectPosition }}
-        className="w-full h-full object-cover scale-[1.06] transition-transform duration-500 group-hover:scale-[1.12]"
-        loading="lazy"
-      />
-    </motion.div>
-
-    {/* Tinted category strip — the accent colour carries the project's own
-        palette, and the scrim only covers the bottom sliver of the frame */}
-    <div
-      className="absolute inset-x-0 bottom-0 px-3 pt-8 pb-2.5 lg:px-4 lg:pb-3"
+      whileHover={{ scale: 1.025 }}
+      className="group flex flex-col h-full overflow-hidden rounded-[18px] lg:rounded-[22px] border border-[rgba(255,255,255,0.12)] shadow-[0_24px_50px_-18px_rgba(0,0,0,0.85)]"
       style={{
-        background: `linear-gradient(to top, rgba(${frame.accent},0.92) 0%, rgba(${frame.accent},0.55) 45%, transparent 100%)`,
+        // Matting picks up a hint of the project's colour so the letterboxed
+        // area reads as a deliberate mount rather than empty space
+        background: `linear-gradient(160deg, rgba(${frame.accent},0.22), rgba(6,10,18,0.96) 70%)`,
       }}
     >
-      <div className="text-[8.5px] lg:text-[9.5px] font-bold uppercase tracking-[0.14em] text-white/75 leading-none mb-1">
-        {frame.category}
+      <div className="relative flex-1 min-h-0 flex items-center justify-center p-2 lg:p-2.5">
+        <img
+          src={frame.img}
+          alt={`${frame.category} — ${frame.title}`}
+          className="max-w-full max-h-full object-contain rounded-[10px] lg:rounded-xl shadow-[0_10px_28px_-12px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:scale-[1.03]"
+          loading="lazy"
+        />
       </div>
-      <div className="font-display text-[11.5px] lg:text-[14px] font-bold text-white leading-tight">
-        {frame.title}
+
+      <div
+        className="flex-none px-3 py-2 lg:px-3.5 lg:py-2.5 border-t border-[rgba(255,255,255,0.1)]"
+        style={{ background: `rgba(${frame.accent},0.88)` }}
+      >
+        <div className="text-[8.5px] lg:text-[9.5px] font-bold uppercase tracking-[0.14em] text-white/70 leading-none mb-0.5 lg:mb-1">
+          {frame.category}
+        </div>
+        <div className="font-display text-[11.5px] lg:text-[14px] font-bold text-white leading-tight truncate">
+          {frame.title}
+        </div>
       </div>
-    </div>
-  </motion.a>
+    </motion.a>
+  </motion.div>
 )
 
 // Self-contained so it can render once in the mobile flow (right after the
@@ -141,30 +147,18 @@ const HeroVisual = () => (
       className="absolute -top-8 -right-6 w-40 h-40 lg:w-56 lg:h-56 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.22),rgba(29,78,216,0.08)_60%,transparent_75%)] blur-sm pointer-events-none"
     />
 
-    {/* Two stacked frames beside one tall frame. Equal-height rows keep the
-        stack's combined height exactly matching the tall frame, so all three
-        line up flush top and bottom. */}
-    <div className="relative grid grid-cols-2 grid-rows-2 gap-2.5 lg:gap-3.5 h-[330px] sm:h-[400px] lg:h-[460px]">
-      <HeroFrame
-        frame={heroFrames.topSmall}
-        className="col-start-1 row-start-1"
-        objectPosition="50% 30%"
-        delay={0.35}
-        float={6}
-      />
-      <HeroFrame
-        frame={heroFrames.bottomSmall}
-        className="col-start-1 row-start-2"
-        objectPosition="50% 40%"
-        delay={0.5}
-        float={8}
-      />
+    {/* Two stacked frames beside one tall frame, still flush top and bottom via
+        equal rows. The tall column is roughly double the narrow one because the
+        work is 4:5 — at that ratio a full-height frame needs twice the width of
+        a half-height one to hold the whole design without letterboxing. */}
+    <div className="relative grid grid-cols-[1fr_2.15fr] grid-rows-2 gap-2.5 lg:gap-3.5 h-[400px] sm:h-[470px] lg:h-[540px]">
+      <HeroFrame frame={heroFrames.topSmall} className="col-start-1 row-start-1" delay={0.35} float={5} />
+      <HeroFrame frame={heroFrames.bottomSmall} className="col-start-1 row-start-2" delay={0.5} float={7} />
       <HeroFrame
         frame={heroFrames.tall}
         className="col-start-2 row-start-1 row-span-2"
-        objectPosition="50% 22%"
         delay={0.2}
-        float={7}
+        float={6}
       />
 
       {/* Tool badges sit mostly outside the collage, straddling opposite outer
@@ -200,7 +194,7 @@ const Hero = () => {
   })
 
   return (
-    <section className={`relative overflow-hidden bg-[#03050a] pt-20 pb-8 lg:pt-24 lg:pb-12 px-6 lg:px-14 ${gridBg}`}>
+    <section className={`relative overflow-hidden bg-[#03050a] pt-[calc(5rem+env(safe-area-inset-top))] pb-8 lg:pt-[calc(6rem+env(safe-area-inset-top))] lg:pb-12 px-6 lg:px-14 ${gridBg}`}>
       <CornerMarks />
       <LineBox className="hidden lg:block -top-16 right-[28%]" size={180} duration={30} />
       <LineBox className="hidden lg:block -bottom-20 -left-16" size={140} duration={24} reverse />
@@ -282,18 +276,20 @@ const Hero = () => {
             {/* Small qualifier under the CTAs, like the reference's note beneath
                 its button — adds substance to the column and answers the two
                 things a prospective client checks first */}
+            {/* Stacks on mobile with the separators hidden — inline they wrapped
+                mid-list and left slashes dangling at the end of lines */}
             <motion.div
               variants={item}
-              className="flex items-center gap-2.5 flex-wrap text-[12.5px] text-[rgba(219,234,254,0.45)] -mt-1"
+              className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-2.5 sm:flex-wrap text-[12.5px] text-[rgba(219,234,254,0.45)] -mt-1"
             >
               <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] flex-none" />
                 Open for freelance work
               </span>
-              <span className="text-[rgba(255,255,255,0.18)]">/</span>
-              <span>Lagos, Nigeria — working remote</span>
-              <span className="text-[rgba(255,255,255,0.18)]">/</span>
-              <span>Replies within 24 hours</span>
+              <span className="hidden sm:inline text-[rgba(255,255,255,0.18)]">/</span>
+              <span className="pl-3 sm:pl-0">Lagos, Nigeria — working remote</span>
+              <span className="hidden sm:inline text-[rgba(255,255,255,0.18)]">/</span>
+              <span className="pl-3 sm:pl-0">Replies within 24 hours</span>
             </motion.div>
 
             <motion.div variants={item} className="flex items-center gap-3.5">
@@ -314,18 +310,25 @@ const Hero = () => {
               ))}
             </motion.div>
 
-            <motion.div variants={item} className="flex gap-7 pt-3 border-t border-[rgba(255,255,255,0.1)]">
+            {/* Even thirds rather than a fixed gap, so the three read as one
+                measured row instead of clustering at the left edge */}
+            <motion.div
+              variants={item}
+              className="grid grid-cols-3 gap-4 pt-5 mt-1 border-t border-[rgba(255,255,255,0.1)]"
+            >
               {stats.map((stat, i) => (
                 <div key={stat.label}>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 + i * 0.1, duration: 0.4 }}
-                    className="font-display text-xl font-bold text-[#F3F6FB]"
+                    className="font-display text-[22px] lg:text-2xl font-bold text-[#F3F6FB] leading-none"
                   >
                     {stat.value}
                   </motion.div>
-                  <div className="text-[11px] text-[rgba(219,234,254,0.5)] mt-0.5">{stat.label}</div>
+                  <div className="text-[11px] lg:text-[11.5px] text-[rgba(219,234,254,0.5)] mt-1.5">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </motion.div>
