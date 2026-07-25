@@ -26,6 +26,29 @@ const socialLinks = [
   { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
 ]
 
+// Quick answers to what clients ask before they get in touch. The two
+// business-specific figures below (turnaround windows and revision count) are
+// sensible defaults — adjust them to match how you actually work, since they
+// read as commitments to anyone about to message you.
+const quickAnswers = [
+  {
+    q: "Typical turnaround",
+    a: "Flyers and posters usually take 2–4 days. A full brand identity runs closer to 1–2 weeks, depending on scope.",
+  },
+  {
+    q: "What to include in your brief",
+    a: "The business name, what the design is for, any copy that has to appear, sizes you need, and a couple of references you like.",
+  },
+  {
+    q: "Revisions",
+    a: "Two rounds of changes are included on every project, so we can refine the direction without extra cost.",
+  },
+  {
+    q: "What you receive",
+    a: "Print-ready PDF plus PNG and JPG versions sized for social. Editable source files on request.",
+  },
+]
+
 const howItWorks = [
   {
     step: "01",
@@ -166,7 +189,7 @@ const ContactPage = () => {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="relative z-10 px-6 lg:px-14 pb-24 max-w-7xl mx-auto"
+        className="relative z-10 px-6 lg:px-14 pb-14 max-w-7xl mx-auto"
       >
         <motion.div
           variants={fadeUp}
@@ -191,6 +214,38 @@ const ContactPage = () => {
             </motion.div>
           ))}
         </div>
+      </motion.section>
+
+      {/* Quick answers — deliberately a compact list rather than more cards, so
+          the page reads as one panel + steps + reference strip instead of a
+          wall of similar-looking boxes */}
+      <motion.section
+        variants={stagger()}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+        className="relative z-10 px-6 lg:px-14 pb-24 max-w-7xl mx-auto"
+      >
+        <motion.div
+          variants={fadeUp}
+          className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-6"
+        >
+          Good to know
+        </motion.div>
+        <motion.div
+          variants={fadeUp}
+          className="rounded-[20px] border border-[rgba(255,255,255,0.1)] divide-y divide-[rgba(255,255,255,0.07)] overflow-hidden"
+        >
+          {quickAnswers.map((item) => (
+            <div
+              key={item.q}
+              className="grid sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)] gap-1.5 sm:gap-8 px-5 py-4 lg:px-7 lg:py-5 transition-colors duration-300 hover:bg-[rgba(255,255,255,0.02)]"
+            >
+              <div className="text-[13.5px] font-semibold text-[#F3F6FB]">{item.q}</div>
+              <p className="text-[13.5px] leading-relaxed text-[rgba(219,234,254,0.6)]">{item.a}</p>
+            </div>
+          ))}
+        </motion.div>
       </motion.section>
     </div>
   )
