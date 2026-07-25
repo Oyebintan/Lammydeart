@@ -2,9 +2,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Palette, Code2, Gem, Zap } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../motion"
-import { gridBg } from "../decor"
-import CornerMarks from "./decor/CornerMarks"
-import LineBox from "./decor/LineBox"
+import { boxTint } from "../decor"
 import Timeline from "./Timeline"
 import Skills from "./Skills"
 
@@ -23,10 +21,8 @@ const AboutHome = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className={`relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120] ${gridBg}`}
+      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
     >
-      <CornerMarks />
-      <LineBox className="hidden lg:block -top-10 right-[6%]" size={150} duration={28} reverse />
       <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
           <span>( 02 )</span>
@@ -47,7 +43,7 @@ const AboutHome = () => {
             <motion.div variants={stagger(0.08)} className="flex flex-col gap-2.5">
               {highlights.map((h) => (
                 <motion.div key={h.text} variants={fadeUp} className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center flex-none">
+                  <div className={`w-8 h-8 rounded-lg bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center flex-none ${boxTint}`}>
                     <h.icon size={14} className="text-[rgba(219,234,254,0.8)]" />
                   </div>
                   <span className="text-[13.5px] font-medium text-[rgba(219,234,254,0.8)]">{h.text}</span>

@@ -9,12 +9,19 @@ const Mark = ({ className }) => (
 
 // Tiny crosshair marks pinned to the corners of a `relative` section —
 // a quiet, technical/blueprint accent so backgrounds aren't just flat gradient.
-const CornerMarks = () => (
+// `bottom={false}` for sections whose texture fades out before the lower edge —
+// leaving the bottom marks there would be the only ruled element in an
+// otherwise plain band.
+const CornerMarks = ({ bottom = true }) => (
   <>
     <Mark className="top-4 left-4 lg:top-6 lg:left-6" />
     <Mark className="top-4 right-4 lg:top-6 lg:right-6" />
-    <Mark className="bottom-4 left-4 lg:bottom-6 lg:left-6" />
-    <Mark className="bottom-4 right-4 lg:bottom-6 lg:right-6" />
+    {bottom && (
+      <>
+        <Mark className="bottom-4 left-4 lg:bottom-6 lg:left-6" />
+        <Mark className="bottom-4 right-4 lg:bottom-6 lg:right-6" />
+      </>
+    )}
   </>
 )
 

@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { Palette, Layout, Lightbulb, Sparkles } from "lucide-react"
 import { usePageTitle } from "../hooks/usePageTitle"
 import { fadeUp, stagger, viewportOnce } from "../motion"
-import { gridBg } from "../decor"
+import { gridBg, boxTint } from "../decor"
 import CornerMarks from "../components/decor/CornerMarks"
 import LineBox from "../components/decor/LineBox"
 import img from "../assets/images/profile/preview.jpg"
@@ -43,7 +43,7 @@ const AboutPage = () => {
         variants={stagger()}
         initial="hidden"
         animate="show"
-        className="relative z-10 px-6 lg:px-14 pt-[calc(7rem+env(safe-area-inset-top))] pb-12 grid lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto"
+        className="relative z-10 px-6 lg:px-14 pt-28 pb-12 grid lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto"
       >
         <div className="flex flex-col gap-5">
           <motion.div
@@ -64,7 +64,7 @@ const AboutPage = () => {
             {highlights.map((h) => (
               <div
                 key={h.text}
-                className="flex items-center gap-2.5 bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] rounded-xl px-3.5 py-3"
+                className={`flex items-center gap-2.5 bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] rounded-xl px-3.5 py-3 ${boxTint}`}
               >
                 <h.icon size={16} className="text-[rgba(219,234,254,0.8)] flex-none" />
                 <span className="text-[12.5px] font-medium text-[#F3F6FB]">{h.text}</span>
@@ -130,7 +130,7 @@ const AboutPage = () => {
             {tools.map((tool) => (
               <div
                 key={tool}
-                className="rounded-xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-center"
+                className={`rounded-xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-center ${boxTint}`}
               >
                 <span className="text-[13px] font-semibold text-[#F3F6FB]">{tool}</span>
               </div>
@@ -146,7 +146,7 @@ const AboutPage = () => {
             {skills.map((skill) => (
               <div
                 key={skill}
-                className="rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.03)] px-4 py-2 text-[12.5px] text-[rgba(219,234,254,0.75)]"
+                className={`rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.03)] px-4 py-2 text-[12.5px] text-[rgba(219,234,254,0.75)] ${boxTint}`}
               >
                 {skill}
               </div>

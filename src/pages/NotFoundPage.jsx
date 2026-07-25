@@ -53,7 +53,7 @@ const NotFoundPage = () => {
         <motion.div variants={fadeUp} className="flex items-center gap-3 flex-wrap">
           <Link
             to="/project"
-            className="flex items-center gap-2 px-[22px] py-[11px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)] hover:scale-[1.03] active:scale-95 transition-transform duration-300"
+            className="flex items-center gap-2 px-[22px] py-[11px] rounded-full animate-gradient bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)] hover:scale-[1.03] active:scale-95 transition-transform duration-300"
           >
             See the work <ArrowRight size={15} strokeWidth={2.5} />
           </Link>

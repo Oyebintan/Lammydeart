@@ -116,6 +116,24 @@ const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
         loading="lazy"
       />
 
+      {/* Attention motion, kept deliberately faint so it reads as light moving
+          across a printed piece rather than as a flashing element. Each frame
+          gets its own delay so the three sweep in sequence, not in unison. */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="animate-sheen absolute inset-y-0 -left-1/4 w-1/3 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.16),transparent)]"
+          style={{ animationDelay: `${delay + 1.2}s` }}
+        />
+      </div>
+
+      {/* Accent edge that breathes — ties each frame to its category colour */}
+      <motion.div
+        animate={{ opacity: [0.25, 0.7, 0.25] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay }}
+        className="absolute inset-0 rounded-[18px] lg:rounded-[22px] pointer-events-none"
+        style={{ boxShadow: `inset 0 0 0 1px rgba(${frame.accent},0.55)` }}
+      />
+
       <div
         className="absolute inset-x-0 bottom-0 px-3 pt-8 pb-2.5 lg:px-4 lg:pb-3 pointer-events-none"
         style={{
@@ -204,10 +222,18 @@ const Hero = () => {
   })
 
   return (
-    <section className={`relative overflow-hidden bg-[#03050a] pt-[calc(5rem+env(safe-area-inset-top))] pb-8 lg:pt-[calc(6rem+env(safe-area-inset-top))] lg:pb-12 px-6 lg:px-14 ${gridBg}`}>
-      <CornerMarks />
+    <section className="relative overflow-hidden bg-[#03050a] pt-20 pb-8 lg:pt-24 lg:pb-12 px-6 lg:px-14">
+      {/* Texture lives on its own masked layer rather than on the section, so it
+          can fade to nothing well before the section ends — everything from the
+          stats row down is plain colour, matching the rest of the page. The
+          mask has to sit here and not on the section itself, since masking the
+          section would fade its content too. */}
+      <div
+        aria-hidden="true"
+        className={`absolute inset-0 pointer-events-none [mask-image:linear-gradient(to_bottom,black_0%,black_38%,transparent_72%)] ${gridBg}`}
+      />
+      <CornerMarks bottom={false} />
       <LineBox className="hidden lg:block -top-16 right-[28%]" size={180} duration={30} />
-      <LineBox className="hidden lg:block -bottom-20 -left-16" size={140} duration={24} reverse />
 
       {/* Ambient glows */}
       <motion.div
@@ -216,6 +242,11 @@ const Hero = () => {
         className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.24),transparent_70%)] blur-2xl pointer-events-none"
       />
       <div className="absolute bottom-[-200px] right-[10%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05),transparent_70%)] blur-2xl pointer-events-none" />
+
+      {/* The grid texture stops with the hero now — everything below it is flat
+          colour — so fade the lines out before the boundary instead of letting
+          them end on a hard horizontal cut */}
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(to_bottom,transparent,#03050a)] pointer-events-none" />
 
       <motion.div
         variants={container}
@@ -244,7 +275,7 @@ const Hero = () => {
               <Cursor />
             </span>
             <br />
-            <span className="bg-gradient-to-r from-[#1D4ED8] via-[#60A5FA] to-[#BAE6FD] bg-clip-text text-transparent">
+            <span className="animate-gradient bg-gradient-to-r from-[#1D4ED8] via-[#60A5FA] to-[#BAE6FD] bg-clip-text text-transparent">
               {role}
               <Cursor />
             </span>
@@ -268,7 +299,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.96 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="flex items-center gap-2 px-[22px] py-[10px] rounded-full bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)]"
+                className="animate-gradient flex items-center gap-2 px-[22px] py-[10px] rounded-full bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)]"
               >
                 View my work <ArrowRight size={15} strokeWidth={2.5} />
               </motion.a>
@@ -290,7 +321,7 @@ const Hero = () => {
                 mid-list and left slashes dangling at the end of lines */}
             <motion.div
               variants={item}
-              className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-2.5 sm:flex-wrap text-[12.5px] text-[rgba(219,234,254,0.45)] -mt-1"
+              className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-2.5 sm:flex-wrap text-[12.5px] text-[rgba(219,234,254,0.45)]"
             >
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] flex-none" />
@@ -324,7 +355,7 @@ const Hero = () => {
                 measured row instead of clustering at the left edge */}
             <motion.div
               variants={item}
-              className="grid grid-cols-3 gap-4 pt-5 mt-1 border-t border-[rgba(255,255,255,0.1)]"
+              className="grid grid-cols-3 gap-4 pt-6 border-t border-[rgba(255,255,255,0.1)]"
             >
               {stats.map((stat, i) => (
                 <div key={stat.label}>

@@ -52,6 +52,30 @@ body::after {
   50% { opacity: 1; }
 }
 
+/* Slides a gradient's colour stops back and forth so gradient text and gradient
+   fills read as alive rather than as a flat painted-on band. Needs the
+   oversized background-size — with the default 100% there is nothing to pan. */
+@keyframes gradient-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradient {
+  background-size: 220% 220%;
+  animation: gradient-pan 7s ease-in-out infinite;
+}
+
+/* Slow, low-contrast light sweep across the featured-work frames. Paired with
+   an ::after-free overlay element in HeroFrame so it never affects layout. */
+@keyframes sheen-sweep {
+  0% { transform: translateX(-130%) skewX(-18deg); }
+  55%, 100% { transform: translateX(230%) skewX(-18deg); }
+}
+
+.animate-sheen {
+  animation: sheen-sweep 5.5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
