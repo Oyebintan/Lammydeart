@@ -217,7 +217,9 @@ const Hero = () => {
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 lg:items-center"
+        // Collage column gets slightly more than half and the gap is tighter, so
+        // the two halves sit close instead of leaving a void down the middle.
+        className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-[1fr_1.06fr] gap-10 lg:gap-9 lg:items-center"
       >
         {/* Text column */}
         <div className="flex flex-col gap-6">
@@ -231,7 +233,7 @@ const Hero = () => {
 
           <motion.h1
             variants={item}
-            className="font-display font-bold text-[32px] lg:text-5xl leading-[1.15] tracking-[-0.01em] text-[#F3F6FB] min-h-[2.4em]"
+            className="font-display font-bold text-[32px] lg:text-[52px] xl:text-[58px] leading-[1.12] tracking-[-0.015em] text-[#F3F6FB] min-h-[2.4em]"
           >
             <span>
               {greeting}
@@ -252,7 +254,7 @@ const Hero = () => {
           {/* The collage spans the full column now, so the copy below it does too —
               no width cap, everything shares one left edge */}
           <div className="w-full lg:contents flex flex-col gap-6">
-            <motion.p variants={item} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] lg:max-w-md">
+            <motion.p variants={item} className="text-[15px] lg:text-base leading-relaxed text-[rgba(219,234,254,0.6)] lg:max-w-[34rem]">
               Crafting bold visual identities and clean, functional websites — one project at a time.
             </motion.p>
 
@@ -275,6 +277,23 @@ const Hero = () => {
               >
                 Let's talk
               </motion.a>
+            </motion.div>
+
+            {/* Small qualifier under the CTAs, like the reference's note beneath
+                its button — adds substance to the column and answers the two
+                things a prospective client checks first */}
+            <motion.div
+              variants={item}
+              className="flex items-center gap-2.5 flex-wrap text-[12.5px] text-[rgba(219,234,254,0.45)] -mt-1"
+            >
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80]" />
+                Open for freelance work
+              </span>
+              <span className="text-[rgba(255,255,255,0.18)]">/</span>
+              <span>Lagos, Nigeria — working remote</span>
+              <span className="text-[rgba(255,255,255,0.18)]">/</span>
+              <span>Replies within 24 hours</span>
             </motion.div>
 
             <motion.div variants={item} className="flex items-center gap-3.5">
@@ -319,8 +338,8 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* Bottom strip — gives the clearance the tilted card needs a purpose
-          (scroll cue + availability) instead of leaving it as dead space */}
+      {/* Bottom strip — scroll cue and section transition. Availability lives in
+          the meta line under the CTAs now, so it isn't repeated here. */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -342,9 +361,8 @@ const Hero = () => {
           Scroll to explore
         </a>
         <span className="h-px flex-1 bg-gradient-to-r from-[rgba(255,255,255,0.12)] via-[rgba(255,255,255,0.06)] to-transparent" />
-        <span className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.14em] uppercase text-[rgba(219,234,254,0.45)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
-          Available for work
+        <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[rgba(219,234,254,0.35)]">
+          Selected work below
         </span>
       </motion.div>
     </section>
