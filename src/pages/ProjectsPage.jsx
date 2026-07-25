@@ -29,7 +29,7 @@ const ProjectsPage = () => {
         variants={stagger()}
         initial="hidden"
         animate="show"
-        className="relative z-10 px-6 lg:px-14 pt-28 pb-8"
+        className="relative z-10 px-6 lg:px-14 pt-[calc(7rem+env(safe-area-inset-top,0px))] pb-8"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
