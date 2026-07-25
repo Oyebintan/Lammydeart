@@ -1,20 +1,38 @@
 import React from "react"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
 import { SiCoreldraw, SiAdobephotoshop } from "react-icons/si"
-import { ArrowRight, ArrowDown, Sparkle } from "lucide-react"
+import { ArrowRight, ArrowDown } from "lucide-react"
 import { useTypewriter } from "../hooks/useTypewriter"
 import { gridBg } from "../decor"
 import CornerMarks from "./decor/CornerMarks"
 import LineBox from "./decor/LineBox"
 import zookImg from "../assets/images/projects/zook-fabrics/preview.jpg"
+import rexonaImg from "../assets/images/projects/rexona-giveaway-campaign/preview.jpg"
+import festivalImg from "../assets/images/projects/cultural-festival-poster/preview.jpg"
 
-// Swap `img` below to feature a different flagship project — used here and
-// in the "Branding" tab of Service.jsx.
-const flagshipProject = {
-  title: "ZOOK Fabrics",
-  category: "Brand Identity",
-  img: zookImg,
+// The hero collage: one tall flagship frame beside two stacked smaller ones.
+// Swap the `img` values to feature different work — each `label` shows in the
+// tinted strip at the bottom of its own frame.
+const heroFrames = {
+  tall: {
+    img: zookImg,
+    category: "Branding",
+    title: "ZOOK Fabrics",
+    accent: "29,78,216", // brand blue, matches the ZOOK board
+  },
+  topSmall: {
+    img: rexonaImg,
+    category: "Social Ads",
+    title: "Rexona Giveaway",
+    accent: "16,122,90",
+  },
+  bottomSmall: {
+    img: festivalImg,
+    category: "Social Ads",
+    title: "Cultural Festival",
+    accent: "168,64,20",
+  },
 }
 
 const stats = [
@@ -69,130 +87,107 @@ const Cursor = () => (
   />
 )
 
+// One frame of the hero collage. The category strip sits flush at the bottom
+// over a tinted scrim: it reads clearly without hiding the artwork behind it.
+const HeroFrame = ({ frame, className, objectPosition = "50% 50%", delay = 0, float = 7 }) => (
+  <motion.a
+    href="/project"
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
+    whileHover={{ y: -6 }}
+    className={`group relative block overflow-hidden rounded-[18px] lg:rounded-[22px] border border-[rgba(255,255,255,0.12)] bg-[#0b1526] shadow-[0_24px_50px_-18px_rgba(0,0,0,0.85)] ${className}`}
+  >
+    <motion.div
+      animate={{ y: [0, -float, 0] }}
+      transition={{ duration: 6.5 + delay, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute inset-0"
+    >
+      <img
+        src={frame.img}
+        alt={`${frame.category} — ${frame.title}`}
+        style={{ objectPosition }}
+        className="w-full h-full object-cover scale-[1.06] transition-transform duration-500 group-hover:scale-[1.12]"
+        loading="lazy"
+      />
+    </motion.div>
+
+    {/* Tinted category strip — the accent colour carries the project's own
+        palette, and the scrim only covers the bottom sliver of the frame */}
+    <div
+      className="absolute inset-x-0 bottom-0 px-3 pt-8 pb-2.5 lg:px-4 lg:pb-3"
+      style={{
+        background: `linear-gradient(to top, rgba(${frame.accent},0.92) 0%, rgba(${frame.accent},0.55) 45%, transparent 100%)`,
+      }}
+    >
+      <div className="text-[8.5px] lg:text-[9.5px] font-bold uppercase tracking-[0.14em] text-white/75 leading-none mb-1">
+        {frame.category}
+      </div>
+      <div className="font-display text-[11.5px] lg:text-[14px] font-bold text-white leading-tight">
+        {frame.title}
+      </div>
+    </div>
+  </motion.a>
+)
+
 // Self-contained so it can render once in the mobile flow (right after the
 // headline) and once in the desktop column, without the two instances
 // fighting over shared grid rows.
-const HeroVisual = () => {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  // Base tilt sits around 32° even at rest — a steep enough foreshortening,
-  // paired with a low perspective value below, to read as a flyer lying flat
-  // on the floor and viewed from above, not a card propped upright.
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [40, 24]), { stiffness: 150, damping: 16 })
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-10, 10]), { stiffness: 150, damping: 16 })
+const HeroVisual = () => (
+  <div className="relative w-full">
+    <motion.div
+      animate={{ opacity: [0.5, 0.85, 0.5] }}
+      transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -top-8 -right-6 w-40 h-40 lg:w-56 lg:h-56 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.22),rgba(29,78,216,0.08)_60%,transparent_75%)] blur-sm pointer-events-none"
+    />
 
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    x.set((e.clientX - rect.left) / rect.width - 0.5)
-    y.set((e.clientY - rect.top) / rect.height - 0.5)
-  }
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
-
-  return (
-    <div className="relative w-full flex flex-col items-center lg:items-start gap-4">
-      <motion.div
-        animate={{ opacity: [0.5, 0.85, 0.5] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-4 right-6 lg:right-0 w-32 h-32 lg:w-44 lg:h-44 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.24),rgba(29,78,216,0.08)_60%,transparent_75%)] blur-sm pointer-events-none"
+    {/* Two stacked frames beside one tall frame. Equal-height rows keep the
+        stack's combined height exactly matching the tall frame, so all three
+        line up flush top and bottom. */}
+    <div className="relative grid grid-cols-2 grid-rows-2 gap-2.5 lg:gap-3.5 h-[330px] sm:h-[400px] lg:h-[460px]">
+      <HeroFrame
+        frame={heroFrames.topSmall}
+        className="col-start-1 row-start-1"
+        objectPosition="50% 30%"
+        delay={0.35}
+        float={6}
+      />
+      <HeroFrame
+        frame={heroFrames.bottomSmall}
+        className="col-start-1 row-start-2"
+        objectPosition="50% 40%"
+        delay={0.5}
+        float={8}
+      />
+      <HeroFrame
+        frame={heroFrames.tall}
+        className="col-start-2 row-start-1 row-span-2"
+        objectPosition="50% 22%"
+        delay={0.2}
+        float={7}
       />
 
-      <motion.div
-        animate={{ y: [0, -9, 0] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-        className="relative w-full max-w-[235px] mx-auto lg:max-w-[360px] lg:mx-0"
-      >
-        {/* Soft pool of light on the "floor" around the object — reads as a
-            surface it's resting on instead of empty space */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-[-6%] w-[145%] h-[75%] rounded-[50%] bg-[radial-gradient(ellipse,rgba(255,255,255,0.07),rgba(255,255,255,0.025)_45%,transparent_72%)] blur-2xl pointer-events-none z-0" />
-
-        {/* Directional cast shadow, offset from the light source top-left —
-            shrinks/fades as the card floats up, grounding it */}
-        <motion.div
-          animate={{ opacity: [0.65, 0.35, 0.65], scaleX: [1, 0.85, 1] }}
-          transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-          style={{ rotate: -7 }}
-          className="absolute left-[14%] bottom-[-4%] translate-x-[8%] translate-y-[4%] w-[95%] h-[30%] lg:h-9 rounded-[50%] bg-black blur-2xl pointer-events-none z-[1]"
-        />
-
-        <motion.a
-          href="/project"
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          style={{ rotateX, rotateY, rotate: -7, transformPerspective: 480 }}
-          className="relative block w-full aspect-[4/5] rounded-[26px] bg-gradient-to-br from-[#0b1526] to-[#050a14] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_50px_100px_-16px_rgba(0,0,0,0.9)] z-[2] cursor-pointer"
-        >
-          <div className="w-full h-full rounded-[20px] overflow-hidden">
-            <img
-              src={flagshipProject.img}
-              alt={flagshipProject.title}
-              className="w-full h-full object-cover object-[50%_22%]"
-              loading="lazy"
-            />
-          </div>
-
-          {/* Floating badge: category (inset, inside the frame) */}
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-3 right-3 flex items-center gap-1.5 py-1.5 px-2.5 rounded-2xl bg-[rgba(5,8,15,0.85)] backdrop-blur-md border border-[rgba(255,255,255,0.14)] shadow-[0_10px_24px_-10px_rgba(0,0,0,0.6)]"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
-            <div className="text-[10px] font-bold text-[#F3F6FB] whitespace-nowrap">{flagshipProject.category}</div>
-          </motion.div>
-
-          {/* Floating badge: featured tag (inset, inside the frame) */}
-          <motion.div
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-            className="absolute bottom-3 left-3 flex items-center gap-1.5 py-1.5 px-2.5 rounded-2xl bg-[rgba(5,8,15,0.85)] backdrop-blur-md border border-[rgba(255,255,255,0.14)] shadow-[0_10px_24px_-10px_rgba(0,0,0,0.6)]"
-          >
-            <Sparkle size={11} className="text-[#F3F6FB]" />
-            <div className="text-[10px] font-bold text-[#F3F6FB] whitespace-nowrap">Featured Work</div>
-          </motion.div>
-
-          {/* Design-tool badges — pinned to the same rotated frame as the
-              rest of the corner badges, so they never drift out of place
-              as the tilt shifts with the mouse */}
-          <FloatingToolIcon
-            icon={SiCoreldraw}
-            color="#1AAB8A"
-            className="top-2 left-2 lg:-top-3 lg:-left-3"
-            duration={5.5}
-            tilt={-6}
-          />
-          <FloatingToolIcon
-            icon={SiAdobephotoshop}
-            color="#31A8FF"
-            className="bottom-2 right-2 lg:-bottom-3 lg:-right-3"
-            duration={6.2}
-            delay={0.8}
-            tilt={5}
-          />
-        </motion.a>
-      </motion.div>
-
-      {/* Caption under the card — names the featured piece and gives the
-          space below the tilted frame a purpose instead of reading as a gap */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
-        className="hidden lg:flex items-center gap-3 w-full max-w-[360px] pt-2"
-      >
-        <span className="h-px flex-1 bg-gradient-to-r from-[rgba(255,255,255,0.22)] to-transparent" />
-        <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[rgba(219,234,254,0.5)] whitespace-nowrap">
-          {flagshipProject.title}
-        </span>
-      </motion.div>
+      {/* Tool badges sit mostly outside the collage, straddling opposite outer
+          corners — far enough out that they don't cover the artwork's own
+          credit line or either category label */}
+      <FloatingToolIcon
+        icon={SiCoreldraw}
+        color="#1AAB8A"
+        className="-top-4 -left-4 lg:-top-7 lg:-left-7"
+        duration={5.5}
+        tilt={-6}
+      />
+      <FloatingToolIcon
+        icon={SiAdobephotoshop}
+        color="#31A8FF"
+        className="-bottom-4 -right-4 lg:-bottom-7 lg:-right-7"
+        duration={6.2}
+        delay={0.8}
+        tilt={5}
+      />
     </div>
-  )
-}
+  </div>
+)
 
 const Hero = () => {
   const greeting = useTypewriter(["Hi, I'm Lammy"], { loop: false, typingSpeed: 55 })
@@ -204,9 +199,6 @@ const Hero = () => {
     startDelay: 1300,
   })
 
-  // Generous lg bottom padding: the card's steep 3D tilt makes its rendered box
-  // taller than its layout box, and the section clips overflow — without the
-  // extra room the bottom of the card gets sliced off.
   return (
     <section className={`relative overflow-hidden bg-[#03050a] pt-20 pb-8 lg:pt-24 lg:pb-12 px-6 lg:px-14 ${gridBg}`}>
       <CornerMarks />
@@ -252,14 +244,14 @@ const Hero = () => {
             </span>
           </motion.h1>
 
-          {/* Flagship project shows right here on mobile, between the headline and the copy */}
+          {/* Collage shows right here on mobile, between the headline and the copy */}
           <div className="lg:hidden">
             <HeroVisual />
           </div>
 
-          {/* Matches the visual's width/centering on mobile so everything below it
-              lines up with its edges instead of spanning the full column */}
-          <div className="w-full max-w-[300px] mx-auto lg:max-w-none lg:mx-0 lg:contents flex flex-col gap-6">
+          {/* The collage spans the full column now, so the copy below it does too —
+              no width cap, everything shares one left edge */}
+          <div className="w-full lg:contents flex flex-col gap-6">
             <motion.p variants={item} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] lg:max-w-md">
               Crafting bold visual identities and clean, functional websites — one project at a time.
             </motion.p>
@@ -285,7 +277,7 @@ const Hero = () => {
               </motion.a>
             </motion.div>
 
-            <motion.div variants={item} className="flex items-center justify-between w-full lg:max-w-[170px]">
+            <motion.div variants={item} className="flex items-center gap-3.5">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
