@@ -26,6 +26,24 @@ const socialLinks = [
   { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
 ]
 
+const howItWorks = [
+  {
+    step: "01",
+    title: "Tell me about it",
+    body: "Send over what you're building, who it's for, and any deadline you're working to. Rough ideas are fine — I'll ask the rest.",
+  },
+  {
+    step: "02",
+    title: "Scope and quote",
+    body: "You get a clear plan: what I'll deliver, how long it takes, and what it costs. No surprises once we start.",
+  },
+  {
+    step: "03",
+    title: "Design and deliver",
+    body: "I share progress as I go so you can steer it early, then hand over the final files in every format you need.",
+  },
+]
+
 const ContactPage = () => {
   usePageTitle("Contact")
 
@@ -68,7 +86,7 @@ const ContactPage = () => {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="relative z-10 px-6 lg:px-14 pb-20"
+        className="relative z-10 px-6 lg:px-14 pb-12"
       >
         <div className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#05080f] p-8 lg:p-12 grid lg:grid-cols-2 gap-10 items-center">
           <div>
@@ -138,6 +156,40 @@ const ContactPage = () => {
               Response time: <span className="text-[rgba(219,234,254,0.75)] font-semibold">within 24 hours</span>
             </div>
           </div>
+        </div>
+      </motion.section>
+
+      {/* How it works — sets expectations for anyone deciding whether to reach
+          out, and gives the page real content instead of a tall empty gap */}
+      <motion.section
+        variants={stagger()}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+        className="relative z-10 px-6 lg:px-14 pb-24 max-w-7xl mx-auto"
+      >
+        <motion.div
+          variants={fadeUp}
+          className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-6"
+        >
+          How working together goes
+        </motion.div>
+        <div className="grid sm:grid-cols-3 gap-4">
+          {howItWorks.map((s) => (
+            <motion.div
+              key={s.step}
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 24 }}
+              className="rounded-[20px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] p-6"
+            >
+              <div className="font-display text-[13px] font-bold text-[rgba(219,234,254,0.35)] mb-3">
+                {s.step}
+              </div>
+              <h3 className="font-display text-[17px] font-bold text-[#F3F6FB] mb-2">{s.title}</h3>
+              <p className="text-[13.5px] leading-relaxed text-[rgba(219,234,254,0.6)]">{s.body}</p>
+            </motion.div>
+          ))}
         </div>
       </motion.section>
     </div>

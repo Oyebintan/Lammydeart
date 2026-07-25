@@ -32,7 +32,7 @@ const Footer = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="px-6 lg:px-14 py-7 border-t border-[rgba(147,197,253,0.1)]"
+      className="px-6 lg:px-14 py-7 border-t border-[rgba(255,255,255,0.08)]"
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 flex-wrap">
         <Link to="/" className="font-display font-bold text-[15px] text-[#F3F6FB]">
@@ -65,7 +65,7 @@ const Footer = () => {
               whileHover={{ scale: 1.12, y: -2 }}
               whileTap={{ scale: 0.94 }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
-              className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(147,197,253,0.18)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA]"
+              className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(255,255,255,0.14)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA]"
             >
               <social.icon size={13} />
             </motion.a>
@@ -76,14 +76,14 @@ const Footer = () => {
             whileHover={{ scale: 1.12, y: -2 }}
             whileTap={{ scale: 0.94 }}
             transition={{ type: "spring", stiffness: 400, damping: 18 }}
-            className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(147,197,253,0.18)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA]"
+            className="flex items-center justify-center w-8 h-8 rounded-full border border-[rgba(255,255,255,0.14)] text-[rgba(219,234,254,0.6)] hover:text-white hover:border-[#60A5FA]"
           >
             <ArrowUp size={14} />
           </motion.button>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-5 pt-4 border-t border-[rgba(147,197,253,0.08)] text-center text-[12px] text-[rgba(219,234,254,0.35)]">
+      <div className="max-w-7xl mx-auto mt-5 pt-4 border-t border-[rgba(255,255,255,0.06)] text-center text-[12px] text-[rgba(219,234,254,0.35)]">
         <span>&copy; {currentYear} Lammydeart. All rights reserved.</span>
       </div>
     </motion.footer>

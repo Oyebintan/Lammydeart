@@ -5,8 +5,8 @@ import { fadeUp, stagger, viewportOnce } from "../motion"
 import { gridBg } from "../decor"
 import CornerMarks from "./decor/CornerMarks"
 // Same flagship brand asset used in Hero.jsx — swap that one file to update both.
-import brandingImg from "../assets/brand/zook.jpg"
-import socialAdsImg from "../assets/projects/p4.jpg"
+import brandingImg from "../assets/images/projects/zook-fabrics/preview.jpg"
+import socialAdsImg from "../assets/images/projects/cultural-festival-poster/preview.jpg"
 
 const services = [
   {
@@ -39,11 +39,11 @@ const services = [
 
 const UiMockup = () => (
   <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0b1526] to-[#0a1120]">
-    <div className="w-40 rounded-xl border border-[rgba(147,197,253,0.25)] bg-[rgba(147,197,253,0.05)] p-3 space-y-2">
+    <div className="w-40 rounded-xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.04)] p-3 space-y-2">
       <div className="h-2 w-2/3 rounded bg-gradient-to-r from-[#1D4ED8] to-[#7DD3FC]" />
-      <div className="h-16 rounded-lg bg-[rgba(147,197,253,0.1)]" />
-      <div className="h-2 w-full rounded bg-[rgba(147,197,253,0.15)]" />
-      <div className="h-2 w-4/5 rounded bg-[rgba(147,197,253,0.15)]" />
+      <div className="h-16 rounded-lg bg-[rgba(255,255,255,0.08)]" />
+      <div className="h-2 w-full rounded bg-[rgba(255,255,255,0.12)]" />
+      <div className="h-2 w-4/5 rounded bg-[rgba(255,255,255,0.12)]" />
     </div>
   </div>
 )
@@ -54,7 +54,7 @@ const LogoMockup = () => (
       {["L", "D", "A"].map((letter, i) => (
         <div
           key={letter}
-          className="w-16 h-16 rounded-2xl border border-[rgba(147,197,253,0.2)] bg-[rgba(147,197,253,0.05)] flex items-center justify-center font-display text-2xl font-bold bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent"
+          className="w-16 h-16 rounded-2xl border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.04)] flex items-center justify-center font-display text-2xl font-bold bg-gradient-to-br from-[#1D4ED8] to-[#7DD3FC] bg-clip-text text-transparent"
           style={{ transform: `translateY(${i === 1 ? -8 : 0}px)` }}
         >
           {letter}
@@ -113,7 +113,7 @@ const Service = () => {
                   )}
                   <div
                     className={`relative z-10 w-[38px] h-[38px] rounded-[11px] flex items-center justify-center flex-none text-white transition-colors duration-300 ${
-                      isActive ? "bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA]" : "bg-[rgba(147,197,253,0.08)]"
+                      isActive ? "bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA]" : "bg-[rgba(255,255,255,0.06)]"
                     }`}
                   >
                     <Icon className="w-[18px] h-[18px]" />
@@ -123,7 +123,7 @@ const Service = () => {
                     <motion.div
                       initial={{ opacity: 0, x: -6 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className="relative z-10 text-[rgba(147,197,253,0.5)]"
+                      className="relative z-10 text-[rgba(219,234,254,0.5)]"
                     >
                       <ArrowRight size={17} strokeWidth={2.5} />
                     </motion.div>

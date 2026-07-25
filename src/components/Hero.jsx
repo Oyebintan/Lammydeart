@@ -7,7 +7,7 @@ import { useTypewriter } from "../hooks/useTypewriter"
 import { gridBg } from "../decor"
 import CornerMarks from "./decor/CornerMarks"
 import LineBox from "./decor/LineBox"
-import zookImg from "../assets/brand/zook.jpg"
+import zookImg from "../assets/images/projects/zook-fabrics/preview.jpg"
 
 // Swap `img` below to feature a different flagship project — used here and
 // in the "Branding" tab of Service.jsx.
