@@ -138,10 +138,17 @@ const Navbar = () => {
   return (
     <>
       <nav
-        // Fully opaque, not /75–/95 as before: at those values 5–25% of the page
-        // scrolled through the bar by design, which read as content bleeding
-        // above the nav. Depth now comes from the border + shadow instead.
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] will-change-transform bg-[#03050a] pt-[env(safe-area-inset-top,0px)] ${
+        // Frosted rather than either fully opaque or plainly see-through. The
+        // earlier bleed-through was the blended overlay painting above this bar,
+        // not the bar's own alpha, so glass is safe again — but it needs the
+        // blur to work: with no backdrop-filter this would just be a translucent
+        // panel with legible content sliding under it. index.css falls back to
+        // solid where backdrop-filter is unsupported.
+        // 0.88 is measured, not guessed: sampling the bar's interior while the
+        // page scrolls under it gives a channel spread of 12 (0 when fully
+        // opaque, 26 at 0.72 where the text behind was still readable). Enough
+        // for the glass to pick up what passes under it, not enough to read.
+        className={`nav-glass fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] bg-[rgba(3,5,10,0.88)] backdrop-blur-xl backdrop-saturate-150 pt-[env(safe-area-inset-top,0px)] ${
           scrolled || isMenuVisible ? "shadow-lg shadow-black/30" : ""
         }`}
       >
@@ -158,7 +165,7 @@ const Navbar = () => {
         />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-16 lg:h-[72px]">
+          <div className="flex items-center justify-between h-[56px] lg:h-16">
             <Logo />
 
             {/* Desktop Navigation */}

@@ -46,6 +46,15 @@ body {
   position: relative;
 }
 
+/* Without backdrop-filter the nav's 0.72 alpha would leave page content plainly
+   readable sliding underneath it, which is the bleed-through look we just spent
+   several rounds removing. Go solid instead of glass on those browsers. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav-glass {
+    background-color: #03050a;
+  }
+}
+
 ::selection {
   background: #3b82f6;
   color: #fff;
