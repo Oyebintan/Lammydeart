@@ -1,18 +1,29 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { usePageTitle } from "../hooks/usePageTitle"
-import { fadeUp, stagger, viewportOnce } from "../motion"
-import { gridBg } from "../decor"
+import { fadeUp, stagger, viewportOnce } from "../lib/motion"
+import { gridBg } from "../lib/decor"
 import CornerMarks from "../components/decor/CornerMarks"
 import LineBox from "../components/decor/LineBox"
 import { projects, projectCategories } from "../data/projects"
 import ProjectCard from "../components/ProjectCard"
+import ProjectLightbox from "../components/ProjectLightbox"
+import CategoryFilter from "../components/CategoryFilter"
 
 const ProjectsPage = () => {
   usePageTitle("Projects")
   const [filter, setFilter] = useState("All")
+  const [openId, setOpenId] = useState(null)
 
   const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter)
+
+  // Keyed off the id so a filter change while the lightbox is open resolves to
+  // null instead of showing a project no longer in the grid.
+  const open = filtered.find((p) => p.id === openId) ?? null
+  const step = (dir) => {
+    const i = filtered.findIndex((p) => p.id === openId)
+    if (i !== -1) setOpenId(filtered[(i + dir + filtered.length) % filtered.length].id)
+  }
 
   return (
     <div className={`relative overflow-hidden bg-[#03050a] min-h-screen ${gridBg}`}>
@@ -40,7 +51,7 @@ const ProjectsPage = () => {
             My Work
           </motion.div>
           <motion.h1 variants={fadeUp} className="font-display font-bold text-4xl lg:text-5xl text-[#F3F6FB] mb-3">
-            Featured Projects
+            All Projects
           </motion.h1>
           <motion.p variants={fadeUp} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] max-w-lg">
             A showcase of creative work that blends modern aesthetics with intuitive design — branding, flyers, and posters.
@@ -57,38 +68,25 @@ const ProjectsPage = () => {
             viewport={viewportOnce}
             className="flex gap-2 flex-wrap mb-6"
           >
-            {projectCategories.map((f) => {
-              const isActive = filter === f
-              return (
-                <button
-                  key={f}
-                  onClick={() => setFilter(f)}
-                  className="relative cursor-pointer py-2 px-[17px] rounded-full text-[12.5px] font-semibold border overflow-hidden transition-colors duration-300 border-[rgba(255,255,255,0.12)] hover:border-[rgba(255,255,255,0.28)]"
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="filter-active-bg-projects"
-                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      className="absolute inset-0 bg-white"
-                    />
-                  )}
-                  <span className={`relative z-10 ${isActive ? "text-[#03050a]" : "text-[rgba(219,234,254,0.6)]"}`}>
-                    {f}
-                  </span>
-                </button>
-              )
-            })}
+            <CategoryFilter
+              categories={projectCategories}
+              value={filter}
+              onChange={setFilter}
+              layoutId="filter-active-bg-projects"
+            />
           </motion.div>
 
           <motion.div layout className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             <AnimatePresence mode="popLayout">
               {filtered.map((p) => (
-                <ProjectCard key={p.id} p={p} />
+                <ProjectCard key={p.id} p={p} onOpen={(x) => setOpenId(x.id)} />
               ))}
             </AnimatePresence>
           </motion.div>
         </div>
       </section>
+
+      <ProjectLightbox project={open} list={filtered} onClose={() => setOpenId(null)} onNavigate={step} />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Star, ChevronLeft, ChevronRight } from "lucide-react"
-import { fadeUp, stagger, viewportOnce } from "../motion"
+import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
 
 const reviews = [
   {
@@ -33,11 +33,28 @@ const reviews = [
   },
 ]
 
+// A 4.5 used to render as four stars — `n <= rating` is false for n=5, so the
+// half was silently dropped and the rating shown was lower than the one given.
 const StarRating = ({ rating }) => (
-  <div className="flex items-center gap-0.5 text-[#F3F6FB] mb-4">
-    {[1, 2, 3, 4, 5].map((n) => (
-      <Star key={n} size={15} fill={n <= rating ? "currentColor" : "none"} strokeWidth={1.5} />
-    ))}
+  <div
+    className="flex items-center gap-0.5 text-[#F3F6FB] mb-4"
+    role="img"
+    aria-label={`${rating} out of 5 stars`}
+  >
+    {[1, 2, 3, 4, 5].map((n) => {
+      const full = n <= Math.floor(rating)
+      const half = !full && n === Math.ceil(rating)
+      return (
+        <span key={n} className="relative flex">
+          <Star size={15} fill={full ? "currentColor" : "none"} strokeWidth={1.5} />
+          {half && (
+            <span className="absolute inset-0 overflow-hidden w-1/2">
+              <Star size={15} fill="currentColor" strokeWidth={1.5} />
+            </span>
+          )}
+        </span>
+      )
+    })}
   </div>
 )
 
@@ -61,6 +78,9 @@ const Testimonial = () => {
 
   useEffect(() => {
     if (paused) return
+    // Auto-advancing content is exactly what prefers-reduced-motion is for, and
+    // MotionConfig only governs framer transitions, not this interval.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     const id = setInterval(() => go(1), AUTOPLAY_MS)
     return () => clearInterval(id)
   }, [paused, go])
@@ -79,7 +99,7 @@ const Testimonial = () => {
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-4 mb-8">
           <div>
             <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
-              <span>( 03 )</span>
+              <span>( 04 )</span>
               <span>What Clients Say</span>
             </div>
             <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">Kind words from clients</h2>
@@ -106,6 +126,8 @@ const Testimonial = () => {
           variants={fadeUp}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
           className="relative rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] p-7 lg:p-9 min-h-[240px] overflow-hidden"
         >
           <AnimatePresence mode="wait" custom={direction}>

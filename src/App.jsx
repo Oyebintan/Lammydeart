@@ -1,6 +1,6 @@
 import HomePage from "./pages/HomePage"
 import ProjectsPage from "./pages/ProjectsPage"
-import Mainlayout from "./layouts/MainLayout"
+import Mainlayout from "./components/layout/MainLayout"
 import AboutPage from "./pages/AboutPage"
 import ContactPage from "./pages/ContactPage"
 import NotFoundPage from "./pages/NotFoundPage"

@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Palette, Megaphone, PenTool, LayoutGrid, ArrowRight } from "lucide-react"
-import { fadeUp, stagger, viewportOnce } from "../motion"
+import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
 // Same flagship brand asset used in Hero.jsx — swap that one file to update both.
-import brandingImg from "../assets/images/projects/zook-fabrics/preview.jpg"
-import socialAdsImg from "../assets/images/projects/cultural-festival-poster/preview.jpg"
+import brandingImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
+import socialAdsImg from "../../assets/images/projects/cultural-festival-poster/preview.jpg"
 
 const services = [
   {
@@ -52,10 +52,15 @@ const LogoMockup = () => (
       {["L", "D", "A"].map((letter, i) => (
         <div
           key={letter}
-          className="w-16 h-16 rounded-2xl border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.04)] flex items-center justify-center font-display text-2xl font-bold animate-gradient bg-gradient-to-br from-[#1D4ED8] via-[#38BDF8] to-[#7DD3FC] bg-clip-text text-transparent"
+          className="w-16 h-16 rounded-2xl border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.04)] flex items-center justify-center font-display text-2xl font-bold"
           style={{ transform: `translateY(${i === 1 ? -8 : 0}px)` }}
         >
-          {letter}
+          {/* Gradient lives on this span, not the tile. background-clip: text
+              clips every background on the element it sits on, so putting both
+              here erased the tile's own translucent fill. */}
+          <span className="animate-gradient bg-gradient-to-br from-[#1D4ED8] via-[#38BDF8] to-[#7DD3FC] bg-clip-text text-transparent">
+            {letter}
+          </span>
         </div>
       ))}
     </div>
@@ -78,8 +83,9 @@ const Service = () => {
       <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-6 flex-wrap mb-6">
           <div>
-            <div className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
-              Quality Services
+            <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
+              <span>( 01 )</span>
+              <span>Quality Services</span>
             </div>
             <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">What I can do for you</h2>
           </div>
@@ -96,6 +102,8 @@ const Service = () => {
               return (
                 <motion.button
                   key={s.name}
+                  type="button"
+                  aria-pressed={isActive}
                   onClick={() => setActive(i)}
                   whileHover={{ x: isActive ? 0 : 3 }}
                   whileTap={{ scale: 0.98 }}

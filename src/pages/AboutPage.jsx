@@ -2,8 +2,8 @@ import React from "react"
 import { motion } from "framer-motion"
 import { Palette, Layout, Lightbulb, Sparkles } from "lucide-react"
 import { usePageTitle } from "../hooks/usePageTitle"
-import { fadeUp, stagger, viewportOnce } from "../motion"
-import { gridBg, boxTint } from "../decor"
+import { fadeUp, stagger, viewportOnce } from "../lib/motion"
+import { gridBg, boxTint } from "../lib/decor"
 import CornerMarks from "../components/decor/CornerMarks"
 import LineBox from "../components/decor/LineBox"
 import img from "../assets/images/profile/preview.jpg"
@@ -104,9 +104,9 @@ const AboutPage = () => {
         className="relative z-10 px-6 lg:px-14 pb-10 max-w-7xl mx-auto"
       >
         <div className="rounded-[20px] border border-[rgba(255,255,255,0.1)] bg-[#05080f] p-7 lg:p-9">
-          <div className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
+          <h2 className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
             My Approach
-          </div>
+          </h2>
           <p className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.7)] max-w-2xl">
             Rooted in curiosity and a strong belief in user-centered design, I balance aesthetic
             appeal with functional clarity — solving one design challenge at a time while staying
@@ -123,9 +123,9 @@ const AboutPage = () => {
         className="relative z-10 px-6 lg:px-14 pb-16 max-w-7xl mx-auto grid lg:grid-cols-2 gap-6"
       >
         <motion.div variants={fadeUp}>
-          <div className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-4">
+          <h2 className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-4">
             Design Tools
-          </div>
+          </h2>
           <div className="grid grid-cols-2 gap-3">
             {tools.map((tool) => (
               <div
@@ -139,9 +139,9 @@ const AboutPage = () => {
         </motion.div>
 
         <motion.div variants={fadeUp}>
-          <div className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-4">
+          <h2 className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-4">
             Skills & Services
-          </div>
+          </h2>
           <div className="flex flex-wrap gap-2.5">
             {skills.map((skill) => (
               <div

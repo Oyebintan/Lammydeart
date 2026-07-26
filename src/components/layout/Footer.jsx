@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { ArrowUp } from "lucide-react"
 import { Link } from "react-router-dom"
 import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
-import { fadeUp, viewportOnce } from "../motion"
+import { fadeUp, viewportOnce } from "../../lib/motion"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()

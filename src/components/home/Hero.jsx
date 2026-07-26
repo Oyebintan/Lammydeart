@@ -1,15 +1,20 @@
 import React from "react"
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
 import { SiCoreldraw, SiAdobephotoshop } from "react-icons/si"
 import { ArrowRight, ArrowDown } from "lucide-react"
-import { useTypewriter } from "../hooks/useTypewriter"
-import { gridBg, boxTint } from "../decor"
-import CornerMarks from "./decor/CornerMarks"
-import LineBox from "./decor/LineBox"
-import zookImg from "../assets/images/projects/zook-fabrics/preview.jpg"
-import rexonaImg from "../assets/images/projects/rexona-giveaway-campaign/preview.jpg"
-import festivalImg from "../assets/images/projects/cultural-festival-poster/preview.jpg"
+import { useTypewriter } from "../../hooks/useTypewriter"
+import { gridBg, boxTint } from "../../lib/decor"
+import CornerMarks from "../decor/CornerMarks"
+import LineBox from "../decor/LineBox"
+import zookImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
+import rexonaImg from "../../assets/images/projects/rexona-giveaway-campaign/preview.jpg"
+import festivalImg from "../../assets/images/projects/cultural-festival-poster/preview.jpg"
+
+// Router-aware anchors. Raw <a href="/..."> triggered a full document reload on
+// every in-app link, throwing away the SPA and re-downloading the bundle.
+const MotionLink = motion.create(Link)
 
 // The hero collage: one large flagship frame beside two stacked smaller ones.
 // Every frame is 4:5, matching the artwork, so designs fit without cropping.
@@ -48,6 +53,9 @@ const socialLinks = [
   { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
 ]
 
+// Module-level so the reference is stable. Inline array literals made
+// useTypewriter's effect tear down and restart its timer on every render.
+const greetingWords = ["Hi, I'm Lammy"]
 const roles = ["a Graphic Designer.", "a Web Designer.", "a UI/UX Designer."]
 
 const container = {
@@ -98,8 +106,8 @@ const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
     transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
     className={className}
   >
-    <motion.a
-      href="/project"
+    <MotionLink
+      to="/project"
       animate={{ y: [0, -float, 0] }}
       transition={{ duration: 6.5 + delay, repeat: Infinity, ease: "easeInOut" }}
       whileHover={{ scale: 1.025 }}
@@ -149,7 +157,7 @@ const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
           {frame.title}
         </div>
       </div>
-    </motion.a>
+    </MotionLink>
   </motion.div>
 )
 
@@ -212,7 +220,7 @@ const HeroVisual = () => (
 )
 
 const Hero = () => {
-  const greeting = useTypewriter(["Hi, I'm Lammy"], { loop: false, typingSpeed: 55 })
+  const greeting = useTypewriter(greetingWords, { loop: false, typingSpeed: 55 })
   const role = useTypewriter(roles, {
     loop: true,
     typingSpeed: 65,
@@ -300,24 +308,24 @@ const Hero = () => {
               variants={item}
               className="grid grid-cols-2 gap-3 w-full lg:max-w-[34rem]"
             >
-              <motion.a
-                href="/project"
+              <MotionLink
+                to="/project"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 className="animate-gradient flex items-center justify-center gap-2 px-5 py-[11px] rounded-full bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)]"
               >
                 View my work <ArrowRight size={15} strokeWidth={2.5} />
-              </motion.a>
-              <motion.a
-                href="/contact"
+              </MotionLink>
+              <MotionLink
+                to="/contact"
                 whileHover={{ scale: 1.03, borderColor: "rgba(255,255,255,0.4)" }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 className="flex items-center justify-center gap-2 px-5 py-[11px] rounded-full border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.03)] text-[#F3F6FB] text-sm font-semibold"
               >
                 Let's talk
-              </motion.a>
+              </MotionLink>
             </motion.div>
 
             {/* Each qualifier is its own chip on a 2-column grid, the third

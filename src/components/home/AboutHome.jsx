@@ -1,10 +1,13 @@
 import React from "react"
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 import { ArrowRight, Palette, Code2, Gem, Zap } from "lucide-react"
-import { fadeUp, stagger, viewportOnce } from "../motion"
-import { boxTint } from "../decor"
+import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
+import { boxTint } from "../../lib/decor"
 import Timeline from "./Timeline"
 import Skills from "./Skills"
+
+const MotionLink = motion.create(Link)
 
 const highlights = [
   { icon: Palette, text: "Graphic & Brand Designer" },
@@ -25,7 +28,7 @@ const AboutHome = () => {
     >
       <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
-          <span>( 02 )</span>
+          <span>( 03 )</span>
           <span>About Me</span>
         </motion.div>
         <motion.h2 variants={fadeUp} className="font-display font-bold text-[28px] text-[#F3F6FB] mb-8">
@@ -51,15 +54,15 @@ const AboutHome = () => {
               ))}
             </motion.div>
 
-            <motion.a
+            <MotionLink
               variants={fadeUp}
-              href="/about"
+              to="/about"
               whileHover={{ x: 3 }}
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#F3F6FB] mt-1 group"
             >
               More about me
               <ArrowRight size={15} strokeWidth={2.5} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </motion.a>
+            </MotionLink>
           </div>
 
           <motion.div variants={fadeUp} className="flex flex-col gap-9">

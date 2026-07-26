@@ -9,8 +9,8 @@ import {
   FaLocationDot,
 } from "react-icons/fa6"
 import { usePageTitle } from "../hooks/usePageTitle"
-import { fadeUp, stagger, viewportOnce } from "../motion"
-import { gridBg, boxTint } from "../decor"
+import { fadeUp, stagger, viewportOnce } from "../lib/motion"
+import { gridBg, boxTint } from "../lib/decor"
 import CornerMarks from "../components/decor/CornerMarks"
 import LineBox from "../components/decor/LineBox"
 
@@ -116,9 +116,9 @@ const ContactPage = () => {
       >
         <div className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#05080f] p-8 lg:p-12 grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-4">
+            <h2 className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-4">
               Contact Details
-            </div>
+            </h2>
             <div className="flex flex-col gap-4 mb-6">
               {contactDetails.map((d) => {
                 const Content = (
@@ -194,12 +194,12 @@ const ContactPage = () => {
         viewport={viewportOnce}
         className="relative z-10 px-6 lg:px-14 pb-14 max-w-7xl mx-auto"
       >
-        <motion.div
+        <motion.h2
           variants={fadeUp}
           className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-6"
         >
           How working together goes
-        </motion.div>
+        </motion.h2>
         <div className="grid sm:grid-cols-3 gap-4">
           {howItWorks.map((s) => (
             <motion.div
@@ -229,12 +229,12 @@ const ContactPage = () => {
         viewport={viewportOnce}
         className="relative z-10 px-6 lg:px-14 pb-24 max-w-7xl mx-auto"
       >
-        <motion.div
+        <motion.h2
           variants={fadeUp}
           className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-6"
         >
           Good to know
-        </motion.div>
+        </motion.h2>
         <motion.div
           variants={fadeUp}
           className="rounded-[20px] border border-[rgba(255,255,255,0.1)] divide-y divide-[rgba(255,255,255,0.07)] overflow-hidden"

@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
 import { ArrowUpRight, Sparkle } from "lucide-react"
 
-const ProjectCard = ({ p, featured = false }) => {
+const ProjectCard = ({ p, featured = false, onOpen }) => {
   const [hovered, setHovered] = useState(false)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -16,9 +16,11 @@ const ProjectCard = ({ p, featured = false }) => {
   }
 
   return (
-    <motion.a
+    <motion.button
       layout
-      href="/project"
+      type="button"
+      onClick={() => onOpen(p)}
+      aria-label={`View ${p.title}`}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
@@ -27,7 +29,7 @@ const ProjectCard = ({ p, featured = false }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative rounded-2xl lg:rounded-[20px] overflow-hidden border border-[rgba(255,255,255,0.1)] aspect-square lg:aspect-[4/3] block"
+      className="group relative rounded-2xl lg:rounded-[20px] overflow-hidden border border-[rgba(255,255,255,0.1)] aspect-square lg:aspect-[4/3] block w-full cursor-pointer text-left"
     >
       <motion.img
         src={p.img}
@@ -70,7 +72,7 @@ const ProjectCard = ({ p, featured = false }) => {
       >
         View Project <ArrowUpRight size={14} strokeWidth={2.5} />
       </motion.div>
-    </motion.a>
+    </motion.button>
   )
 }
 

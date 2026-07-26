@@ -1,8 +1,8 @@
-import React from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import Navbar from '../components/navbar/Navbar'
-import Footer from '../components/Footer'
+import React from "react"
+import { Outlet, useLocation } from "react-router-dom"
+import { motion } from "framer-motion"
+import Navbar from "./Navbar"
+import Footer from "./Footer"
 
 const MainLayout = () => {
   const location = useLocation()

@@ -1,7 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
-import { fadeUp, stagger, viewportOnce } from "../motion"
+import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
 
 const socialLinks = [
   { icon: FaInstagram, href: "https://www.instagram.com/lammyde.art", label: "Instagram" },
@@ -25,7 +25,7 @@ const HomeContact = () => {
       >
         <div>
           <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
-            <span>( 04 )</span>
+            <span>( 05 )</span>
             <span>Contact</span>
           </div>
           <h2 className="font-display font-bold text-[28px] text-[#F3F6FB] mb-3">Let's build something exceptional</h2>

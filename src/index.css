@@ -2,13 +2,17 @@
 
 * {
   box-sizing: border-box;
-  font-family: "Manrope", sans-serif;
-  /* border: 1px solid red !important; */
 }
 
+/* Manrope belongs on body so it INHERITS. On `*` it matched every descendant
+   directly, which beat inheritance and silently undid .font-display on any
+   nested element — the whole hero headline and the "deart" half of the logo
+   were rendering in Manrope despite sitting inside .font-display. */
 body {
+  font-family: "Manrope", sans-serif;
   background-color: #03050a;
   overscroll-behavior-y: none;
+  position: relative;
 }
 
 html {
@@ -42,11 +46,7 @@ body::after {
   background-size: 180px 180px;
 }
 
-body {
-  position: relative;
-}
-
-/* Without backdrop-filter the nav's 0.72 alpha would leave page content plainly
+/* Without backdrop-filter the nav's 0.88 alpha would leave page content plainly
    readable sliding underneath it, which is the bleed-through look we just spent
    several rounds removing. Go solid instead of glass on those browsers. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -62,17 +62,6 @@ body {
 
 .font-display {
   font-family: "Clash Display", "Manrope", sans-serif;
-}
-
-.lbr {
-  box-shadow: 0 0 700px 15px white;
-  rotate: -30deg;
-  z-index: -1;
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
 }
 
 /* Slides a gradient's colour stops back and forth so gradient text and gradient
@@ -105,38 +94,5 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    opacity: 1;
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    border-radius: 0;
-    top: 0;
-    border: 0;
-    right: 0;
-    height: 100%;
-    width: 250px;
-    background-color: #1d1d1d;
-    padding-top: 60px;
-    opacity: 0;
-    z-index: 9;
-  }
-
-  .nav-links.show {
-    display: flex;
-    opacity: 1;
-  }
-
-  .nav-links a {
-    padding: 15px;
-    text-align: center;
-    width: 100%;
-    margin: 10px 0;
-    color: white;
-    display: block;
   }
 }

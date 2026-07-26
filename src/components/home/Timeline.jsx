@@ -1,6 +1,6 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { fadeUp, stagger } from "../motion"
+import { fadeUp, stagger } from "../../lib/motion"
 
 const experience = [
   { years: "2023—24", role: "Senior Graphic Designer", company: "Folanimprint LTD" },
@@ -17,9 +17,9 @@ const Timeline = () => {
   return (
     <div className="grid sm:grid-cols-2 gap-8">
       <motion.div variants={stagger(0.08)} className="flex flex-col gap-3.5">
-        <div className="text-[12px] font-bold text-[rgba(219,234,254,0.4)] tracking-[0.08em] uppercase">
+        <h3 className="text-[12px] font-bold text-[rgba(219,234,254,0.4)] tracking-[0.08em] uppercase">
           Experience
-        </div>
+        </h3>
         {experience.map((e) => (
           <motion.div
             key={e.company}
@@ -37,9 +37,9 @@ const Timeline = () => {
       </motion.div>
 
       <motion.div variants={stagger(0.08)} className="flex flex-col gap-3.5">
-        <div className="text-[12px] font-bold text-[rgba(219,234,254,0.4)] tracking-[0.08em] uppercase">
+        <h3 className="text-[12px] font-bold text-[rgba(219,234,254,0.4)] tracking-[0.08em] uppercase">
           Education
-        </div>
+        </h3>
         {education.map((e) => (
           <motion.div
             key={e.degree}

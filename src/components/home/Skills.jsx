@@ -1,6 +1,6 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { fadeUp, viewportOnce } from "../motion"
+import { fadeUp, viewportOnce } from "../../lib/motion"
 
 const skills = [
   { name: "Corel Draw", pct: 95 },
@@ -11,9 +11,9 @@ const skills = [
 const Skills = () => {
   return (
     <div className="flex flex-col gap-4.5">
-      <div className="text-[12px] font-bold text-[rgba(219,234,254,0.4)] tracking-[0.08em] uppercase">
+      <h3 className="text-[12px] font-bold text-[rgba(219,234,254,0.4)] tracking-[0.08em] uppercase">
         Skills
-      </div>
+      </h3>
       {skills.map((s) => (
         <motion.div key={s.name} variants={fadeUp}>
           <div className="flex justify-between text-[13px] mb-1.5">

@@ -1,17 +1,17 @@
-import React from "react";
-import Hero from "../components/Hero";
-import Service from "../components/Service";
-import HeroPrj from "../components/HeroPrj";
-import AboutHome from "../components/AboutHome";
-import Testimonial from "../components/Testimonial";
-import HomeContact from "../components/HomeContact";
+import React from "react"
+import Hero from "../components/home/Hero"
+import Service from "../components/home/Service"
+import FeaturedWork from "../components/home/FeaturedWork"
+import AboutHome from "../components/home/AboutHome"
+import Testimonial from "../components/home/Testimonial"
+import HomeContact from "../components/home/HomeContact"
 
 const HomePage = () => {
   return (
     <div>
       <Hero />
       <Service />
-      <HeroPrj times={6} />
+      <FeaturedWork times={6} />
       <AboutHome />
       <Testimonial />
       <HomeContact />
