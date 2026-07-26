@@ -11,13 +11,17 @@
 body {
   font-family: "Manrope", sans-serif;
   background-color: #03050a;
-  overscroll-behavior-y: none;
   position: relative;
 }
 
 html {
   scroll-behavior: smooth;
-  overscroll-behavior-y: none;
+  /* No overscroll-behavior-y: none here. It was added to stop the overscroll
+     bounce exposing a light gutter, but it also disables pull-to-refresh, and
+     the dark colour-scheme + background below already handle the gutter.
+     Anything that must not scroll (open menu, open lightbox) locks
+     body.overflow instead, which correctly suppresses pull-to-refresh only
+     while it is open. */
   /* Keeps native UI (scrollbars, form controls, overscroll gutter) dark so no
      light strip appears at the edges of the page */
   color-scheme: dark;
