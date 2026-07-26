@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Menu, X } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -27,24 +27,32 @@ const Button = () => (
   </MotionLink>
 )
 
-const Checkbox = ({ setIsMenuVisible, checkboxRef, toggleRef }) => (
-  <div ref={toggleRef} className="lg:hidden">
-    <input
-      ref={checkboxRef}
-      type="checkbox"
-      id="menu-toggle"
-      className="hidden peer"
-      onChange={(e) => setIsMenuVisible(e.target.checked)}
-    />
-    <label
-      htmlFor="menu-toggle"
-      className="flex flex-col gap-1.5 cursor-pointer z-50 relative"
-    >
-      <span className="w-7 h-0.5 bg-white transition-all duration-300 peer-checked:rotate-45 peer-checked:translate-y-2"></span>
-      <span className="w-7 h-0.5 bg-white transition-all duration-300 peer-checked:opacity-0"></span>
-      <span className="w-7 h-0.5 bg-white transition-all duration-300 peer-checked:-rotate-45 peer-checked:-translate-y-2"></span>
-    </label>
-  </div>
+// Real Menu/X icons on a button, replacing the hidden-checkbox + CSS-morph
+// hamburger. Smaller than the old 28px bars, gives an unambiguous X to close
+// with, and drops the checkbox .click() round-trip that previously let the
+// toggle open the menu but never close it.
+const MenuToggle = ({ isOpen, onToggle, toggleRef }) => (
+  <button
+    ref={toggleRef}
+    type="button"
+    onClick={onToggle}
+    aria-label={isOpen ? "Close menu" : "Open menu"}
+    aria-expanded={isOpen}
+    className="lg:hidden -mr-1 w-9 h-9 flex items-center justify-center rounded-full text-[#F3F6FB] transition-colors duration-300 hover:bg-[rgba(255,255,255,0.06)] active:bg-[rgba(255,255,255,0.1)]"
+  >
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.span
+        key={isOpen ? "close" : "open"}
+        initial={{ opacity: 0, rotate: isOpen ? -90 : 90 }}
+        animate={{ opacity: 1, rotate: 0 }}
+        exit={{ opacity: 0, rotate: isOpen ? 90 : -90 }}
+        transition={{ duration: 0.18, ease: "easeOut" }}
+        className="flex"
+      >
+        {isOpen ? <X size={19} strokeWidth={2.5} /> : <Menu size={21} strokeWidth={2.5} />}
+      </motion.span>
+    </AnimatePresence>
+  </button>
 )
 
 const menuVariants = {
@@ -68,7 +76,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const [hovered, setHovered] = useState(null)
   const menuRef = useRef(null)
-  const checkboxRef = useRef(null)
   const toggleRef = useRef(null)
   const location = useLocation()
 
@@ -94,10 +101,9 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // The hamburger must be excluded here. It sits outside the drawer, so
-      // without this its mousedown ran closeMenu() (un-checking the box) and
-      // then the label's own click re-checked it — the toggle could open the
-      // menu but never close it, leaving body scroll locked.
+      // The toggle must be excluded here. It sits outside the drawer, so
+      // without this its mousedown would close the menu and its own click would
+      // then reopen it — the button could open but never close.
       if (
         isMenuVisible &&
         menuRef.current &&
@@ -114,12 +120,7 @@ const Navbar = () => {
     }
   }, [isMenuVisible])
 
-  const closeMenu = () => {
-    setIsMenuVisible(false)
-    if (checkboxRef.current && checkboxRef.current.checked) {
-      checkboxRef.current.click()
-    }
-  }
+  const closeMenu = () => setIsMenuVisible(false)
 
   const socialLinks = [
     { icon: FaXTwitter, href: "https://x.com/oyebintan?s=21", label: "Twitter" },
@@ -225,9 +226,9 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Toggle */}
-            <Checkbox
-              setIsMenuVisible={setIsMenuVisible}
-              checkboxRef={checkboxRef}
+            <MenuToggle
+              isOpen={isMenuVisible}
+              onToggle={() => setIsMenuVisible((v) => !v)}
               toggleRef={toggleRef}
             />
           </div>

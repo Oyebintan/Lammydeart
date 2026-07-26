@@ -325,16 +325,25 @@ const Hero = () => {
                 background you asked for, and the grid is what makes the row of
                 shapes start and end exactly where the collage does — as plain
                 ragged text these lines left the right-hand side empty. */}
-            <motion.div
-              variants={item}
-              className={`w-full lg:max-w-[34rem] rounded-2xl bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] divide-y divide-[rgba(255,255,255,0.07)] text-[12.5px] text-[rgba(219,234,254,0.6)] overflow-hidden ${boxTint}`}
-            >
-              <div className="flex items-center gap-2 px-4 py-2.5">
+            <motion.div variants={item} className="w-full lg:max-w-[34rem] flex flex-col gap-3">
+              {/* Same pill treatment as the badge above the headline, so the two
+                  read as one system */}
+              <span
+                className={`inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(219,234,254,0.8)] uppercase w-fit ${boxTint}`}
+              >
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] flex-none" />
                 Open for freelance work
+              </span>
+
+              {/* Bullet-separated on one line rather than stacked rows. 12px is
+                  what lets all three fit without wrapping at 390px. */}
+              <div className="flex items-center gap-2 flex-wrap text-[12px] text-[rgba(219,234,254,0.5)]">
+                <span>Lagos, Nigeria</span>
+                <span className="text-[rgba(255,255,255,0.25)]">•</span>
+                <span>Working remote</span>
+                <span className="text-[rgba(255,255,255,0.25)]">•</span>
+                <span>Fast response</span>
               </div>
-              <div className="px-4 py-2.5">Lagos, Nigeria — working remote</div>
-              <div className="px-4 py-2.5">Replies within 24 hours</div>
             </motion.div>
 
             {/* Three even columns rather than three small circles bunched at the
