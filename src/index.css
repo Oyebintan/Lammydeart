@@ -82,14 +82,36 @@ body::after {
 }
 
 /* Slow, low-contrast light sweep across the featured-work frames. Paired with
-   an ::after-free overlay element in HeroFrame so it never affects layout. */
+   an ::after-free overlay element in HeroFrame so it never affects layout.
+
+   This was a sawtooth: it swept 0-55%, HELD at the end position for 55-100%,
+   then jumped back to the start. Measured, the band parked 31% into the frame
+   — visible across the artwork — for ~2.5s, then moved 119% of the frame width
+   in a single step. That read as a loop restarting rather than light travelling.
+
+   Now a single from/to pair with `alternate`, so the browser plays it forwards
+   then backwards: a genuine there-and-back with no discontinuity at either end.
+   The end points are past the frame on both sides (verified by sampling the
+   band's box against its clipping parent) so each turnaround happens
+   off-screen, not mid-artwork. */
 @keyframes sheen-sweep {
-  0% { transform: translateX(-130%) skewX(-18deg); }
-  55%, 100% { transform: translateX(230%) skewX(-18deg); }
+  /* End points derived from measurement, not guessed. skewX inflates the band's
+     rendered box to 74% of the frame width (not the 33% of its layout box), and
+     sampling gives left% = -45.3 + 0.333 x translate%. So the band is only fully
+     outside the frame below -86% and above 436%. -100% and 450% clear both edges
+     with a little margin and no more dead travel than that needs — at 400% the
+     turnaround still happened with the band 12% inside the frame. */
+  from { transform: translateX(-100%) skewX(-18deg); }
+  to { transform: translateX(450%) skewX(-18deg); }
 }
 
 .animate-sheen {
-  animation: sheen-sweep 5.5s ease-in-out infinite;
+  animation: sheen-sweep 4.5s ease-in-out infinite alternate backwards;
+  /* `backwards` matters: each frame staggers its start with animation-delay, and
+     without a fill mode the band sits at its untransformed position during that
+     delay — partly inside the frame — then jumps to the `from` offset when the
+     animation begins. Measured as a 67% jump on first load. With `backwards` it
+     holds the `from` state through the delay, so the first sweep starts clean. */
 }
 
 @media (prefers-reduced-motion: reduce) {

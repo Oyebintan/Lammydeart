@@ -99,7 +99,14 @@ const Cursor = () => (
 // One frame of the hero collage. The frame is 4:5 like the artwork, so
 // object-contain fills it edge to edge with nothing cropped, and the category
 // sits in a tinted band overlaid across the bottom of the design.
-const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
+// Memoised, and that is load-bearing rather than an optimisation. The role
+// typewriter re-renders Hero roughly every 50ms; each re-render handed framer a
+// fresh `animate` array and restarted the float and pulse from their current
+// value. Measured: the float managed 0.98px of its 5-7px travel, and the two
+// frames carrying a start delay never moved at all, because every restart
+// re-applied the delay. Props here are module-level constants and literals, so
+// this bails out of every re-render and the loops run uninterrupted.
+const HeroFrame = React.memo(({ frame, className, delay = 0, float = 6, phase = 0 }) => (
   <motion.div
     initial={{ opacity: 0, y: 16 }}
     animate={{ opacity: 1, y: 0 }}
@@ -108,8 +115,12 @@ const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
   >
     <MotionLink
       to="/project"
+      // `phase` offsets the first iteration, which permanently staggers the
+      // loop — without it all three frames rose and fell together (measured:
+      // two frames sat at an identical top offset) and the collage read as one
+      // mechanical object rather than three floating pieces.
       animate={{ y: [0, -float, 0] }}
-      transition={{ duration: 6.5 + delay, repeat: Infinity, ease: "easeInOut" }}
+      transition={{ duration: 6.5 + delay, repeat: Infinity, ease: "easeInOut", delay: phase }}
       whileHover={{ scale: 1.025 }}
       className="group relative block w-full h-full overflow-hidden rounded-[18px] lg:rounded-[22px] border border-[rgba(255,255,255,0.12)] shadow-[0_24px_50px_-18px_rgba(0,0,0,0.85)]"
       style={{
@@ -130,14 +141,14 @@ const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className="animate-sheen absolute inset-y-0 -left-1/4 w-1/3 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.16),transparent)]"
-          style={{ animationDelay: `${delay + 1.2}s` }}
+          style={{ animationDelay: `${1.2 + phase}s` }}
         />
       </div>
 
       {/* Accent edge that breathes — ties each frame to its category colour */}
       <motion.div
         animate={{ opacity: [0.25, 0.7, 0.25] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: phase }}
         className="absolute inset-0 rounded-[18px] lg:rounded-[22px] pointer-events-none"
         style={{ boxShadow: `inset 0 0 0 1px rgba(${frame.accent},0.55)` }}
       />
@@ -159,12 +170,13 @@ const HeroFrame = ({ frame, className, delay = 0, float = 6 }) => (
       </div>
     </MotionLink>
   </motion.div>
-)
+))
+HeroFrame.displayName = "HeroFrame"
 
 // Self-contained so it can render once in the mobile flow (right after the
 // headline) and once in the desktop column, without the two instances
 // fighting over shared grid rows.
-const HeroVisual = () => (
+const HeroVisual = React.memo(() => (
   <div className="relative w-full">
     <motion.div
       animate={{ opacity: [0.5, 0.85, 0.5] }}
@@ -183,18 +195,21 @@ const HeroVisual = () => (
         className="col-start-1 row-start-1 aspect-[4/5]"
         delay={0.35}
         float={5}
+        phase={1.5}
       />
       <HeroFrame
         frame={heroFrames.bottomSmall}
         className="col-start-1 row-start-2 aspect-[4/5]"
         delay={0.5}
         float={7}
+        phase={3}
       />
       <HeroFrame
         frame={heroFrames.tall}
         className="col-start-2 row-start-1 row-span-2"
         delay={0.2}
         float={6}
+        phase={0}
       />
 
       {/* Tool badges sit mostly outside the collage, straddling opposite outer
@@ -217,7 +232,8 @@ const HeroVisual = () => (
       />
     </div>
   </div>
-)
+))
+HeroVisual.displayName = "HeroVisual"
 
 const Hero = () => {
   const greeting = useTypewriter(greetingWords, { loop: false, typingSpeed: 55 })
