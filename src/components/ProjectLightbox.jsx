@@ -6,6 +6,11 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react"
 // — while a hover pill promised "View Project". There are no per-project routes,
 // so the promise went nowhere. This shows the actual artwork full size instead,
 // which is what someone clicking a design portfolio wants.
+//
+// Backdrop alpha is deliberately low (0.62) so the grid behind stays visible
+// through the blur — the point is that the page reads as pushed back and out of
+// focus with the artwork floating above it. At the 0.92 it started on, the
+// backdrop-filter was doing nothing you could see.
 const ProjectLightbox = ({ project, list = [], onClose, onNavigate }) => {
   const closeRef = useRef(null)
   const index = project ? list.findIndex((p) => p.id === project.id) : -1
@@ -45,16 +50,16 @@ const ProjectLightbox = ({ project, list = [], onClose, onNavigate }) => {
           role="dialog"
           aria-modal="true"
           aria-label={`${project.title} — ${project.category}`}
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 lg:p-8 bg-[rgba(2,4,10,0.92)] backdrop-blur-md"
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 lg:p-8 bg-[rgba(2,4,10,0.62)] backdrop-blur-xl"
         >
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="absolute top-4 right-4 lg:top-6 lg:right-6 w-10 h-10 rounded-full border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.05)] flex items-center justify-center text-[#F3F6FB] hover:bg-[rgba(255,255,255,0.12)] transition-colors duration-300"
+            className="absolute top-4 right-4 lg:top-6 lg:right-6 w-8 h-8 rounded-full border border-[rgba(255,255,255,0.18)] bg-[rgba(3,5,10,0.6)] backdrop-blur-md flex items-center justify-center text-[#F3F6FB] hover:bg-[rgba(255,255,255,0.14)] transition-colors duration-300"
           >
-            <X size={18} strokeWidth={2.5} />
+            <X size={15} strokeWidth={2.5} />
           </button>
 
           {hasSiblings && (

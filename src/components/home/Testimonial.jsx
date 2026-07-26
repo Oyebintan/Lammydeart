@@ -3,33 +3,39 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
 
+// IMPORTANT: the names and roles here are real clients, but the quote wording is
+// still placeholder copy carried over from the previous entries — it was written
+// to fit each client's line of work, not transcribed from anything they said.
+// Replace each `message` with the client's actual words (or wording they have
+// agreed to) before treating this section as published, since these read as
+// direct quotes from named people and a named company.
 const reviews = [
   {
     id: 1,
-    name: "Becky B.",
-    initials: "BB",
-    role: "Beauty brand Founder",
+    name: "Miss Teniola",
+    initials: "MT",
+    role: "PR & Broadcast Consultant",
     rating: 4.5,
     message:
-      "Choosing Olamide for my flyer project was a game-changer. He captured the message perfectly and delivered a bold, eye-catching design that brought the vision to life.",
+      "Choosing Olamide for my campaign flyers was a game-changer. He captured the message perfectly and delivered bold, eye-catching designs that read clearly the moment people see them.",
   },
   {
     id: 2,
-    name: "Funbi O.",
-    initials: "FO",
-    role: "E-commerce Merchant",
+    name: "DomStack",
+    initials: "DS",
+    role: "Full-Stack Development Company",
     rating: 4.5,
     message:
-      "Olamide transformed my product with thoughtful, intuitive UI/UX design. He grasped my goals quickly and crafted an experience that feels effortless and on-brand.",
+      "Olamide brought thoughtful, intuitive UI/UX design to our product. He grasped our goals quickly and crafted an interface that feels effortless to use and consistent throughout.",
   },
   {
     id: 3,
-    name: "Bola A.",
-    initials: "BA",
-    role: "Real Estate Founder",
+    name: "Zook Fabrics",
+    initials: "ZF",
+    role: "Clothing Brand",
     rating: 5,
     message:
-      "Working with Olamide on my logo was the best decision I made for my brand. He immediately understood my vision and created a mark that truly represents my identity.",
+      "Working with Olamide on our brand identity was the best decision we made. He understood the vision immediately and built a logo and system that genuinely represents who we are.",
   },
 ]
 
