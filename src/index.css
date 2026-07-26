@@ -22,14 +22,28 @@ html {
 
 body::after {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: 999;
+  /* Was z-index: 999 with mix-blend-mode: overlay on a position: fixed layer —
+     i.e. a full-viewport blended compositing layer sitting ABOVE the nav.
+     That is the prime suspect for the band of page content appearing over the
+     nav on iOS: a fixed blended layer has to re-composite every time Safari
+     resizes the viewport (toolbar collapsing on scroll), and it blends against
+     what is beneath it, so a stale source tile paints stale content on top of
+     everything — including the nav. No amount of nav styling can win against a
+     layer drawn over it.
+     Now absolute (scrolls with the page, no viewport-resize recomposite),
+     un-blended, and below the nav's z-50. Same texture, none of the
+     compositing hazard. */
+  z-index: 0;
   pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
+}
+
+body {
+  position: relative;
 }
 
 ::selection {

@@ -4,7 +4,7 @@ import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
 import { SiCoreldraw, SiAdobephotoshop } from "react-icons/si"
 import { ArrowRight, ArrowDown } from "lucide-react"
 import { useTypewriter } from "../hooks/useTypewriter"
-import { gridBg } from "../decor"
+import { gridBg, boxTint } from "../decor"
 import CornerMarks from "./decor/CornerMarks"
 import LineBox from "./decor/LineBox"
 import zookImg from "../assets/images/projects/zook-fabrics/preview.jpg"
@@ -293,47 +293,57 @@ const Hero = () => {
               Crafting bold visual identities and clean, functional websites — one project at a time.
             </motion.p>
 
-            <motion.div variants={item} className="flex items-center gap-3 flex-wrap">
+            {/* Two equal columns rather than auto-width pills, so the button
+                shapes themselves start at the collage's left edge and end at its
+                right edge instead of trailing off mid-row */}
+            <motion.div
+              variants={item}
+              className="grid grid-cols-2 gap-3 w-full lg:max-w-[34rem]"
+            >
               <motion.a
                 href="/project"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.96 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="animate-gradient flex items-center gap-2 px-[22px] py-[10px] rounded-full bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)]"
+                className="animate-gradient flex items-center justify-center gap-2 px-5 py-[11px] rounded-full bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)]"
               >
                 View my work <ArrowRight size={15} strokeWidth={2.5} />
               </motion.a>
               <motion.a
                 href="/contact"
-                whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.4)" }}
-                whileTap={{ scale: 0.96 }}
+                whileHover={{ scale: 1.03, borderColor: "rgba(255,255,255,0.4)" }}
+                whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="flex items-center gap-2 px-[22px] py-[10px] rounded-full border border-[rgba(255,255,255,0.16)] text-[#F3F6FB] text-sm font-semibold"
+                className="flex items-center justify-center gap-2 px-5 py-[11px] rounded-full border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.03)] text-[#F3F6FB] text-sm font-semibold"
               >
                 Let's talk
               </motion.a>
             </motion.div>
 
-            {/* Small qualifier under the CTAs, like the reference's note beneath
-                its button — adds substance to the column and answers the two
-                things a prospective client checks first */}
-            {/* Stacks on mobile with the separators hidden — inline they wrapped
-                mid-list and left slashes dangling at the end of lines */}
+            {/* Each qualifier is its own chip on a 2-column grid, the third
+                spanning both. Chips give "Open for freelance work" the small
+                background you asked for, and the grid is what makes the row of
+                shapes start and end exactly where the collage does — as plain
+                ragged text these lines left the right-hand side empty. */}
             <motion.div
               variants={item}
-              className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-2.5 sm:flex-wrap text-[12.5px] text-[rgba(219,234,254,0.45)]"
+              className={`w-full lg:max-w-[34rem] rounded-2xl bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] divide-y divide-[rgba(255,255,255,0.07)] text-[12.5px] text-[rgba(219,234,254,0.6)] overflow-hidden ${boxTint}`}
             >
-              <span className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2 px-4 py-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] flex-none" />
                 Open for freelance work
-              </span>
-              <span className="hidden sm:inline text-[rgba(255,255,255,0.18)]">/</span>
-              <span className="pl-3 sm:pl-0">Lagos, Nigeria — working remote</span>
-              <span className="hidden sm:inline text-[rgba(255,255,255,0.18)]">/</span>
-              <span className="pl-3 sm:pl-0">Replies within 24 hours</span>
+              </div>
+              <div className="px-4 py-2.5">Lagos, Nigeria — working remote</div>
+              <div className="px-4 py-2.5">Replies within 24 hours</div>
             </motion.div>
 
-            <motion.div variants={item} className="flex items-center gap-3.5">
+            {/* Three even columns rather than three small circles bunched at the
+                left, so the first shape sits on the collage's left edge and the
+                last on its right edge */}
+            <motion.div
+              variants={item}
+              className="grid grid-cols-3 gap-2 w-full lg:max-w-[34rem]"
+            >
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
@@ -341,12 +351,12 @@ const Hero = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  whileHover={{ scale: 1.15, y: -2 }}
-                  whileTap={{ scale: 0.92 }}
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                  className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[rgba(255,255,255,0.4)]"
+                  className={`h-11 rounded-full border border-[rgba(255,255,255,0.14)] bg-[rgba(255,255,255,0.03)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white ${boxTint}`}
                 >
-                  <social.icon className="w-3.5 h-3.5" />
+                  <social.icon className="w-4 h-4" />
                 </motion.a>
               ))}
             </motion.div>
