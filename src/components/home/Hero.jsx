@@ -8,18 +8,35 @@ import { useTypewriter } from "../../hooks/useTypewriter"
 import { gridBg, boxTint } from "../../lib/decor"
 import CornerMarks from "../decor/CornerMarks"
 import LineBox from "../decor/LineBox"
+import { projects } from "../../data/projects"
 import zookImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
-import rexonaImg from "../../assets/images/projects/rexona-giveaway-campaign/preview.jpg"
-import festivalImg from "../../assets/images/projects/cultural-festival-poster/preview.jpg"
 
 // Router-aware anchors. Raw <a href="/..."> triggered a full document reload on
 // every in-app link, throwing away the SPA and re-downloading the bundle.
 const MotionLink = motion.create(Link)
 
+// Pulls title/category straight from data/projects.js instead of duplicating
+// them here. Those two used to be hardcoded per frame, so swapping which image
+// a frame shows (as happened more than once) left the OLD title and category
+// sitting over the NEW artwork — that mismatch was the bug. Now a frame can
+// only ever describe the image it's actually showing.
+const featuredProject = (slug) => {
+  const p = projects.find((proj) => proj.slug === slug)
+  return {
+    img: p.img,
+    category: p.category,
+    // The tile is narrow, so the long "Name — subtitle" project titles are
+    // shortened to just the name; the full title still shows in the grid and
+    // the lightbox.
+    title: p.title.split(" — ")[0],
+  }
+}
+
 // The hero collage: one large flagship frame beside two stacked smaller ones.
 // Every frame is 4:5, matching the artwork, so designs fit without cropping.
-// Swap the `img` values to feature different work — each frame's category and
-// title show in the tinted band across its bottom.
+// ZOOK is the flagship brand board — a dedicated asset, not part of the
+// projects catalog — so it's the one frame still set by hand. Change which
+// project fills the other two frames by changing the slug passed here.
 const heroFrames = {
   tall: {
     img: zookImg,
@@ -28,16 +45,13 @@ const heroFrames = {
     accent: "29,78,216", // brand blue, matches the ZOOK board
   },
   topSmall: {
-    img: rexonaImg,
-    category: "Social Ads",
-    title: "Rexona Giveaway",
-    accent: "16,122,90",
+    ...featuredProject("relish-locals-opening"),
+    accent: "192,57,43", // brick red, matches the Relish Locals logo
   },
   bottomSmall: {
-    img: festivalImg,
-    category: "Social Ads",
-    title: "Cultural Festival",
-    accent: "168,64,20",
+    ...featuredProject("transactx-sub-accounts"),
+    accent: "0,0,0", // black, per direct request — reads as a clean fade to
+                     // the frame's own near-black mat rather than a colour tint
   },
 }
 
