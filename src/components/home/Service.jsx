@@ -10,7 +10,7 @@ import brandingImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
 // go stale the way it did before: the image at cultural-festival-poster/ got
 // swapped for an unrelated TransactX ad, and this import kept pointing at the
 // file path with no way to know the content underneath had changed.
-const socialAdsImg = projects.find((p) => p.slug === "transactx-sub-accounts").img
+const socialAdsImg = projects.find((p) => p.slug === "relish-locals-opening").img
 
 const services = [
   {
