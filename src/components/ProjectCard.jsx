@@ -38,6 +38,7 @@ const ProjectCard = ({ p, featured = false, onOpen }) => {
         transition={{ duration: 0.5 }}
         className="w-full h-full object-cover"
         loading="lazy"
+        decoding="async"
       />
 
       {featured && (

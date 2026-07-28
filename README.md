@@ -52,6 +52,13 @@ sizing guidance are in `src/assets/images/README.md`.
 `category` must be one of the values in `projectCategories` or the filter won't
 reach it.
 
+**Export images at roughly 1200px on the long edge, JPEG quality ~80.** The
+originals were 1360-1700px and up to 600KB each, which is far more than they
+render at — the grid shows them around 420px wide and the lightbox is capped at
+65vh. Oversized files are the main thing that makes the work look slow to
+appear on mobile data. Re-encoding the set at 1200px/q80 cut the payload from
+6.11MB to 2.73MB with no visible loss.
+
 ## Notes worth knowing before editing
 
 - **Tailwind v4, no config file.** Colours are inline arbitrary values

@@ -86,6 +86,8 @@ const ProjectLightbox = ({ project, list = [], onClose, onNavigate }) => {
               src={project.img}
               alt={project.title}
               // contain, not cover: the whole design has to be visible here
+              fetchPriority="high"
+              decoding="async"
               className="w-full max-h-[65vh] object-contain rounded-2xl border border-[rgba(255,255,255,0.12)]"
             />
             <div className="text-center px-2 pb-2">

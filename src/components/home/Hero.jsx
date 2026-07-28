@@ -120,7 +120,7 @@ const Cursor = () => (
 // frames carrying a start delay never moved at all, because every restart
 // re-applied the delay. Props here are module-level constants and literals, so
 // this bails out of every re-render and the loops run uninterrupted.
-const HeroFrame = React.memo(({ frame, className, delay = 0, float = 6, phase = 0 }) => (
+const HeroFrame = React.memo(({ frame, className, delay = 0, float = 6, phase = 0, priority = false }) => (
   <motion.div
     initial={{ opacity: 0, y: 16 }}
     animate={{ opacity: 1, y: 0 }}
@@ -142,11 +142,17 @@ const HeroFrame = React.memo(({ frame, className, delay = 0, float = 6, phase = 
         background: `linear-gradient(160deg, rgba(${frame.accent},0.28), rgba(6,10,18,0.96) 70%)`,
       }}
     >
+      {/* Eager, not lazy: these sit at the top of the page, so they ARE the
+          largest contentful paint. loading="lazy" made the browser defer the
+          hero artwork until after layout, which is the opposite of what is
+          wanted. `priority` marks the big frame as the one to fetch first. */}
       <img
         src={frame.img}
         alt={`${frame.category} — ${frame.title}`}
         className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-        loading="lazy"
+        loading="eager"
+        fetchPriority={priority ? "high" : "auto"}
+        decoding="async"
       />
 
       {/* Attention motion, kept deliberately faint so it reads as light moving
@@ -224,6 +230,7 @@ const HeroVisual = React.memo(() => (
         delay={0.2}
         float={6}
         phase={0}
+        priority
       />
 
       {/* Tool badges sit mostly outside the collage, straddling opposite outer
