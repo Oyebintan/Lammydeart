@@ -114,7 +114,7 @@ const ContactPage = () => {
         viewport={viewportOnce}
         className="relative z-10 px-6 lg:px-14 pb-12"
       >
-        <div className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#0A0A0A] p-8 lg:p-12 grid lg:grid-cols-2 gap-10 items-center">
+        <div className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#050506] p-8 lg:p-12 grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <h2 className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-4">
               Contact Details

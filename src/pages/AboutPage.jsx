@@ -83,7 +83,7 @@ const AboutPage = () => {
           <div
             style={{ rotate: "-3deg" }}
             // 4:5 to match the illustration's own ratio, so it isn't cropped
-            className="relative w-full max-w-[300px] aspect-[4/5] rounded-[26px] bg-gradient-to-br from-[#141414] to-[#0A0A0A] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.75)]"
+            className="relative w-full max-w-[300px] aspect-[4/5] rounded-[26px] bg-gradient-to-br from-[#0D0E0F] to-[#050506] border border-[rgba(255,255,255,0.12)] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.75)]"
           >
             <div className="w-full h-full rounded-[20px] overflow-hidden">
               <img src={img} alt="Olamide" className="w-full h-full object-cover" loading="eager" fetchPriority="high" decoding="async" />
@@ -103,7 +103,7 @@ const AboutPage = () => {
         viewport={viewportOnce}
         className="relative z-10 px-6 lg:px-14 pb-10 max-w-7xl mx-auto"
       >
-        <div className="rounded-[20px] border border-[rgba(255,255,255,0.1)] bg-[#0A0A0A] p-7 lg:p-9">
+        <div className="rounded-[20px] border border-[rgba(255,255,255,0.1)] bg-[#050506] p-7 lg:p-9">
           <h2 className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-2">
             My Approach
           </h2>

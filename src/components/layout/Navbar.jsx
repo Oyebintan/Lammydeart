@@ -55,20 +55,14 @@ const MenuToggle = ({ isOpen, onToggle, toggleRef }) => (
   </button>
 )
 
-const menuVariants = {
-  hidden: { x: "100%" },
-  show: { x: 0, transition: { type: "spring", stiffness: 300, damping: 32 } },
-  exit: { x: "100%", transition: { duration: 0.25, ease: "easeIn" } },
-}
-
 const linkListVariants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.05, delayChildren: 0.06 } },
 }
 
 const linkItemVariants = {
-  hidden: { opacity: 0, x: 20 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, y: -8 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.28, ease: [0.16, 1, 0.3, 1] } },
 }
 
 const Navbar = () => {
@@ -137,35 +131,31 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Top-edge scrim. A floating pill necessarily leaves page content visible
+          above and beside it — that is the look — but raw artwork scrolling
+          past the screen edge reads as broken, and this is the same strip that
+          caused so much trouble on iOS. This fades content out toward the top
+          edge so it never appears "extremely visible" there. Deliberately NOT
+          blended and sitting BELOW the nav (z-40 vs z-50): a full-viewport
+          fixed layer with mix-blend-mode above the nav was the original iOS
+          bug, and this must not repeat it. */}
+      <div
+        aria-hidden="true"
+        className="fixed inset-x-0 top-0 h-28 z-40 pointer-events-none bg-gradient-to-b from-black via-black/80 to-transparent"
+      />
+
+      <header className="fixed inset-x-0 top-0 z-50 px-3 sm:px-4 pt-[calc(0.6rem+env(safe-area-inset-top,0px))]">
       <nav
-        // Frosted rather than either fully opaque or plainly see-through. The
-        // earlier bleed-through was the blended overlay painting above this bar,
-        // not the bar's own alpha, so glass is safe again — but it needs the
-        // blur to work: with no backdrop-filter this would just be a translucent
-        // panel with legible content sliding under it. index.css falls back to
-        // solid where backdrop-filter is unsupported.
-        // 0.88 is measured, not guessed: sampling the bar's interior while the
-        // page scrolls under it gives a channel spread of 12 (0 when fully
-        // opaque, 26 at 0.72 where the text behind was still readable). Enough
-        // for the glass to pick up what passes under it, not enough to read.
-        className={`nav-glass fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.88)] backdrop-blur-xl backdrop-saturate-150 pt-[env(safe-area-inset-top,0px)] ${
-          scrolled || isMenuVisible ? "shadow-lg shadow-black/30" : ""
+        // Floating capsule rather than a full-width bar. The fill stays heavy
+        // (0.72 at rest, 0.9 once scrolled) with a strong blur so page content
+        // passing underneath tints it but never becomes readable — the same
+        // measured constraint the old sealed bar had.
+        className={`nav-glass mx-auto flex h-14 w-full max-w-5xl items-center justify-between rounded-full pl-5 pr-3 transition-all duration-300 backdrop-blur-xl backdrop-saturate-150 border ${
+          scrolled || isMenuVisible
+            ? "bg-[rgba(0,0,0,0.9)] border-[rgba(255,255,255,0.12)] shadow-lg shadow-black/50"
+            : "bg-[rgba(0,0,0,0.72)] border-[rgba(255,255,255,0.07)]"
         }`}
       >
-        {/* Opaque shim pinned directly above the nav, independent of any
-            safe-area reasoning. If the nav's top edge is the true top of the
-            screen this sits off-screen and does nothing. If anything ever
-            insets the nav downward — safe area, browser chrome, a future
-            layout change — this covers the gap so page content can never
-            appear above the bar. Cheap insurance for a failure mode that
-            can't be reproduced outside a real device. */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 bottom-full h-60 bg-[#000000] pointer-events-none"
-        />
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-[56px] lg:h-16">
             <Logo />
 
             {/* Desktop Navigation */}
@@ -238,73 +228,78 @@ const Navbar = () => {
               onToggle={() => setIsMenuVisible((v) => !v)}
               toggleRef={toggleRef}
             />
-          </div>
-        </div>
       </nav>
+      </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu — a panel that drops out of the pill rather than a drawer
+          sliding in from the edge, so it reads as part of the same floating
+          object. Links stagger in on the shared ease-out curve. */}
       <AnimatePresence>
         {isMenuVisible && (
           <motion.div
             key="mobile-menu"
             ref={menuRef}
-            variants={menuVariants}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            className="fixed inset-y-0 right-0 w-72 bg-[#000000] border-l border-[rgba(255,255,255,0.1)] z-40 lg:hidden overflow-y-auto"
+            initial={{ opacity: 0, y: -12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.98, transition: { duration: 0.18, ease: "easeIn" } }}
+            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-x-3 sm:inset-x-4 top-[calc(4.4rem+env(safe-area-inset-top,0px))] z-50 lg:hidden origin-top rounded-[1.75rem] border border-[rgba(255,255,255,0.12)] bg-[rgba(0,0,0,0.94)] backdrop-blur-xl shadow-2xl shadow-black/60 overflow-hidden"
           >
-            <div className="flex flex-col h-full pt-[calc(6rem+env(safe-area-inset-top,0px))] px-6">
-              <motion.div
-                variants={linkListVariants}
-                initial="hidden"
-                animate="show"
-                className="flex flex-col gap-2 mb-8"
-              >
-                {navLinks.map((link) => (
+            <motion.div
+              variants={linkListVariants}
+              initial="hidden"
+              animate="show"
+              className="flex flex-col p-3"
+            >
+              {navLinks.map((link) => {
+                const isCurrent = location.pathname === link.path
+                return (
                   <motion.div key={link.path} variants={linkItemVariants}>
                     <Link
                       to={link.path}
                       onClick={closeMenu}
-                      className="block text-[rgba(255,255,255,0.82)] hover:text-white hover:bg-[rgba(255,255,255,0.05)] px-4 py-3 rounded-lg font-medium transition-all duration-300"
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3.5 text-[15px] font-medium transition-colors duration-200 ${
+                        isCurrent
+                          ? "bg-[rgba(255,255,255,0.07)] text-white"
+                          : "text-[rgba(255,255,255,0.7)] hover:bg-[rgba(255,255,255,0.05)] hover:text-white"
+                      }`}
                     >
                       {link.name}
+                      {isCurrent && <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />}
                     </Link>
                   </motion.div>
-                ))}
+                )
+              })}
+
+              <motion.div variants={linkItemVariants} className="mt-2 px-1">
+                <MotionLink
+                  to="/contact"
+                  onClick={closeMenu}
+                  whileTap={{ scale: 0.97 }}
+                  className="animate-gradient block bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white font-semibold py-3 px-6 rounded-full text-center"
+                >
+                  Let&apos;s talk
+                </MotionLink>
               </motion.div>
 
-              {/* Mobile CTA Button */}
-              <MotionLink
-                to="/contact"
-                onClick={closeMenu}
-                whileTap={{ scale: 0.96 }}
-                className="animate-gradient bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white font-semibold py-3 px-6 rounded-full text-center mb-8"
+              <motion.div
+                variants={linkItemVariants}
+                className="flex items-center justify-center gap-3 pt-4 pb-1"
               >
-                Let's talk
-              </MotionLink>
-
-              {/* Mobile Social Links */}
-              {/* Extra bottom room so "Follow me" clears the mobile browser's
-                  bottom toolbar instead of sitting underneath it */}
-              <div className="mt-auto pb-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
-                <p className="text-[rgba(255,255,255,0.62)] text-sm mb-4">Follow me</p>
-                <div className="flex items-center gap-3">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(255,255,255,0.16)] text-[rgba(255,255,255,0.78)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
-                      aria-label={social.label}
-                    >
-                      <social.icon className="w-5 h-5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(255,255,255,0.14)] text-[rgba(255,255,255,0.7)] hover:text-white hover:border-[rgba(255,255,255,0.35)] transition-colors duration-300"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-4 h-4" />
+                  </a>
+                ))}
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -316,9 +311,7 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            // Opaque: at /95 the remaining 5% let section headings show through
-            // behind the open menu
-            className="fixed inset-0 bg-[#000000] z-30 lg:hidden"
+            className="fixed inset-0 bg-[rgba(0,0,0,0.7)] backdrop-blur-sm z-40 lg:hidden"
             onClick={closeMenu}
           />
         )}

@@ -42,7 +42,7 @@ const services = [
 ]
 
 const UiMockup = () => (
-  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#141414] to-[#101010]">
+  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0D0E0F] to-[#090A0B]">
     <div className="w-40 rounded-xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.04)] p-3 space-y-2">
       <div className="animate-gradient h-2 w-2/3 rounded bg-gradient-to-r from-[#1D4ED8] via-[#38BDF8] to-[#7DD3FC]" />
       <div className="h-16 rounded-lg bg-[rgba(255,255,255,0.08)]" />
@@ -53,7 +53,7 @@ const UiMockup = () => (
 )
 
 const LogoMockup = () => (
-  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#141414] to-[#101010]">
+  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0D0E0F] to-[#090A0B]">
     <div className="flex items-center gap-5">
       {["L", "D", "A"].map((letter, i) => (
         <div
@@ -84,7 +84,7 @@ const Service = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="relative overflow-hidden px-6 lg:px-14 py-10 bg-gradient-to-b from-[#0A0A0A] to-[#101010]"
+      className="relative overflow-hidden px-6 lg:px-14 py-10 bg-gradient-to-b from-[#050506] to-[#090A0B]"
     >
       <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-6 flex-wrap mb-6">

@@ -71,8 +71,8 @@ appear on mobile data. Re-encoding the set at 1200px/q80 cut the payload from
   | role | value |
   |---|---|
   | page | `#000000` |
-  | raised panel | `#0A0A0A` |
-  | card / section gradient | `#101010`, `#141414` |
+  | raised panel | `#050506` |
+  | card / section gradient | `#090A0B`, `#0D0E0F` |
   | hairline / fill | `rgba(255,255,255,0.03–0.18)` |
   | heading | `#FAFAFA` |
   | body text | `rgba(255,255,255,0.70)` |
@@ -82,9 +82,16 @@ appear on mobile data. Re-encoding the set at 1200px/q80 cut the payload from
   (Clash Display) then cascades into nested elements. Do not move the base
   font-family onto `*` — a universal selector beats inheritance and silently
   overrides `.font-display` on every child.
-- **The nav is frosted glass** (`bg-[rgba(3,5,10,0.88)]` + `backdrop-blur-xl`),
-  with a solid `@supports` fallback. The alpha is deliberately high; lower it and
-  page content becomes readable through the bar.
+- **The nav is a floating capsule**, not a full-width bar: `h-14 max-w-5xl
+  rounded-full`, inset from the screen edges, frosted at `rgba(0,0,0,0.72)`
+  rising to `0.9` on scroll behind `backdrop-blur-xl`, with a solid `@supports`
+  fallback. The alpha is deliberately high; lower it and page content becomes
+  readable through the bar.
+- **A floating bar leaves content visible above and beside it.** That is handled
+  by the 112px top-edge scrim in `Navbar.jsx` (`z-40`, below the nav's `z-50`).
+  Measured: mean brightness stays under 1/255 through the top 70px. Do not make
+  that scrim `mix-blend-mode` or move it above the nav — a blended full-viewport
+  fixed layer over the nav was the original iOS Safari bug.
 - **`viewport-fit=cover` in `index.html` is required**, along with the
   `env(safe-area-inset-*)` padding on the nav, hero, page headers and footer.
   Removing either half puts content behind the iOS status bar.

@@ -24,7 +24,7 @@ const AboutHome = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#0A0A0A] to-[#101010]"
+      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#050506] to-[#090A0B]"
     >
       <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-2">

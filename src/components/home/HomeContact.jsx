@@ -21,7 +21,7 @@ const HomeContact = () => {
     >
       <motion.div
         variants={fadeUp}
-        className="relative max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#0A0A0A] p-8 lg:p-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center"
+        className="relative max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#050506] p-8 lg:p-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center"
       >
         <div>
           <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-2">

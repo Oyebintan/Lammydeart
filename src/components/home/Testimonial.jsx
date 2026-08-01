@@ -99,7 +99,7 @@ const Testimonial = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#0A0A0A] to-[#101010]"
+      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#050506] to-[#090A0B]"
     >
       <div className="relative max-w-3xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-4 mb-8">
