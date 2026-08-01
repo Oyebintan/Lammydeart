@@ -12,13 +12,13 @@ const NotFoundPage = () => {
   usePageTitle("Page not found")
 
   return (
-    <div className={`relative overflow-hidden bg-[#03050a] min-h-screen flex items-center ${gridBg}`}>
+    <div className={`relative overflow-hidden bg-[#000000] min-h-screen flex items-center ${gridBg}`}>
       <CornerMarks />
       <LineBox className="hidden lg:block top-24 right-[10%]" size={160} duration={26} />
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.24),transparent_70%)] blur-2xl pointer-events-none"
+        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.15),transparent_70%)] blur-2xl pointer-events-none"
       />
 
       <motion.section
@@ -29,7 +29,7 @@ const NotFoundPage = () => {
       >
         <motion.div
           variants={fadeUp}
-          className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(219,234,254,0.8)] uppercase w-fit mb-5"
+          className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit mb-5"
         >
           <span>( 404 )</span>
           <span>Page not found</span>
@@ -37,14 +37,14 @@ const NotFoundPage = () => {
 
         <motion.h1
           variants={fadeUp}
-          className="font-display font-bold text-4xl lg:text-5xl text-[#F3F6FB] mb-4 max-w-xl leading-[1.15]"
+          className="font-display font-bold text-4xl lg:text-5xl text-[#FAFAFA] mb-4 max-w-xl leading-[1.15]"
         >
           This page doesn't exist
         </motion.h1>
 
         <motion.p
           variants={fadeUp}
-          className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] max-w-md mb-8"
+          className="text-[15px] leading-relaxed text-[rgba(255,255,255,0.70)] max-w-md mb-8"
         >
           The link may be out of date or slightly off. The work is all still here — pick up from
           one of these instead.
@@ -59,7 +59,7 @@ const NotFoundPage = () => {
           </Link>
           <Link
             to="/"
-            className="flex items-center gap-2 px-[22px] py-[11px] rounded-full border border-[rgba(255,255,255,0.16)] hover:border-[rgba(255,255,255,0.4)] text-[#F3F6FB] text-sm font-semibold transition-colors duration-300"
+            className="flex items-center gap-2 px-[22px] py-[11px] rounded-full border border-[rgba(255,255,255,0.16)] hover:border-[rgba(255,255,255,0.4)] text-[#FAFAFA] text-sm font-semibold transition-colors duration-300"
           >
             <ArrowLeft size={15} strokeWidth={2.5} /> Back home
           </Link>

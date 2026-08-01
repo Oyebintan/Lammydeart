@@ -50,14 +50,14 @@ const ProjectLightbox = ({ project, list = [], onClose, onNavigate }) => {
           role="dialog"
           aria-modal="true"
           aria-label={`${project.title} — ${project.category}`}
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 lg:p-8 bg-[rgba(2,4,10,0.62)] backdrop-blur-xl"
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 lg:p-8 bg-[rgba(0,0,0,0.62)] backdrop-blur-xl"
         >
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="absolute top-4 right-4 lg:top-6 lg:right-6 w-8 h-8 rounded-full border border-[rgba(255,255,255,0.18)] bg-[rgba(3,5,10,0.6)] backdrop-blur-md flex items-center justify-center text-[#F3F6FB] hover:bg-[rgba(255,255,255,0.14)] transition-colors duration-300"
+            className="absolute top-4 right-4 lg:top-6 lg:right-6 w-8 h-8 rounded-full border border-[rgba(255,255,255,0.18)] bg-[rgba(0,0,0,0.6)] backdrop-blur-md flex items-center justify-center text-[#FAFAFA] hover:bg-[rgba(255,255,255,0.14)] transition-colors duration-300"
           >
             <X size={15} strokeWidth={2.5} />
           </button>
@@ -91,14 +91,14 @@ const ProjectLightbox = ({ project, list = [], onClose, onNavigate }) => {
               className="w-full max-h-[65vh] object-contain rounded-2xl border border-[rgba(255,255,255,0.12)]"
             />
             <div className="text-center px-2 pb-2">
-              <div className="text-[11px] font-bold tracking-[0.16em] uppercase text-[rgba(219,234,254,0.45)] mb-1.5">
+              <div className="text-[11px] font-bold tracking-[0.16em] uppercase text-[rgba(255,255,255,0.58)] mb-1.5">
                 {project.category}
                 {hasSiblings && ` — ${index + 1} of ${list.length}`}
               </div>
-              <h3 className="font-display text-xl lg:text-2xl font-bold text-[#F3F6FB] mb-2">
+              <h3 className="font-display text-xl lg:text-2xl font-bold text-[#FAFAFA] mb-2">
                 {project.title}
               </h3>
-              <p className="text-[13.5px] leading-relaxed text-[rgba(219,234,254,0.6)] max-w-xl mx-auto">
+              <p className="text-[13.5px] leading-relaxed text-[rgba(255,255,255,0.70)] max-w-xl mx-auto">
                 {project.description}
               </p>
             </div>
@@ -119,7 +119,7 @@ const NavButton = ({ side, onClick, label, children }) => (
     }}
     className={`absolute ${
       side === "left" ? "left-2 lg:left-6" : "right-2 lg:right-6"
-    } top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.05)] flex items-center justify-center text-[#F3F6FB] hover:bg-[rgba(255,255,255,0.12)] transition-colors duration-300`}
+    } top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.05)] flex items-center justify-center text-[#FAFAFA] hover:bg-[rgba(255,255,255,0.12)] transition-colors duration-300`}
   >
     {children}
   </button>

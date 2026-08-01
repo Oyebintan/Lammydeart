@@ -24,20 +24,20 @@ const AboutHome = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
+      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#0A0A0A] to-[#101010]"
     >
       <div className="relative max-w-7xl mx-auto">
-        <motion.div variants={fadeUp} className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
+        <motion.div variants={fadeUp} className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-2">
           <span>( 03 )</span>
           <span>About Me</span>
         </motion.div>
-        <motion.h2 variants={fadeUp} className="font-display font-bold text-[28px] text-[#F3F6FB] mb-8">
+        <motion.h2 variants={fadeUp} className="font-display font-bold text-[28px] text-[#FAFAFA] mb-8">
           The person behind the pixels
         </motion.h2>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
           <div className="flex flex-col gap-5">
-            <motion.p variants={fadeUp} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.65)]">
+            <motion.p variants={fadeUp} className="text-[15px] leading-relaxed text-[rgba(255,255,255,0.74)]">
               I'm Lammy — a graphic designer and frontend developer who loves turning a blank
               canvas into something that actually works for the brand behind it. I care as much
               about how a design feels as how it performs.
@@ -47,9 +47,9 @@ const AboutHome = () => {
               {highlights.map((h) => (
                 <motion.div key={h.text} variants={fadeUp} className="flex items-center gap-3">
                   <div className={`w-8 h-8 rounded-lg bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center flex-none ${boxTint}`}>
-                    <h.icon size={14} className="text-[rgba(219,234,254,0.8)]" />
+                    <h.icon size={14} className="text-[rgba(255,255,255,0.86)]" />
                   </div>
-                  <span className="text-[13.5px] font-medium text-[rgba(219,234,254,0.8)]">{h.text}</span>
+                  <span className="text-[13.5px] font-medium text-[rgba(255,255,255,0.86)]">{h.text}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -58,7 +58,7 @@ const AboutHome = () => {
               variants={fadeUp}
               to="/about"
               whileHover={{ x: 3 }}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#F3F6FB] mt-1 group"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#FAFAFA] mt-1 py-1 group w-fit"
             >
               More about me
               <ArrowRight size={15} strokeWidth={2.5} className="transition-transform duration-300 group-hover:translate-x-1" />

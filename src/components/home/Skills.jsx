@@ -11,14 +11,14 @@ const skills = [
 const Skills = () => {
   return (
     <div className="flex flex-col gap-4.5">
-      <h3 className="text-[12px] font-bold text-[rgba(219,234,254,0.4)] tracking-[0.08em] uppercase">
+      <h3 className="text-[12px] font-bold text-[rgba(255,255,255,0.55)] tracking-[0.08em] uppercase">
         Skills
       </h3>
       {skills.map((s) => (
         <motion.div key={s.name} variants={fadeUp}>
           <div className="flex justify-between text-[13px] mb-1.5">
-            <span className="text-[#F3F6FB] font-semibold">{s.name}</span>
-            <span className="text-[rgba(219,234,254,0.5)] font-bold">{s.pct}%</span>
+            <span className="text-[#FAFAFA] font-semibold">{s.name}</span>
+            <span className="text-[rgba(255,255,255,0.62)] font-bold">{s.pct}%</span>
           </div>
           <div className="h-1.5 rounded-full bg-[rgba(255,255,255,0.08)] overflow-hidden">
             <motion.div

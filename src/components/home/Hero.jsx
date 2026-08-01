@@ -201,7 +201,7 @@ const HeroVisual = React.memo(() => (
     <motion.div
       animate={{ opacity: [0.5, 0.85, 0.5] }}
       transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-      className="absolute -top-8 -right-6 w-40 h-40 lg:w-56 lg:h-56 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.22),rgba(29,78,216,0.08)_60%,transparent_75%)] blur-sm pointer-events-none"
+      className="absolute -top-8 -right-6 w-40 h-40 lg:w-56 lg:h-56 rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.16),rgba(29,78,216,0.05)_60%,transparent_75%)] blur-sm pointer-events-none"
     />
 
     {/* The two small frames are 4:5 and set the row heights; ZOOK spans both
@@ -267,7 +267,7 @@ const Hero = () => {
   })
 
   return (
-    <section className="relative overflow-hidden bg-[#03050a] pt-[calc(5rem+env(safe-area-inset-top,0px))] pb-8 lg:pt-[calc(6rem+env(safe-area-inset-top,0px))] lg:pb-12 px-6 lg:px-14">
+    <section className="relative overflow-hidden bg-[#000000] pt-[calc(5rem+env(safe-area-inset-top,0px))] pb-8 lg:pt-[calc(6rem+env(safe-area-inset-top,0px))] lg:pb-12 px-6 lg:px-14">
       {/* Texture lives on its own masked layer rather than on the section, so it
           can fade to nothing well before the section ends — everything from the
           stats row down is plain colour, matching the rest of the page. The
@@ -284,14 +284,14 @@ const Hero = () => {
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.24),transparent_70%)] blur-2xl pointer-events-none"
+        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.15),transparent_70%)] blur-2xl pointer-events-none"
       />
-      <div className="absolute bottom-[-200px] right-[10%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05),transparent_70%)] blur-2xl pointer-events-none" />
+      <div className="absolute bottom-[-200px] right-[10%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.035),transparent_70%)] blur-2xl pointer-events-none" />
 
       {/* The grid texture stops with the hero now — everything below it is flat
           colour — so fade the lines out before the boundary instead of letting
           them end on a hard horizontal cut */}
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(to_bottom,transparent,#03050a)] pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(to_bottom,transparent,#000000)] pointer-events-none" />
 
       <motion.div
         variants={container}
@@ -305,7 +305,7 @@ const Hero = () => {
         <div className="flex flex-col gap-6">
           <motion.div
             variants={item}
-            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(219,234,254,0.8)] uppercase w-fit"
+            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] shadow-[0_0_8px_#60A5FA]" />
             Graphic Designer + Web Designer
@@ -313,7 +313,7 @@ const Hero = () => {
 
           <motion.h1
             variants={item}
-            className="font-display font-bold text-[32px] lg:text-[52px] xl:text-[58px] leading-[1.12] tracking-[-0.015em] text-[#F3F6FB] min-h-[2.4em]"
+            className="font-display font-bold text-[32px] lg:text-[52px] xl:text-[58px] leading-[1.12] tracking-[-0.015em] text-[#FAFAFA] min-h-[2.4em]"
           >
             <span>
               {greeting}
@@ -334,7 +334,7 @@ const Hero = () => {
           {/* The collage spans the full column now, so the copy below it does too —
               no width cap, everything shares one left edge */}
           <div className="w-full lg:contents flex flex-col gap-6">
-            <motion.p variants={item} className="text-[15px] lg:text-base leading-relaxed text-[rgba(219,234,254,0.6)] lg:max-w-[34rem]">
+            <motion.p variants={item} className="text-[15px] lg:text-base leading-relaxed text-[rgba(255,255,255,0.70)] lg:max-w-[34rem]">
               Crafting bold visual identities and clean, functional websites — one project at a time.
             </motion.p>
 
@@ -359,7 +359,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.03, borderColor: "rgba(255,255,255,0.4)" }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="flex items-center justify-center gap-2 px-5 py-[11px] rounded-full border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.03)] text-[#F3F6FB] text-sm font-semibold"
+                className="flex items-center justify-center gap-2 px-5 py-[11px] rounded-full border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.03)] text-[#FAFAFA] text-sm font-semibold"
               >
                 Let's talk
               </MotionLink>
@@ -374,7 +374,7 @@ const Hero = () => {
               {/* Same pill treatment as the badge above the headline, so the two
                   read as one system */}
               <span
-                className={`inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(219,234,254,0.8)] uppercase w-fit ${boxTint}`}
+                className={`inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit ${boxTint}`}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] flex-none" />
                 Open for freelance work
@@ -382,11 +382,11 @@ const Hero = () => {
 
               {/* Bullet-separated on one line rather than stacked rows. 12px is
                   what lets all three fit without wrapping at 390px. */}
-              <div className="flex items-center gap-2 flex-wrap text-[12px] text-[rgba(219,234,254,0.5)]">
+              <div className="flex items-center gap-2 flex-wrap text-[12px] text-[rgba(255,255,255,0.62)]">
                 <span>Lagos, Nigeria</span>
-                <span className="text-[rgba(255,255,255,0.25)]">•</span>
+                <span className="text-[rgba(255,255,255,0.5)]">•</span>
                 <span>Working remote</span>
-                <span className="text-[rgba(255,255,255,0.25)]">•</span>
+                <span className="text-[rgba(255,255,255,0.5)]">•</span>
                 <span>Fast response</span>
               </div>
             </motion.div>
@@ -396,7 +396,7 @@ const Hero = () => {
                 last on its right edge */}
             <motion.div
               variants={item}
-              className="grid grid-cols-3 gap-2 w-full lg:max-w-[34rem]"
+              className="grid grid-cols-3 gap-2 w-full lg:flex lg:w-auto lg:gap-3"
             >
               {socialLinks.map((social) => (
                 <motion.a
@@ -408,7 +408,7 @@ const Hero = () => {
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                  className={`h-11 rounded-full border border-[rgba(255,255,255,0.14)] bg-[rgba(255,255,255,0.03)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white ${boxTint}`}
+                  className={`h-11 lg:w-11 rounded-full border border-[rgba(255,255,255,0.14)] bg-[rgba(255,255,255,0.03)] flex items-center justify-center text-[rgba(255,255,255,0.78)] hover:text-white ${boxTint}`}
                 >
                   <social.icon className="w-4 h-4" />
                 </motion.a>
@@ -427,11 +427,11 @@ const Hero = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 + i * 0.1, duration: 0.4 }}
-                    className="font-display text-[22px] lg:text-2xl font-bold text-[#F3F6FB] leading-none"
+                    className="font-display text-[22px] lg:text-2xl font-bold text-[#FAFAFA] leading-none"
                   >
                     {stat.value}
                   </motion.div>
-                  <div className="text-[11px] lg:text-[11.5px] text-[rgba(219,234,254,0.5)] mt-1.5">
+                  <div className="text-[11px] lg:text-[11.5px] text-[rgba(255,255,255,0.62)] mt-1.5">
                     {stat.label}
                   </div>
                 </div>
@@ -456,7 +456,7 @@ const Hero = () => {
       >
         <a
           href="#services"
-          className="group flex items-center gap-3 text-[11px] font-semibold tracking-[0.16em] uppercase text-[rgba(219,234,254,0.45)] hover:text-[rgba(219,234,254,0.85)] transition-colors duration-300"
+          className="group flex items-center gap-3 text-[11px] font-semibold tracking-[0.16em] uppercase text-[rgba(255,255,255,0.58)] hover:text-[rgba(255,255,255,0.85)] transition-colors duration-300"
         >
           <span className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center group-hover:border-[rgba(255,255,255,0.35)] transition-colors duration-300">
             <motion.span
@@ -469,7 +469,7 @@ const Hero = () => {
           Scroll to explore
         </a>
         <span className="h-px flex-1 bg-gradient-to-r from-[rgba(255,255,255,0.12)] via-[rgba(255,255,255,0.06)] to-transparent" />
-        <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[rgba(219,234,254,0.35)]">
+        <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[rgba(255,255,255,0.55)]">
           Selected work below
         </span>
       </motion.div>

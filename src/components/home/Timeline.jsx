@@ -17,7 +17,7 @@ const Timeline = () => {
   return (
     <div className="grid sm:grid-cols-2 gap-8">
       <motion.div variants={stagger(0.08)} className="flex flex-col gap-3.5">
-        <h3 className="text-[12px] font-bold text-[rgba(219,234,254,0.4)] tracking-[0.08em] uppercase">
+        <h3 className="text-[12px] font-bold text-[rgba(255,255,255,0.55)] tracking-[0.08em] uppercase">
           Experience
         </h3>
         {experience.map((e) => (
@@ -27,17 +27,17 @@ const Timeline = () => {
             whileHover={{ x: 4 }}
             className="flex gap-4 pb-3.5 border-b border-[rgba(255,255,255,0.08)]"
           >
-            <div className="text-xs font-semibold text-[rgba(219,234,254,0.55)] flex-none w-[74px] pt-0.5">{e.years}</div>
+            <div className="text-xs font-semibold text-[rgba(255,255,255,0.65)] flex-none w-[74px] pt-0.5">{e.years}</div>
             <div>
-              <div className="text-[14.5px] font-bold text-[#F3F6FB]">{e.role}</div>
-              <div className="text-[12.5px] text-[rgba(219,234,254,0.5)] mt-0.5">{e.company}</div>
+              <div className="text-[14.5px] font-bold text-[#FAFAFA]">{e.role}</div>
+              <div className="text-[12.5px] text-[rgba(255,255,255,0.62)] mt-0.5">{e.company}</div>
             </div>
           </motion.div>
         ))}
       </motion.div>
 
       <motion.div variants={stagger(0.08)} className="flex flex-col gap-3.5">
-        <h3 className="text-[12px] font-bold text-[rgba(219,234,254,0.4)] tracking-[0.08em] uppercase">
+        <h3 className="text-[12px] font-bold text-[rgba(255,255,255,0.55)] tracking-[0.08em] uppercase">
           Education
         </h3>
         {education.map((e) => (
@@ -47,10 +47,10 @@ const Timeline = () => {
             whileHover={{ x: 4 }}
             className="flex gap-4 pb-3.5 border-b border-[rgba(255,255,255,0.08)]"
           >
-            <div className="text-xs font-semibold text-[rgba(219,234,254,0.55)] flex-none w-[74px] pt-0.5">{e.years}</div>
+            <div className="text-xs font-semibold text-[rgba(255,255,255,0.65)] flex-none w-[74px] pt-0.5">{e.years}</div>
             <div>
-              <div className="text-[14.5px] font-bold text-[#F3F6FB]">{e.degree}</div>
-              <div className="text-[12.5px] text-[rgba(219,234,254,0.5)] mt-0.5">{e.school}</div>
+              <div className="text-[14.5px] font-bold text-[#FAFAFA]">{e.degree}</div>
+              <div className="text-[12.5px] text-[rgba(255,255,255,0.62)] mt-0.5">{e.school}</div>
             </div>
           </motion.div>
         ))}

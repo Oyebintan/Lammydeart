@@ -31,16 +31,16 @@ const FeaturedWork = ({ times = 6 }) => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-[#03050a]"
+      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-[#000000]"
     >
       <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between flex-wrap gap-4 mb-6">
           <div>
-            <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
+            <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-2">
               <span>( 02 )</span>
               <span>Featured Work</span>
             </div>
-            <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">Work worth talking about</h2>
+            <h2 className="font-display font-bold text-[28px] text-[#FAFAFA]">Work worth talking about</h2>
           </div>
           <CategoryFilter
             categories={projectCategories}
@@ -68,7 +68,7 @@ const FeaturedWork = ({ times = 6 }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="flex items-center gap-2 border border-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.4)] text-[#F3F6FB] text-sm font-semibold px-6 py-2.5 rounded-full"
+            className="flex items-center gap-2 border border-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.4)] text-[#FAFAFA] text-sm font-semibold px-6 py-2.5 rounded-full"
           >
             View all projects <ArrowRight size={15} strokeWidth={2.5} />
           </MotionLink>

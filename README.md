@@ -52,6 +52,10 @@ sizing guidance are in `src/assets/images/README.md`.
 `category` must be one of the values in `projectCategories` or the filter won't
 reach it.
 
+**Cards are portrait 4:5**, matching how most of the work is designed. If a piece
+is landscape, set `wide: true` on it and the grid gives it a 16:9 card spanning
+two columns instead of cropping it to portrait.
+
 **Export images at roughly 1200px on the long edge, JPEG quality ~80.** The
 originals were 1360-1700px and up to 600KB each, which is far more than they
 render at — the grid shows them around 420px wide and the lightbox is capped at
@@ -61,9 +65,19 @@ appear on mobile data. Re-encoding the set at 1200px/q80 cut the payload from
 
 ## Notes worth knowing before editing
 
-- **Tailwind v4, no config file.** Colours are inline arbitrary values
-  (`bg-[#03050a]`), not theme tokens. Match the existing values rather than
-  introducing new ones.
+- **Tailwind v4, no config file.** Colours are inline arbitrary values, not theme
+  tokens. Match the existing values rather than introducing new ones. The palette:
+
+  | role | value |
+  |---|---|
+  | page | `#000000` |
+  | raised panel | `#0A0A0A` |
+  | card / section gradient | `#101010`, `#141414` |
+  | hairline / fill | `rgba(255,255,255,0.03–0.18)` |
+  | heading | `#FAFAFA` |
+  | body text | `rgba(255,255,255,0.70)` |
+  | muted text | `rgba(255,255,255,0.55)` — the floor; below ~0.50 fails AA on black |
+  | accent | `#1D4ED8 → #60A5FA` (the only colour on the site) |
 - **Fonts.** Manrope is set on `body` so it inherits; `.font-display`
   (Clash Display) then cascades into nested elements. Do not move the base
   font-family onto `*` — a universal selector beats inheritance and silently

@@ -43,7 +43,7 @@ const reviews = [
 // half was silently dropped and the rating shown was lower than the one given.
 const StarRating = ({ rating }) => (
   <div
-    className="flex items-center gap-0.5 text-[#F3F6FB] mb-4"
+    className="flex items-center gap-0.5 text-[#FAFAFA] mb-4"
     role="img"
     aria-label={`${rating} out of 5 stars`}
   >
@@ -99,29 +99,29 @@ const Testimonial = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
+      className="relative overflow-hidden px-6 lg:px-14 py-12 bg-gradient-to-b from-[#0A0A0A] to-[#101010]"
     >
       <div className="relative max-w-3xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-4 mb-8">
           <div>
-            <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
+            <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-2">
               <span>( 04 )</span>
               <span>What Clients Say</span>
             </div>
-            <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">Kind words from clients</h2>
+            <h2 className="font-display font-bold text-[28px] text-[#FAFAFA]">Kind words from clients</h2>
           </div>
           <div className="hidden sm:flex items-center gap-2">
             <button
               onClick={() => go(-1)}
               aria-label="Previous testimonial"
-              className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[rgba(255,255,255,0.4)] transition-colors duration-300"
+              className="w-9 h-9 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)] hover:text-white hover:border-[rgba(255,255,255,0.4)] transition-colors duration-300"
             >
               <ChevronLeft size={16} />
             </button>
             <button
               onClick={() => go(1)}
               aria-label="Next testimonial"
-              className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[rgba(255,255,255,0.4)] transition-colors duration-300"
+              className="w-9 h-9 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)] hover:text-white hover:border-[rgba(255,255,255,0.4)] transition-colors duration-300"
             >
               <ChevronRight size={16} />
             </button>
@@ -146,14 +146,14 @@ const Testimonial = () => {
               exit="exit"
             >
               <StarRating rating={active.rating} />
-              <p className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.8)] mb-6">&ldquo;{active.message}&rdquo;</p>
+              <p className="text-[15px] leading-relaxed text-[rgba(255,255,255,0.86)] mb-6">&ldquo;{active.message}&rdquo;</p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[13px] font-bold text-white">
                   {active.initials}
                 </div>
                 <div>
-                  <div className="text-[13.5px] font-bold text-[#F3F6FB]">{active.name}</div>
-                  <div className="text-[12px] text-[rgba(219,234,254,0.45)]">{active.role}</div>
+                  <div className="text-[13.5px] font-bold text-[#FAFAFA]">{active.name}</div>
+                  <div className="text-[12px] text-[rgba(255,255,255,0.58)]">{active.role}</div>
                 </div>
               </div>
             </motion.div>
@@ -164,14 +164,14 @@ const Testimonial = () => {
             <button
               onClick={() => go(-1)}
               aria-label="Previous testimonial"
-              className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(219,234,254,0.7)]"
+              className="w-9 h-9 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)]"
             >
               <ChevronLeft size={16} />
             </button>
             <button
               onClick={() => go(1)}
               aria-label="Next testimonial"
-              className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(219,234,254,0.7)]"
+              className="w-9 h-9 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)]"
             >
               <ChevronRight size={16} />
             </button>
@@ -187,10 +187,17 @@ const Testimonial = () => {
                 setIndex(i)
               }}
               aria-label={`Go to testimonial ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === index ? "w-6 bg-[#F3F6FB]" : "w-1.5 bg-[rgba(255,255,255,0.2)]"
-              }`}
-            />
+              aria-current={i === index}
+              /* The dot itself stays 6px; the button around it carries a 24px
+                 hit area. It was 6x6, under the 24x24 minimum. */
+              className="py-2.5 px-2.5 flex items-center group/dot"
+            >
+              <span
+                className={`h-1.5 rounded-full block transition-all duration-300 ${
+                  i === index ? "w-6 bg-[#FAFAFA]" : "w-1.5 bg-[rgba(255,255,255,0.2)] group-hover/dot:bg-[rgba(255,255,255,0.45)]"
+                }`}
+              />
+            </button>
           ))}
         </motion.div>
       </div>

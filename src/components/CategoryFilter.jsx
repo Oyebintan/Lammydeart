@@ -23,7 +23,7 @@ const CategoryFilter = ({ categories, value, onChange, layoutId }) => (
               className="absolute inset-0 bg-white"
             />
           )}
-          <span className={`relative z-10 ${isActive ? "text-[#03050a]" : "text-[rgba(219,234,254,0.6)]"}`}>
+          <span className={`relative z-10 ${isActive ? "text-[#000000]" : "text-[rgba(255,255,255,0.70)]"}`}>
             {c}
           </span>
         </button>

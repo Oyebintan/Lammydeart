@@ -10,7 +10,7 @@
    were rendering in Manrope despite sitting inside .font-display. */
 body {
   font-family: "Manrope", sans-serif;
-  background-color: #03050a;
+  background-color: #000000;
   position: relative;
 }
 
@@ -25,7 +25,7 @@ html {
   /* Keeps native UI (scrollbars, form controls, overscroll gutter) dark so no
      light strip appears at the edges of the page */
   color-scheme: dark;
-  background-color: #03050a;
+  background-color: #000000;
 }
 
 body::after {
@@ -55,8 +55,18 @@ body::after {
    several rounds removing. Go solid instead of glass on those browsers. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .nav-glass {
-    background-color: #03050a;
+    background-color: #000000;
   }
+}
+
+/* There were no focus styles at all: keyboard users got the browser default,
+   which on a black page renders as a near-invisible 1px dark outline. One rule
+   here covers every control on the site. :focus-visible (not :focus) so it only
+   shows for keyboard navigation, never on mouse clicks. */
+:focus-visible {
+  outline: 2px solid #60A5FA;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 ::selection {

@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 const MotionLink = motion.create(Link)
 
 const Logo = () => (
-  <Link to="/" className="font-display font-bold text-[19px] text-[#F3F6FB] tracking-[0.02em] z-50">
+  <Link to="/" className="font-display font-bold text-[19px] text-[#FAFAFA] tracking-[0.02em] z-50">
     Lammy
     <span className="animate-gradient bg-gradient-to-br from-[#1D4ED8] via-[#38BDF8] to-[#7DD3FC] bg-clip-text text-transparent">
       deart
@@ -38,7 +38,7 @@ const MenuToggle = ({ isOpen, onToggle, toggleRef }) => (
     onClick={onToggle}
     aria-label={isOpen ? "Close menu" : "Open menu"}
     aria-expanded={isOpen}
-    className="lg:hidden -mr-1 w-9 h-9 flex items-center justify-center rounded-full text-[#F3F6FB] transition-colors duration-300 hover:bg-[rgba(255,255,255,0.06)] active:bg-[rgba(255,255,255,0.1)]"
+    className="lg:hidden -mr-1 w-11 h-11 flex items-center justify-center rounded-full text-[#FAFAFA] transition-colors duration-300 hover:bg-[rgba(255,255,255,0.06)] active:bg-[rgba(255,255,255,0.1)]"
   >
     <AnimatePresence mode="wait" initial={false}>
       <motion.span
@@ -148,7 +148,7 @@ const Navbar = () => {
         // page scrolls under it gives a channel spread of 12 (0 when fully
         // opaque, 26 at 0.72 where the text behind was still readable). Enough
         // for the glass to pick up what passes under it, not enough to read.
-        className={`nav-glass fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] bg-[rgba(3,5,10,0.88)] backdrop-blur-xl backdrop-saturate-150 pt-[env(safe-area-inset-top,0px)] ${
+        className={`nav-glass fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.88)] backdrop-blur-xl backdrop-saturate-150 pt-[env(safe-area-inset-top,0px)] ${
           scrolled || isMenuVisible ? "shadow-lg shadow-black/30" : ""
         }`}
       >
@@ -161,7 +161,7 @@ const Navbar = () => {
             can't be reproduced outside a real device. */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-full h-60 bg-[#03050a] pointer-events-none"
+          className="absolute inset-x-0 bottom-full h-60 bg-[#000000] pointer-events-none"
         />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -181,7 +181,7 @@ const Navbar = () => {
                     to={link.path}
                     onMouseEnter={() => setHovered(i)}
                     className={`relative px-4 py-2 text-[13.5px] font-medium transition-colors duration-300 ${
-                      isCurrent ? "text-white" : "text-[rgba(219,234,254,0.75)] hover:text-white"
+                      isCurrent ? "text-white" : "text-[rgba(255,255,255,0.82)] hover:text-white"
                     }`}
                   >
                     {hovered === i && (
@@ -217,7 +217,7 @@ const Navbar = () => {
                     whileHover={{ scale: 1.12, y: -2 }}
                     whileTap={{ scale: 0.94 }}
                     transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                    className="flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(255,255,255,0.16)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-colors duration-300"
+                    className="flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(255,255,255,0.16)] text-[rgba(255,255,255,0.78)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-colors duration-300"
                     aria-label={social.label}
                   >
                     <social.icon className="w-4 h-4" />
@@ -252,7 +252,7 @@ const Navbar = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="fixed inset-y-0 right-0 w-72 bg-[#03050a] border-l border-[rgba(255,255,255,0.1)] z-40 lg:hidden overflow-y-auto"
+            className="fixed inset-y-0 right-0 w-72 bg-[#000000] border-l border-[rgba(255,255,255,0.1)] z-40 lg:hidden overflow-y-auto"
           >
             <div className="flex flex-col h-full pt-[calc(6rem+env(safe-area-inset-top,0px))] px-6">
               <motion.div
@@ -266,7 +266,7 @@ const Navbar = () => {
                     <Link
                       to={link.path}
                       onClick={closeMenu}
-                      className="block text-[rgba(219,234,254,0.75)] hover:text-white hover:bg-[rgba(255,255,255,0.05)] px-4 py-3 rounded-lg font-medium transition-all duration-300"
+                      className="block text-[rgba(255,255,255,0.82)] hover:text-white hover:bg-[rgba(255,255,255,0.05)] px-4 py-3 rounded-lg font-medium transition-all duration-300"
                     >
                       {link.name}
                     </Link>
@@ -288,7 +288,7 @@ const Navbar = () => {
               {/* Extra bottom room so "Follow me" clears the mobile browser's
                   bottom toolbar instead of sitting underneath it */}
               <div className="mt-auto pb-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
-                <p className="text-[rgba(219,234,254,0.5)] text-sm mb-4">Follow me</p>
+                <p className="text-[rgba(255,255,255,0.62)] text-sm mb-4">Follow me</p>
                 <div className="flex items-center gap-3">
                   {socialLinks.map((social) => (
                     <a
@@ -296,7 +296,7 @@ const Navbar = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(255,255,255,0.16)] text-[rgba(219,234,254,0.7)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
+                      className="flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(255,255,255,0.16)] text-[rgba(255,255,255,0.78)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-all duration-300"
                       aria-label={social.label}
                     >
                       <social.icon className="w-5 h-5" />
@@ -318,7 +318,7 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             // Opaque: at /95 the remaining 5% let section headings show through
             // behind the open menu
-            className="fixed inset-0 bg-[#03050a] z-30 lg:hidden"
+            className="fixed inset-0 bg-[#000000] z-30 lg:hidden"
             onClick={closeMenu}
           />
         )}

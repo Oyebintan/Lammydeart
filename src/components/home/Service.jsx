@@ -42,7 +42,7 @@ const services = [
 ]
 
 const UiMockup = () => (
-  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0b1526] to-[#0a1120]">
+  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#141414] to-[#101010]">
     <div className="w-40 rounded-xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.04)] p-3 space-y-2">
       <div className="animate-gradient h-2 w-2/3 rounded bg-gradient-to-r from-[#1D4ED8] via-[#38BDF8] to-[#7DD3FC]" />
       <div className="h-16 rounded-lg bg-[rgba(255,255,255,0.08)]" />
@@ -53,7 +53,7 @@ const UiMockup = () => (
 )
 
 const LogoMockup = () => (
-  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0b1526] to-[#0a1120]">
+  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#141414] to-[#101010]">
     <div className="flex items-center gap-5">
       {["L", "D", "A"].map((letter, i) => (
         <div
@@ -84,18 +84,18 @@ const Service = () => {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="relative overflow-hidden px-6 lg:px-14 py-10 bg-gradient-to-b from-[#05080f] to-[#0a1120]"
+      className="relative overflow-hidden px-6 lg:px-14 py-10 bg-gradient-to-b from-[#0A0A0A] to-[#101010]"
     >
       <div className="relative max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="flex items-end justify-between gap-6 flex-wrap mb-6">
           <div>
-            <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-2">
+            <div className="flex items-center gap-2 text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-2">
               <span>( 01 )</span>
               <span>Quality Services</span>
             </div>
-            <h2 className="font-display font-bold text-[28px] text-[#F3F6FB]">What I can do for you</h2>
+            <h2 className="font-display font-bold text-[28px] text-[#FAFAFA]">What I can do for you</h2>
           </div>
-          <p className="max-w-[300px] text-[13.5px] text-[rgba(219,234,254,0.55)]">
+          <p className="max-w-[300px] text-[13.5px] text-[rgba(255,255,255,0.65)]">
             From first sketch to shipped product — a full design-driven process.
           </p>
         </motion.div>
@@ -129,12 +129,12 @@ const Service = () => {
                   >
                     <Icon className="w-[18px] h-[18px]" />
                   </div>
-                  <div className="relative z-10 flex-1 text-[14.5px] font-bold text-[#F3F6FB]">{s.name}</div>
+                  <div className="relative z-10 flex-1 text-[14.5px] font-bold text-[#FAFAFA]">{s.name}</div>
                   {isActive && (
                     <motion.div
                       initial={{ opacity: 0, x: -6 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className="relative z-10 text-[rgba(219,234,254,0.5)]"
+                      className="relative z-10 text-[rgba(255,255,255,0.62)]"
                     >
                       <ArrowRight size={17} strokeWidth={2.5} />
                     </motion.div>
@@ -144,7 +144,12 @@ const Service = () => {
             })}
           </div>
 
-          <div className="relative rounded-[20px] border border-[rgba(255,255,255,0.1)] overflow-hidden h-[300px] lg:h-[320px]">
+          {/* Was a fixed 300/320px band, i.e. roughly 2:1, holding 4:5 artwork
+              under object-cover — 61% of each design was cropped away. Now a
+              portrait-friendly box with the same accent-matte + object-contain
+              treatment HeroFrame uses, so the whole piece shows and the two
+              surfaces read as one system. */}
+          <div className="relative rounded-[20px] border border-[rgba(255,255,255,0.1)] overflow-hidden aspect-[4/5] sm:aspect-[4/3] lg:aspect-[5/4]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService.name}
@@ -155,20 +160,31 @@ const Service = () => {
                 className="absolute inset-0"
               >
                 {activeService.img ? (
-                  <img src={activeService.img} alt={activeService.name} className="absolute inset-0 w-full h-full object-cover" />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: "linear-gradient(160deg, rgba(29,78,216,0.28), rgba(6,10,18,0.96) 70%)" }}
+                  >
+                    <img
+                      src={activeService.img}
+                      alt={activeService.name}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                  </div>
                 ) : activeService.mockup === "logo" ? (
                   <LogoMockup />
                 ) : (
                   <UiMockup />
                 )}
                 {/* Strong bottom gradient — dark enough that the photo's own text never collides with the write-up */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(3,5,10,0.97)_0%,rgba(3,5,10,0.88)_38%,rgba(3,5,10,0.4)_62%,transparent_85%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.97)_0%,rgba(0,0,0,0.88)_38%,rgba(0,0,0,0.4)_62%,transparent_85%)]" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <div className="w-[42px] h-[42px] rounded-2xl bg-gradient-to-br from-[#1D4ED8] to-[#60A5FA] flex items-center justify-center mb-3 text-white">
                     <activeService.icon className="w-5 h-5" />
                   </div>
                   <h3 className="font-display text-[22px] font-bold text-white mb-2">{activeService.name}</h3>
-                  <p className="text-sm leading-relaxed text-[rgba(219,234,254,0.8)]">{activeService.desc}</p>
+                  <p className="text-sm leading-relaxed text-[rgba(255,255,255,0.86)]">{activeService.desc}</p>
                 </div>
               </motion.div>
             </AnimatePresence>

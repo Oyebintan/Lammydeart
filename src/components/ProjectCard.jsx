@@ -29,7 +29,13 @@ const ProjectCard = ({ p, featured = false, onOpen }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative rounded-2xl lg:rounded-[20px] overflow-hidden border border-[rgba(255,255,255,0.1)] aspect-square lg:aspect-[4/3] block w-full cursor-pointer text-left"
+      // 4:5 matches how the work is actually designed. The card used to be
+      // square on mobile and 4:3 on desktop, which cropped 40% off most pieces
+      // (worst case 51%) — a portfolio showing half of each design. Landscape
+      // work opts out via `wide` and gets a 16:9 card across two columns.
+      className={`group relative rounded-2xl lg:rounded-[20px] overflow-hidden border border-[rgba(255,255,255,0.1)] block w-full cursor-pointer text-left ${
+        p.wide ? "sm:col-span-2 aspect-[16/9]" : "aspect-[4/5]"
+      }`}
     >
       <motion.img
         src={p.img}
@@ -42,7 +48,7 @@ const ProjectCard = ({ p, featured = false, onOpen }) => {
       />
 
       {featured && (
-        <div className="absolute top-2.5 left-2.5 lg:top-3.5 lg:left-3.5 flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-[rgba(3,5,10,0.7)] backdrop-blur-md border border-[rgba(255,255,255,0.18)] z-10">
+        <div className="absolute top-2.5 left-2.5 lg:top-3.5 lg:left-3.5 flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-[rgba(0,0,0,0.7)] backdrop-blur-md border border-[rgba(255,255,255,0.18)] z-10">
           <Sparkle size={10} className="text-[#60A5FA]" />
           <span className="text-[9.5px] lg:text-[10.5px] font-bold uppercase tracking-[0.08em] text-white">Featured</span>
         </div>
@@ -51,13 +57,13 @@ const ProjectCard = ({ p, featured = false, onOpen }) => {
       {/* Near-opaque at the caption zone: several of these posters have their own
           "POSTER DESIGN"/"FLYER DESIGN" text baked in, which showed through and
           collided with the card's own label under a softer gradient */}
-      <div className="absolute inset-0 flex flex-col justify-end p-2.5 lg:p-4.5 bg-[linear-gradient(to_top,rgba(2,4,10,0.98)_0%,rgba(2,4,10,0.95)_30%,rgba(2,4,10,0.6)_48%,transparent_76%)]">
-        <div className="text-[8.5px] lg:text-[11px] font-semibold tracking-[0.1em] uppercase text-[rgba(219,234,254,0.6)] mb-0.5 lg:mb-1">
+      <div className="absolute inset-0 flex flex-col justify-end p-2.5 lg:p-4.5 bg-[linear-gradient(to_top,rgba(0,0,0,0.98)_0%,rgba(0,0,0,0.95)_30%,rgba(0,0,0,0.6)_48%,transparent_76%)]">
+        <div className="text-[8.5px] lg:text-[11px] font-semibold tracking-[0.1em] uppercase text-[rgba(255,255,255,0.70)] mb-0.5 lg:mb-1">
           {p.category}
         </div>
         <div className="flex items-center justify-between gap-1">
           <div className="font-display text-[13px] lg:text-lg font-bold text-white leading-tight">{p.title}</div>
-          <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-white flex items-center justify-center text-[#03050a] flex-none">
+          <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-white flex items-center justify-center text-[#000000] flex-none">
             <ArrowUpRight size={14} className="lg:hidden" strokeWidth={2.5} />
             <ArrowUpRight size={17} className="hidden lg:block" strokeWidth={2.5} />
           </div>
@@ -69,7 +75,7 @@ const ProjectCard = ({ p, featured = false, onOpen }) => {
         style={{ left: springX, top: springY }}
         animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.8 }}
         transition={{ duration: 0.15 }}
-        className="hidden lg:flex absolute -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 py-2 px-4 rounded-full bg-white text-[#03050a] text-xs font-bold pointer-events-none z-20 whitespace-nowrap"
+        className="hidden lg:flex absolute -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 py-2 px-4 rounded-full bg-white text-[#000000] text-xs font-bold pointer-events-none z-20 whitespace-nowrap"
       >
         View Project <ArrowUpRight size={14} strokeWidth={2.5} />
       </motion.div>

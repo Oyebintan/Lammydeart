@@ -74,15 +74,15 @@ const ContactPage = () => {
   usePageTitle("Contact")
 
   return (
-    <div className={`relative overflow-hidden bg-[#03050a] min-h-screen ${gridBg}`}>
+    <div className={`relative overflow-hidden bg-[#000000] min-h-screen ${gridBg}`}>
       <CornerMarks />
       <LineBox className="hidden lg:block top-24 right-[8%]" size={150} duration={26} />
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.24),transparent_70%)] blur-2xl pointer-events-none"
+        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.15),transparent_70%)] blur-2xl pointer-events-none"
       />
-      <div className="absolute top-40 right-[5%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05),transparent_70%)] blur-2xl pointer-events-none" />
+      <div className="absolute top-40 right-[5%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.035),transparent_70%)] blur-2xl pointer-events-none" />
 
       <motion.section
         variants={stagger()}
@@ -93,15 +93,15 @@ const ContactPage = () => {
         <div className="max-w-7xl mx-auto">
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(219,234,254,0.8)] uppercase w-fit mb-4"
+            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit mb-4"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
             Available for new projects
           </motion.div>
-          <motion.h1 variants={fadeUp} className="font-display font-bold text-4xl lg:text-5xl text-[#F3F6FB] mb-3">
+          <motion.h1 variants={fadeUp} className="font-display font-bold text-4xl lg:text-5xl text-[#FAFAFA] mb-3">
             Let's Work Together
           </motion.h1>
-          <motion.p variants={fadeUp} className="text-[15px] leading-relaxed text-[rgba(219,234,254,0.6)] max-w-lg">
+          <motion.p variants={fadeUp} className="text-[15px] leading-relaxed text-[rgba(255,255,255,0.70)] max-w-lg">
             Have a project in mind? Tell me about it — I usually reply within a day.
           </motion.p>
         </div>
@@ -114,9 +114,9 @@ const ContactPage = () => {
         viewport={viewportOnce}
         className="relative z-10 px-6 lg:px-14 pb-12"
       >
-        <div className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#05080f] p-8 lg:p-12 grid lg:grid-cols-2 gap-10 items-center">
+        <div className="max-w-7xl mx-auto rounded-[24px] border border-[rgba(255,255,255,0.1)] bg-[#0A0A0A] p-8 lg:p-12 grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-4">
+            <h2 className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-4">
               Contact Details
             </h2>
             <div className="flex flex-col gap-4 mb-6">
@@ -124,9 +124,9 @@ const ContactPage = () => {
                 const Content = (
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-[rgba(255,255,255,0.05)] flex items-center justify-center flex-none">
-                      <d.icon className="text-[rgba(219,234,254,0.8)]" size={16} />
+                      <d.icon className="text-[rgba(255,255,255,0.86)]" size={16} />
                     </div>
-                    <span className="text-[14px] text-[rgba(219,234,254,0.8)]">{d.label}</span>
+                    <span className="text-[14px] text-[rgba(255,255,255,0.86)]">{d.label}</span>
                   </div>
                 )
                 return d.href ? (
@@ -149,7 +149,7 @@ const ContactPage = () => {
                   whileHover={{ scale: 1.12, y: -2 }}
                   whileTap={{ scale: 0.94 }}
                   transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                  className="w-[38px] h-[38px] rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(219,234,254,0.7)] hover:text-white hover:border-[rgba(255,255,255,0.4)]"
+                  className="w-[38px] h-[38px] min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)] hover:text-white hover:border-[rgba(255,255,255,0.4)]"
                 >
                   <s.icon size={15} />
                 </motion.a>
@@ -174,12 +174,12 @@ const ContactPage = () => {
               whileHover={{ scale: 1.02, borderColor: "rgba(255,255,255,0.4)" }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="flex items-center justify-center gap-2 py-4 px-6 rounded-2xl border border-[rgba(255,255,255,0.16)] text-[#F3F6FB] text-sm font-semibold"
+              className="flex items-center justify-center gap-2 py-4 px-6 rounded-2xl border border-[rgba(255,255,255,0.16)] text-[#FAFAFA] text-sm font-semibold"
             >
               <FaWhatsapp /> WhatsApp me
             </motion.a>
-            <div className="flex items-center justify-center gap-2 text-[12.5px] text-[rgba(219,234,254,0.45)] pt-2">
-              Response time: <span className="text-[rgba(219,234,254,0.75)] font-semibold">within 24 hours</span>
+            <div className="flex items-center justify-center gap-2 text-[12.5px] text-[rgba(255,255,255,0.58)] pt-2">
+              Response time: <span className="text-[rgba(255,255,255,0.82)] font-semibold">within 24 hours</span>
             </div>
           </div>
         </div>
@@ -196,7 +196,7 @@ const ContactPage = () => {
       >
         <motion.h2
           variants={fadeUp}
-          className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-6"
+          className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-6"
         >
           How working together goes
         </motion.h2>
@@ -209,11 +209,11 @@ const ContactPage = () => {
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
               className={`rounded-[20px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] p-6 ${boxTint}`}
             >
-              <div className="font-display text-[13px] font-bold text-[rgba(219,234,254,0.35)] mb-3">
+              <div className="font-display text-[13px] font-bold text-[rgba(255,255,255,0.55)] mb-3">
                 {s.step}
               </div>
-              <h3 className="font-display text-[17px] font-bold text-[#F3F6FB] mb-2">{s.title}</h3>
-              <p className="text-[13.5px] leading-relaxed text-[rgba(219,234,254,0.6)]">{s.body}</p>
+              <h3 className="font-display text-[17px] font-bold text-[#FAFAFA] mb-2">{s.title}</h3>
+              <p className="text-[13.5px] leading-relaxed text-[rgba(255,255,255,0.70)]">{s.body}</p>
             </motion.div>
           ))}
         </div>
@@ -231,7 +231,7 @@ const ContactPage = () => {
       >
         <motion.h2
           variants={fadeUp}
-          className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(219,234,254,0.4)] uppercase mb-6"
+          className="text-[11.5px] font-bold tracking-[0.16em] text-[rgba(255,255,255,0.55)] uppercase mb-6"
         >
           Good to know
         </motion.h2>
@@ -244,8 +244,8 @@ const ContactPage = () => {
               key={item.q}
               className="grid sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)] gap-1.5 sm:gap-8 px-5 py-4 lg:px-7 lg:py-5 transition-colors duration-300 hover:bg-[rgba(255,255,255,0.02)]"
             >
-              <div className="text-[13.5px] font-semibold text-[#F3F6FB]">{item.q}</div>
-              <p className="text-[13.5px] leading-relaxed text-[rgba(219,234,254,0.6)]">{item.a}</p>
+              <div className="text-[13.5px] font-semibold text-[#FAFAFA]">{item.q}</div>
+              <p className="text-[13.5px] leading-relaxed text-[rgba(255,255,255,0.70)]">{item.a}</p>
             </div>
           ))}
         </motion.div>
