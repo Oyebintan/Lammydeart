@@ -76,7 +76,7 @@ const ProjectsPage = () => {
             />
           </motion.div>
 
-          <motion.div layout className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
+          <motion.div layout className="grid grid-flow-row-dense grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             <AnimatePresence mode="popLayout">
               {filtered.map((p) => (
                 <ProjectCard key={p.id} p={p} onOpen={(x) => setOpenId(x.id)} />

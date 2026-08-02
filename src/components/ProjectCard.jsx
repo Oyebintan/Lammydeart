@@ -33,8 +33,14 @@ const ProjectCard = ({ p, featured = false, onOpen }) => {
       // square on mobile and 4:3 on desktop, which cropped 40% off most pieces
       // (worst case 51%) — a portfolio showing half of each design. Landscape
       // work opts out via `wide` and gets a 16:9 card across two columns.
+      //
+      // The span is `col-span-2` at every breakpoint, not `sm:col-span-2`. On a
+      // phone the two-column form used to drop away, leaving a 16:9 card one
+      // column wide — roughly half the height of the 4:5 card beside it, so the
+      // row left a hole under it. Full width also shows landscape work larger,
+      // which is the point of flagging it `wide` in the first place.
       className={`group relative rounded-2xl lg:rounded-[20px] overflow-hidden border border-[rgba(255,255,255,0.1)] block w-full cursor-pointer text-left ${
-        p.wide ? "sm:col-span-2 aspect-[16/9]" : "aspect-[4/5]"
+        p.wide ? "col-span-2 aspect-[16/9]" : "aspect-[4/5]"
       }`}
     >
       <motion.img
