@@ -55,10 +55,13 @@ const heroFrames = {
   },
 }
 
+// Figures a three-year freelance run actually supports: 50+ pieces is roughly
+// one to two a month, and 30+ clients allows for repeat work rather than a new
+// client per job. "3+ Years Experience" matches the same line in AboutPage.
 const stats = [
   { value: "3+", label: "Years Experience" },
-  { value: "20+", label: "Projects Done" },
-  { value: "10+", label: "Happy Clients" },
+  { value: "50+", label: "Projects Done" },
+  { value: "30+", label: "Happy Clients" },
 ]
 
 const socialLinks = [
