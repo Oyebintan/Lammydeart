@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { fadeUp, viewportOnce } from "../../lib/motion"
+import { easeOut, fadeUp, viewportOnce } from "../../lib/motion"
 
 const skills = [
   { name: "Corel Draw", pct: 95 },
@@ -24,7 +24,7 @@ const Skills = () => {
               initial={{ width: 0 }}
               whileInView={{ width: `${s.pct}%` }}
               viewport={viewportOnce}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 1, ease: easeOut }}
               className="animate-gradient h-full rounded-full bg-gradient-to-r from-[#1D4ED8] via-[#38BDF8] to-[#7DD3FC]"
             />
           </div>

@@ -1,10 +1,11 @@
 import { motion } from "framer-motion"
+import PageBackdrop, { pageShell } from "../components/decor/PageBackdrop"
+import IconButton from "../components/ui/IconButton"
 import { FaWhatsapp, FaEnvelope, FaPhone, FaLocationDot } from "react-icons/fa6"
 import { usePageTitle } from "../hooks/usePageTitle"
-import { fadeUp, stagger, viewportOnce } from "../lib/motion"
-import { gridBg, boxTint } from "../lib/decor"
-import CornerMarks from "../components/decor/CornerMarks"
-import LineBox from "../components/decor/LineBox"
+import { fadeUp, springPress, stagger, viewportOnce } from "../lib/motion"
+import { boxTint } from "../lib/decor"
+import { pillClass } from "../components/ui/Pill"
 import {
   socialLinks,
   EMAIL,
@@ -69,15 +70,8 @@ const ContactPage = () => {
   usePageTitle("Contact")
 
   return (
-    <div className={`relative overflow-hidden bg-[#000000] min-h-screen ${gridBg}`}>
-      <CornerMarks />
-      <LineBox className="hidden lg:block top-24 right-[8%]" size={150} duration={26} />
-      <motion.div
-        animate={{ opacity: [0.5, 0.85, 0.5] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.15),transparent_70%)] blur-2xl pointer-events-none"
-      />
-      <div className="absolute top-40 right-[5%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.035),transparent_70%)] blur-2xl pointer-events-none" />
+    <div className={`${pageShell}`}>
+      <PageBackdrop lineBox={{ className: "hidden lg:block top-24 right-[8%]", size: 150, duration: 26 }} />
 
       <motion.section
         variants={stagger()}
@@ -88,7 +82,7 @@ const ContactPage = () => {
         <div className="max-w-7xl mx-auto">
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit mb-4"
+            className={`${pillClass} mb-4`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
             Available for new projects
@@ -135,19 +129,9 @@ const ContactPage = () => {
             </div>
             <div className="flex gap-3">
               {socialLinks.map((s) => (
-                <motion.a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  whileHover={{ scale: 1.12, y: -2 }}
-                  whileTap={{ scale: 0.94 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                  className="w-[38px] h-[38px] min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)] hover:text-white hover:border-[rgba(255,255,255,0.4)]"
-                >
+                <IconButton key={s.label} as="a" href={s.href} aria-label={s.label} size={38}>
                   <s.icon size={15} />
-                </motion.a>
+                </IconButton>
               ))}
             </div>
           </div>
@@ -157,7 +141,7 @@ const ContactPage = () => {
               href={EMAIL_HREF}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              transition={springPress}
               className="animate-gradient flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold"
             >
               <FaEnvelope /> Send an email
@@ -168,7 +152,7 @@ const ContactPage = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02, borderColor: "rgba(255,255,255,0.4)" }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              transition={springPress}
               className="flex items-center justify-center gap-2 py-4 px-6 rounded-2xl border border-[rgba(255,255,255,0.16)] text-[#FAFAFA] text-sm font-semibold"
             >
               <FaWhatsapp /> WhatsApp me

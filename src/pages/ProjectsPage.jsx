@@ -1,29 +1,21 @@
 import { motion, AnimatePresence } from "framer-motion"
+import PageBackdrop, { pageShell } from "../components/decor/PageBackdrop"
 import { usePageTitle } from "../hooks/usePageTitle"
 import { fadeUp, stagger, viewportOnce } from "../lib/motion"
-import { gridBg } from "../lib/decor"
-import CornerMarks from "../components/decor/CornerMarks"
-import LineBox from "../components/decor/LineBox"
 import { projectCategories } from "../data/projects"
 import { useProjectGallery } from "../hooks/useProjectGallery"
 import ProjectCard from "../components/ProjectCard"
 import ProjectLightbox from "../components/ProjectLightbox"
 import CategoryFilter from "../components/CategoryFilter"
+import { pillClass } from "../components/ui/Pill"
 
 const ProjectsPage = () => {
   usePageTitle("Projects")
   const { filter, setFilter, filtered, open, openProject, closeProject, step } = useProjectGallery()
 
   return (
-    <div className={`relative overflow-hidden bg-[#000000] min-h-screen ${gridBg}`}>
-      <CornerMarks />
-      <LineBox className="hidden lg:block top-28 right-[6%]" size={150} duration={24} reverse />
-      <motion.div
-        animate={{ opacity: [0.5, 0.85, 0.5] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.15),transparent_70%)] blur-2xl pointer-events-none"
-      />
-      <div className="absolute top-40 right-[5%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.035),transparent_70%)] blur-2xl pointer-events-none" />
+    <div className={`${pageShell}`}>
+      <PageBackdrop lineBox={{ className: "hidden lg:block top-28 right-[6%]", size: 150, duration: 24, reverse: true }} />
 
       <motion.section
         variants={stagger()}
@@ -34,7 +26,7 @@ const ProjectsPage = () => {
         <div className="max-w-7xl mx-auto">
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit mb-4"
+            className={`${pillClass} mb-4`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] shadow-[0_0_8px_#60A5FA]" />
             My Work

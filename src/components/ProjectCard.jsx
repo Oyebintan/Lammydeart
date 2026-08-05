@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
 import { ArrowUpRight, Sparkle } from "lucide-react"
+import { easeOut } from "../lib/motion"
 
 const ProjectCard = ({ p, featured = false, onOpen }) => {
   const [hovered, setHovered] = useState(false)
@@ -24,7 +25,7 @@ const ProjectCard = ({ p, featured = false, onOpen }) => {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.35, ease: easeOut }}
       whileHover={{ y: -4 }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}

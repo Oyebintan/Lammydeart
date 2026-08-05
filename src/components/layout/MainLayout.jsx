@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 import { useScrollToTop } from "../../hooks/useScrollToTop"
+import { easeOut } from "../../lib/motion"
 
 const MainLayout = () => {
   const location = useLocation()
@@ -15,7 +16,7 @@ const MainLayout = () => {
         key={location.pathname}
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.4, ease: easeOut }}
       >
         <Outlet />
       </motion.div>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Star, ChevronLeft, ChevronRight } from "lucide-react"
-import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
+import { easeOut, fadeUp, stagger, viewportOnce } from "../../lib/motion"
 
 // IMPORTANT: the names and roles here are real clients, but the quote wording is
 // still placeholder copy carried over from the previous entries — it was written
@@ -66,8 +66,8 @@ const StarRating = ({ rating }) => (
 
 const slideVariants = {
   enter: (dir) => ({ opacity: 0, x: dir > 0 ? 40 : -40 }),
-  center: { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } },
-  exit: (dir) => ({ opacity: 0, x: dir > 0 ? -40 : 40, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }),
+  center: { opacity: 1, x: 0, transition: { duration: 0.45, ease: easeOut } },
+  exit: (dir) => ({ opacity: 0, x: dir > 0 ? -40 : 40, transition: { duration: 0.3, ease: easeOut } }),
 }
 
 const AUTOPLAY_MS = 6000

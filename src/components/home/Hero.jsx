@@ -1,6 +1,5 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
 import { SiCoreldraw, SiAdobephotoshop } from "react-icons/si"
 import { ArrowRight, ArrowDown } from "lucide-react"
 import { useTypewriter } from "../../hooks/useTypewriter"
@@ -10,10 +9,11 @@ import LineBox from "../decor/LineBox"
 import { getProject } from "../../data/projects"
 import { socialLinks, LOCATION } from "../../data/site"
 import zookImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
+import { MotionLink, easeOut, springPress, springTap } from "../../lib/motion"
+import { pillClass } from "../ui/Pill"
 
 // Router-aware anchors. Raw <a href="/..."> triggered a full document reload on
 // every in-app link, throwing away the SPA and re-downloading the bundle.
-const MotionLink = motion.create(Link)
 
 // Pulls title/category straight from data/projects.js instead of duplicating
 // them here. Those two used to be hardcoded per frame, so swapping which image
@@ -76,7 +76,7 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeOut } },
 }
 
 // Floating "app icon" badge for a design tool — real brand mark, not a
@@ -121,7 +121,7 @@ const HeroFrame = React.memo(({ frame, className, delay = 0, float = 6, phase = 
   <motion.div
     initial={{ opacity: 0, y: 16 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
+    transition={{ duration: 0.65, delay, ease: easeOut }}
     className={className}
   >
     <MotionLink
@@ -302,7 +302,7 @@ const Hero = () => {
         <div className="flex flex-col gap-6">
           <motion.div
             variants={item}
-            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit"
+            className={pillClass}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] shadow-[0_0_8px_#60A5FA]" />
             Graphic Designer + Web Designer
@@ -346,7 +346,7 @@ const Hero = () => {
                 to="/project"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                transition={springPress}
                 className="animate-gradient flex items-center justify-center gap-2 px-5 py-[11px] rounded-full bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold shadow-[0_8px_26px_-8px_rgba(37,99,235,0.65)]"
               >
                 View my work <ArrowRight size={15} strokeWidth={2.5} />
@@ -355,7 +355,7 @@ const Hero = () => {
                 to="/contact"
                 whileHover={{ scale: 1.03, borderColor: "rgba(255,255,255,0.4)" }}
                 whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                transition={springPress}
                 className="flex items-center justify-center gap-2 px-5 py-[11px] rounded-full border border-[rgba(255,255,255,0.16)] bg-[rgba(255,255,255,0.03)] text-[#FAFAFA] text-sm font-semibold"
               >
                 Let's talk
@@ -371,7 +371,7 @@ const Hero = () => {
               {/* Same pill treatment as the badge above the headline, so the two
                   read as one system */}
               <span
-                className={`inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit ${boxTint}`}
+                className={`${pillClass} ${boxTint}`}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] flex-none" />
                 Open for freelance work
@@ -404,7 +404,7 @@ const Hero = () => {
                   aria-label={social.label}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
+                  transition={springTap}
                   className={`h-11 lg:w-11 rounded-full border border-[rgba(255,255,255,0.14)] bg-[rgba(255,255,255,0.03)] flex items-center justify-center text-[rgba(255,255,255,0.78)] hover:text-white ${boxTint}`}
                 >
                   <social.icon className="w-4 h-4" />

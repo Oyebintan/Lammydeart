@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
+import IconButton from "../ui/IconButton"
 import { FaWhatsapp, FaEnvelope } from "react-icons/fa6"
-import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
+import { fadeUp, springPress, stagger, viewportOnce } from "../../lib/motion"
 import { socialLinks, EMAIL, EMAIL_HREF, WHATSAPP_HREF, LOCATION } from "../../data/site"
 
 const HomeContact = () => {
@@ -33,19 +34,9 @@ const HomeContact = () => {
             <div className="text-[13.5px] text-[rgba(255,255,255,0.82)]">{LOCATION} — Remote</div>
             <div className="flex gap-3 mt-1.5">
               {socialLinks.map((s) => (
-                <motion.a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  whileHover={{ scale: 1.12, y: -2 }}
-                  whileTap={{ scale: 0.94 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                  className="w-[34px] h-[34px] min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)] hover:text-white hover:border-[rgba(255,255,255,0.4)]"
-                >
+                <IconButton key={s.label} as="a" href={s.href} aria-label={s.label} size={34}>
                   <s.icon size={14} />
-                </motion.a>
+                </IconButton>
               ))}
             </div>
           </div>
@@ -56,7 +47,7 @@ const HomeContact = () => {
             href={EMAIL_HREF}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            transition={springPress}
             className="animate-gradient flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-sm font-semibold"
           >
             <FaEnvelope /> Send an email
@@ -67,7 +58,7 @@ const HomeContact = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.02, borderColor: "rgba(255,255,255,0.4)" }}
             whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            transition={springPress}
             className="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl border border-[rgba(255,255,255,0.16)] text-[#FAFAFA] text-sm font-semibold"
           >
             <FaWhatsapp /> WhatsApp me

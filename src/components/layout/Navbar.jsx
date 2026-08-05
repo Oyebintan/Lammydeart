@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { useBodyScrollLock } from "../../hooks/useBodyScrollLock"
 import { socialLinks } from "../../data/site"
+import { MotionLink, easeOut, springPress, springTap } from "../../lib/motion"
 
 // Module scope — these were rebuilt on every render inside the component
 const navLinks = [
@@ -13,7 +14,6 @@ const navLinks = [
   { name: "Contact", path: "/contact" },
 ]
 
-const MotionLink = motion.create(Link)
 
 const Logo = () => (
   <Link to="/" className="font-display font-bold text-[19px] text-[#FAFAFA] tracking-[0.02em] z-50">
@@ -29,7 +29,7 @@ const Button = () => (
     to="/contact"
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.96 }}
-    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+    transition={springPress}
     className="animate-gradient hidden lg:flex items-center gap-2 px-[18px] py-[9px] rounded-full bg-gradient-to-br from-[#1D4ED8] via-[#3B82F6] to-[#60A5FA] text-white text-[13.5px] font-semibold"
   >
     Let's talk <ArrowRight size={15} strokeWidth={2.5} />
@@ -71,7 +71,7 @@ const linkListVariants = {
 
 const linkItemVariants = {
   hidden: { opacity: 0, y: -8 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.28, ease: [0.16, 1, 0.3, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.28, ease: easeOut } },
 }
 
 const Navbar = () => {
@@ -195,7 +195,7 @@ const Navbar = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.12, y: -2 }}
                     whileTap={{ scale: 0.94 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 18 }}
+                    transition={springTap}
                     className="flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(255,255,255,0.16)] text-[rgba(255,255,255,0.78)] hover:bg-gradient-to-br hover:from-[#1D4ED8] hover:to-[#60A5FA] hover:text-white hover:border-transparent transition-colors duration-300"
                     aria-label={social.label}
                   >
@@ -231,7 +231,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -12, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98, transition: { duration: 0.18, ease: "easeIn" } }}
-            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.32, ease: easeOut }}
             className="fixed inset-x-3 sm:inset-x-4 top-[calc(4.4rem+env(safe-area-inset-top,0px))] z-50 lg:hidden origin-top rounded-[1.75rem] border border-[rgba(255,255,255,0.12)] bg-[rgba(0,0,0,0.94)] backdrop-blur-xl shadow-2xl shadow-black/60 overflow-hidden"
           >
             <motion.div

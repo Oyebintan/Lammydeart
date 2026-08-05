@@ -1,24 +1,17 @@
 import { motion } from "framer-motion"
+import PageBackdrop, { pageShell } from "../components/decor/PageBackdrop"
 import { Link } from "react-router-dom"
 import { ArrowRight, ArrowLeft } from "lucide-react"
 import { usePageTitle } from "../hooks/usePageTitle"
 import { fadeUp, stagger } from "../lib/motion"
-import { gridBg } from "../lib/decor"
-import CornerMarks from "../components/decor/CornerMarks"
-import LineBox from "../components/decor/LineBox"
+import { pillClass } from "../components/ui/Pill"
 
 const NotFoundPage = () => {
   usePageTitle("Page not found")
 
   return (
-    <div className={`relative overflow-hidden bg-[#000000] min-h-screen flex items-center ${gridBg}`}>
-      <CornerMarks />
-      <LineBox className="hidden lg:block top-24 right-[10%]" size={160} duration={26} />
-      <motion.div
-        animate={{ opacity: [0.5, 0.85, 0.5] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.15),transparent_70%)] blur-2xl pointer-events-none"
-      />
+    <div className={`${pageShell} flex items-center`}>
+      <PageBackdrop lineBox={{ className: "hidden lg:block top-24 right-[10%]", size: 160, duration: 26 }} glowY={null} />
 
       <motion.section
         variants={stagger()}
@@ -28,7 +21,7 @@ const NotFoundPage = () => {
       >
         <motion.div
           variants={fadeUp}
-          className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit mb-5"
+          className={`${pillClass} mb-5`}
         >
           <span>( 404 )</span>
           <span>Page not found</span>

@@ -1,12 +1,10 @@
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
 import { ArrowRight, Palette, Code2, Gem, Zap } from "lucide-react"
-import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
+import { MotionLink, fadeUp, stagger, viewportOnce } from "../../lib/motion"
 import { boxTint } from "../../lib/decor"
 import Timeline from "./Timeline"
 import Skills from "./Skills"
 
-const MotionLink = motion.create(Link)
 
 const highlights = [
   { icon: Palette, text: "Graphic & Brand Designer" },

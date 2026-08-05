@@ -1,11 +1,11 @@
 import { motion } from "framer-motion"
+import PageBackdrop, { pageShell } from "../components/decor/PageBackdrop"
 import { Palette, Layout, Lightbulb, Sparkles } from "lucide-react"
 import { usePageTitle } from "../hooks/usePageTitle"
 import { fadeUp, stagger, viewportOnce } from "../lib/motion"
-import { gridBg, boxTint } from "../lib/decor"
-import CornerMarks from "../components/decor/CornerMarks"
-import LineBox from "../components/decor/LineBox"
+import { boxTint } from "../lib/decor"
 import img from "../assets/images/profile/preview.jpg"
+import { pillClass } from "../components/ui/Pill"
 
 const highlights = [
   { icon: Palette, text: "3+ Years Experience" },
@@ -28,15 +28,8 @@ const AboutPage = () => {
   usePageTitle("About")
 
   return (
-    <div className={`relative overflow-hidden bg-[#000000] min-h-screen ${gridBg}`}>
-      <CornerMarks />
-      <LineBox className="hidden lg:block top-24 right-[8%]" size={160} duration={26} />
-      <motion.div
-        animate={{ opacity: [0.5, 0.85, 0.5] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.15),transparent_70%)] blur-2xl pointer-events-none"
-      />
-      <div className="absolute top-96 right-[5%] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.035),transparent_70%)] blur-2xl pointer-events-none" />
+    <div className={`${pageShell}`}>
+      <PageBackdrop lineBox={{ className: "hidden lg:block top-24 right-[8%]", size: 160, duration: 26 }} glowY="top-96" />
 
       <motion.section
         variants={stagger()}
@@ -47,7 +40,7 @@ const AboutPage = () => {
         <div className="flex flex-col gap-5">
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 py-[5px] px-[13px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.14)] text-[11px] font-semibold tracking-[0.14em] text-[rgba(255,255,255,0.86)] uppercase w-fit"
+            className={pillClass}
           >
             <Sparkles size={12} /> About Me
           </motion.div>

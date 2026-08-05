@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Palette, Megaphone, PenTool, LayoutGrid, ArrowRight } from "lucide-react"
-import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
+import { easeOut, fadeUp, stagger, viewportOnce } from "../../lib/motion"
 import { getProject } from "../../data/projects"
 // Same flagship brand asset used in Hero.jsx — swap that one file to update both.
 import brandingImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
@@ -156,7 +156,7 @@ const Service = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.35, ease: easeOut }}
                 className="absolute inset-0"
               >
                 {activeService.img ? (

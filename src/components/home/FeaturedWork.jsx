@@ -1,14 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion"
-import { Link } from "react-router-dom"
 import { ArrowRight } from "lucide-react"
-import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
+import { MotionLink, fadeUp, springPress, stagger, viewportOnce } from "../../lib/motion"
 import { projectCategories } from "../../data/projects"
 import { useProjectGallery } from "../../hooks/useProjectGallery"
 import ProjectCard from "../ProjectCard"
 import ProjectLightbox from "../ProjectLightbox"
 import CategoryFilter from "../CategoryFilter"
 
-const MotionLink = motion.create(Link)
 
 const FeaturedWork = ({ limit = 6 }) => {
   const { filter, setFilter, filtered, open, openProject, closeProject, step } =
@@ -65,7 +63,7 @@ const FeaturedWork = ({ limit = 6 }) => {
             to="/project"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            transition={springPress}
             className="flex items-center gap-2 border border-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.4)] text-[#FAFAFA] text-sm font-semibold px-6 py-2.5 rounded-full"
           >
             View all projects <ArrowRight size={15} strokeWidth={2.5} />

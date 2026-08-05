@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import IconButton from "../ui/IconButton"
 import { ArrowUp } from "lucide-react"
 import { Link } from "react-router-dom"
 import { fadeUp, viewportOnce } from "../../lib/motion"
@@ -53,30 +54,20 @@ const Footer = () => {
 
         <div className="flex items-center gap-3">
           {footerSocials.map((social) => (
-            <motion.a
+            <IconButton
               key={social.label}
+              as="a"
               href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
               aria-label={social.label}
-              whileHover={{ scale: 1.12, y: -2 }}
-              whileTap={{ scale: 0.94 }}
-              transition={{ type: "spring", stiffness: 400, damping: 18 }}
-              className="flex items-center justify-center w-8 h-8 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] text-[rgba(255,255,255,0.70)] hover:text-white hover:border-[#60A5FA]"
+              size={32}
+              className="hover:border-[#60A5FA]"
             >
               <social.icon size={13} />
-            </motion.a>
+            </IconButton>
           ))}
-          <motion.button
-            onClick={scrollToTop}
-            aria-label="Scroll to top"
-            whileHover={{ scale: 1.12, y: -2 }}
-            whileTap={{ scale: 0.94 }}
-            transition={{ type: "spring", stiffness: 400, damping: 18 }}
-            className="flex items-center justify-center w-8 h-8 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] text-[rgba(255,255,255,0.70)] hover:text-white hover:border-[#60A5FA]"
-          >
+          <IconButton onClick={scrollToTop} aria-label="Scroll to top" size={32} className="hover:border-[#60A5FA]">
             <ArrowUp size={14} />
-          </motion.button>
+          </IconButton>
         </div>
       </div>
 

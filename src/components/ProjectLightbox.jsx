@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock"
+import { easeOut } from "../lib/motion"
 
 // Project cards used to link to /project — the listing page they already sit on
 // — while a hover pill promised "View Project". There are no per-project routes,
@@ -94,7 +95,7 @@ const ProjectLightbox = ({ project, list = [], onClose, onNavigate }) => {
             key={project.id}
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.25, ease: easeOut }}
             onClick={(e) => e.stopPropagation()}
             className="w-full max-w-3xl max-h-full flex flex-col gap-4 overflow-y-auto"
           >
