@@ -41,8 +41,11 @@ npm run preview  # serve the production build
 npm run lint     # eslint — nothing runs this automatically
 ```
 
-There is **no test suite and no CI.** `vite build` does not run ESLint, so a
-lint error ships. Run `npx eslint .` and `npm run build` by hand before pushing.
+**CI runs `npm ci`, eslint and the build** on every push and PR
+(`.github/workflows/ci.yml`). Vercel's own build step still does not lint, so CI
+is the only thing enforcing it. There is **no test suite** — verification here
+is done by driving a real browser (see below), because most of what has broken
+on this site has been visual and browser-specific.
 
 ---
 
@@ -54,22 +57,35 @@ src/
   main.jsx                 entry
   index.css                Tailwind import + ~10 global rules, heavily commented
   lib/
-    motion.js              fadeUp, stagger(), viewportOnce
+    motion.js              fadeUp, fadeDown, stagger(), viewportOnce,
+                           easeOut, springTap, springPress, MotionLink
     decor.js               gridBg, boxTint class tokens
   hooks/
     usePageTitle.js        document.title per route
     useTypewriter.js       hero headline typing effect
-  data/projects.js         THE project catalogue — single source of truth
+    useBodyScrollLock.js   one scroll lock for every overlay
+    useScrollToTop.js      resets scroll on navigation
+    useProjectGallery.js   filter + lightbox state for both project grids
+  data/
+    projects.js            THE project catalogue — single source of truth
+    site.js                every contact detail and social link
   components/
     layout/                MainLayout, Navbar, Footer
     home/                  one file per home section, in page order
-    decor/                 CornerMarks, LineBox — ambient accents
+    decor/                 CornerMarks, LineBox, PageBackdrop
+    ui/                    Pill, IconButton — shared primitives
     ProjectCard.jsx        grid tile → opens the lightbox
     ProjectLightbox.jsx    full-size artwork view, keyboard nav
     CategoryFilter.jsx     shared by the home grid and the projects page
   pages/                   one per route
-  assets/images/           see assets/images/README.md (NOTE: partly stale)
+  assets/images/           see assets/images/README.md
 ```
+
+**Use the shared pieces rather than pasting.** Contact details come from
+`data/site.js`; the ease curve, springs and `MotionLink` from `lib/motion.js`;
+the badge, icon button and page backdrop from `components/ui` and
+`components/decor`. Each of those exists because the same markup had been copied
+into five or six files and had already drifted apart.
 
 Routes: `/` · `/project` (singular — `/projects` redirects to it) · `/about` ·
 `/contact` · `*` → 404. All nest inside `MainLayout`, so the 404 keeps nav and
@@ -86,14 +102,17 @@ Home sections render in the order listed in `pages/HomePage.jsx` and their
 { id, slug, title, category, img, wide?, description }
 ```
 
-- `category` must be one of `projectCategories` (same file) or the filter can't
-  reach it. That array is hand-maintained and can drift from the data.
+- `category` is free text; `projectCategories` is derived from the data and
+  sorted, so a new category creates its own filter chip automatically.
 - `wide: true` marks landscape work (2 of 16). See card ratios below.
+- `featured: true` puts the "Featured" badge on a card in the home grid.
 - Images live at `src/assets/images/projects/<slug>/preview.jpg` — drop in a
   replacement `preview.jpg` and nothing else changes.
-- The hero and the Services panel pull their images **by slug** via
-  `projects.find(...)`. Those lookups are unguarded, so renaming a slug throws
-  at module scope and blanks the entire app. Slugs currently depended on:
+- The hero and the Services panel pull their images **by slug**, through
+  `getProject(slug)`. Always use that, never an inline `projects.find(...)` —
+  those lookups run at module scope, so an unguarded one on a renamed slug
+  throws while the module is evaluating and blanks the whole app. `getProject`
+  throws a message naming the slug instead. Slugs currently depended on:
   `relish-locals-opening`, `transactx-sub-accounts`.
 
 ---
@@ -151,6 +170,15 @@ pull-to-refresh, which was reported as a bug.
 
 **10. Internal links use `Link` / `MotionLink`, never `<a href="/...">`.** Six
 raw anchors were triggering full document reloads and re-downloading the bundle.
+
+**11. Route changes reset scroll via `useScrollToTop`, not React Router's
+`ScrollRestoration`.** `html { scroll-behavior: smooth }` turns
+ScrollRestoration's scrollTo into an animation, and because the destination page
+is usually shorter, the document shrinks mid-animation and the scroll is
+abandoned partway (measured: 65px instead of 0). The hook flips scroll-behavior
+to `auto` for the reset and repeats once on the next frame — a scroll started
+with an explicit `behavior: "smooth"` option ignores the CSS property and
+otherwise resumes afterwards (measured: 32px instead of 0).
 
 ---
 
@@ -218,22 +246,26 @@ Test at 390px first — that is the real audience.
 
 ## Known open issues
 
-A full audit was carried out; findings are summarised in the session that
-produced this file. The significant open items:
+A full audit was carried out and stages 1–7 of it have shipped: the four real
+bugs, the dead code, the duplicated data and markup, the accessibility floor,
+the docs and CI. What it deliberately left alone, in rough value order:
 
-- `ProjectLightbox`'s effect re-runs on every parent render (inline `onClose`
-  and a re-created `step` in the deps), which re-steals focus to the close
-  button mid-view.
-- `Navbar` and `ProjectLightbox` implement the body scroll lock differently;
-  the nav's version clobbers rather than restores, so closing the menu can
-  break an open lightbox's lock.
-- No scroll restoration on route change — navigating from the bottom of one
-  page lands you scrolled down on the next.
-- `import React` is dead in 20 of 21 components; the ESLint
-  `varsIgnorePattern` masks it.
-- `vite.config.js` has an `optimizeDeps` entry for a package that is not
-  installed and not imported.
-- No `<main>` landmark, no skip link, no focus trap on the mobile menu.
-- Single 492KB bundle, no route-level code splitting.
-- `src/assets/images/README.md` contradicts `README.md` on image sizing and
-  card ratios — trust `README.md`.
+- **No route-level code splitting.** One 500KB / 157KB gzip chunk; visiting the
+  home page downloads every other page too. `React.lazy` on the five routes is
+  the single biggest performance win still available.
+- **No responsive images.** Zero `srcset` anywhere — a 390px phone downloads the
+  same 960×1200 JPEG a desktop does, and cards render at ~170px there.
+- **No Tailwind `@theme` tokens.** ~70 distinct colour literals inline, with
+  near-duplicate pairs (five border alphas between 0.10 and 0.18, both
+  `rgba(255,255,255,0.70)` and `0.7`) that no find-and-replace catches together.
+- **No focus trap** in the mobile menu or the lightbox. Both close on Escape and
+  restore focus; Tab can still reach the page behind them.
+- **Two oversized files**: `Hero.jsx` (~480 lines) and `Navbar.jsx` (~330).
+  Extraction targets are `HeroFrame`, `HeroVisual` and `MobileMenu`.
+- **The testimonial carousel is silent to screen readers** — no `aria-live`, no
+  visible pause control.
+- **`public/og.jpg` uses a fallback typeface**, because both font CDNs are
+  blocked from the build sandbox. Replacing that file with a real export needs
+  no code change.
+- The route is `/project` while every label says "Projects", patched by a
+  redirect.
