@@ -1,28 +1,24 @@
 import { motion } from "framer-motion"
-import {
-  FaXTwitter,
-  FaInstagram,
-  FaWhatsapp,
-  FaEnvelope,
-  FaPhone,
-  FaLocationDot,
-} from "react-icons/fa6"
+import { FaWhatsapp, FaEnvelope, FaPhone, FaLocationDot } from "react-icons/fa6"
 import { usePageTitle } from "../hooks/usePageTitle"
 import { fadeUp, stagger, viewportOnce } from "../lib/motion"
 import { gridBg, boxTint } from "../lib/decor"
 import CornerMarks from "../components/decor/CornerMarks"
 import LineBox from "../components/decor/LineBox"
+import {
+  socialLinks,
+  EMAIL,
+  EMAIL_HREF,
+  PHONE,
+  PHONE_HREF,
+  WHATSAPP_HREF,
+  LOCATION,
+} from "../data/site"
 
 const contactDetails = [
-  { icon: FaEnvelope, label: "lammydeart@gmail.com", href: "mailto:lammydeart@gmail.com" },
-  { icon: FaPhone, label: "+234 701 584 8547", href: "tel:+2347015848547" },
-  { icon: FaLocationDot, label: "Lagos, Nigeria — Remote", href: null },
-]
-
-const socialLinks = [
-  { icon: FaInstagram, href: "https://www.instagram.com/lammyde.art", label: "Instagram" },
-  { icon: FaXTwitter, href: "https://x.com/oyebintan?s=21", label: "Twitter" },
-  { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
+  { icon: FaEnvelope, label: EMAIL, href: EMAIL_HREF },
+  { icon: FaPhone, label: PHONE, href: PHONE_HREF },
+  { icon: FaLocationDot, label: `${LOCATION} — Remote`, href: null },
 ]
 
 // Quick answers to what clients ask before they get in touch. Turnaround
@@ -158,7 +154,7 @@ const ContactPage = () => {
 
           <div className="flex flex-col gap-3.5">
             <motion.a
-              href="mailto:lammydeart@gmail.com"
+              href={EMAIL_HREF}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -167,7 +163,7 @@ const ContactPage = () => {
               <FaEnvelope /> Send an email
             </motion.a>
             <motion.a
-              href="http://Wa.me/2347015848547"
+              href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02, borderColor: "rgba(255,255,255,0.4)" }}

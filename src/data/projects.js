@@ -45,7 +45,14 @@ export const projects = [
   { id: 16, slug: "transactx-sub-accounts", title: "TransactX — Sub Accounts Feature", category: "Social Ads", img: transactxSubAccounts, description: "Product feature ad for a fintech app, using a lit-window scene to frame the phone screen it's actually selling." },
 ]
 
-export const projectCategories = ["All", "Flyer Design", "Poster Design", "Social Ads"]
+// Derived, not hand-written. As a literal it could fall out of step with the
+// data — adding a project in a new category left it unfilterable, with nothing
+// to indicate why. Sorted so the chip order stays stable as projects are added
+// or reordered (it also reproduces the previous hand-written order exactly).
+export const projectCategories = [
+  "All",
+  ...[...new Set(projects.map((p) => p.category))].sort(),
+]
 
 // Always look a project up through this, never `projects.find(...)` inline.
 // The hero and the Services panel both pick their artwork by slug at MODULE

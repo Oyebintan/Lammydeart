@@ -1,7 +1,6 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
 import { SiCoreldraw, SiAdobephotoshop } from "react-icons/si"
 import { ArrowRight, ArrowDown } from "lucide-react"
 import { useTypewriter } from "../../hooks/useTypewriter"
@@ -9,6 +8,7 @@ import { gridBg, boxTint } from "../../lib/decor"
 import CornerMarks from "../decor/CornerMarks"
 import LineBox from "../decor/LineBox"
 import { getProject } from "../../data/projects"
+import { socialLinks, LOCATION } from "../../data/site"
 import zookImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
 
 // Router-aware anchors. Raw <a href="/..."> triggered a full document reload on
@@ -62,12 +62,6 @@ const stats = [
   { value: "3+", label: "Years Experience" },
   { value: "50+", label: "Projects Done" },
   { value: "30+", label: "Happy Clients" },
-]
-
-const socialLinks = [
-  { icon: FaInstagram, href: "https://www.instagram.com/lammyde.art", label: "Instagram" },
-  { icon: FaXTwitter, href: "https://x.com/oyebintan?s=21", label: "Twitter" },
-  { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
 ]
 
 // Module-level so the reference is stable. Inline array literals made
@@ -386,7 +380,7 @@ const Hero = () => {
               {/* Bullet-separated on one line rather than stacked rows. 12px is
                   what lets all three fit without wrapping at 390px. */}
               <div className="flex items-center gap-2 flex-wrap text-[12px] text-[rgba(255,255,255,0.62)]">
-                <span>Lagos, Nigeria</span>
+                <span>{LOCATION}</span>
                 <span className="text-[rgba(255,255,255,0.5)]">•</span>
                 <span>Working remote</span>
                 <span className="text-[rgba(255,255,255,0.5)]">•</span>

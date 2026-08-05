@@ -1,8 +1,11 @@
 import { motion } from "framer-motion"
 import { ArrowUp } from "lucide-react"
 import { Link } from "react-router-dom"
-import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
 import { fadeUp, viewportOnce } from "../../lib/motion"
+import { socialLinks, emailLink } from "../../data/site"
+
+// Footer is the one place that also offers email
+const footerSocials = [...socialLinks, emailLink]
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -10,13 +13,6 @@ const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
-
-  const socialLinks = [
-    { icon: FaInstagram, url: "https://www.instagram.com/lammyde.art?igsh=MWs5b2ZjOWFjeHBvMQ%3D%3D&utm_source=qr", label: "Instagram" },
-    { icon: FaXTwitter, url: "https://x.com/oyebintan?s=21", label: "Twitter" },
-    { icon: FaWhatsapp, url: "http://Wa.me/2347015848547", label: "WhatsApp" },
-    { icon: FaEnvelope, url: "mailto:lammydeart@gmail.com", label: "Email" },
-  ]
 
   const quickLinks = [
     { name: "Home", href: "/" },
@@ -56,10 +52,10 @@ const Footer = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          {socialLinks.map((social) => (
+          {footerSocials.map((social) => (
             <motion.a
               key={social.label}
-              href={social.url}
+              href={social.href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.label}

@@ -1,9 +1,17 @@
 import { useState, useEffect, useRef } from "react"
-import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
 import { ArrowRight, Menu, X } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { useBodyScrollLock } from "../../hooks/useBodyScrollLock"
+import { socialLinks } from "../../data/site"
+
+// Module scope — these were rebuilt on every render inside the component
+const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Projects", path: "/project" },
+  { name: "Contact", path: "/contact" },
+]
 
 const MotionLink = motion.create(Link)
 
@@ -109,19 +117,6 @@ const Navbar = () => {
   }, [isMenuVisible])
 
   const closeMenu = () => setIsMenuVisible(false)
-
-  const socialLinks = [
-    { icon: FaXTwitter, href: "https://x.com/oyebintan?s=21", label: "Twitter" },
-    { icon: FaInstagram, href: "https://www.instagram.com/lammyde.art", label: "Instagram" },
-    { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
-  ]
-
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Projects", path: "/project" },
-    { name: "Contact", path: "/contact" },
-  ]
 
   return (
     <>

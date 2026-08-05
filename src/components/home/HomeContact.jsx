@@ -1,12 +1,7 @@
 import { motion } from "framer-motion"
-import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
+import { FaWhatsapp, FaEnvelope } from "react-icons/fa6"
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
-
-const socialLinks = [
-  { icon: FaInstagram, href: "https://www.instagram.com/lammyde.art", label: "Instagram" },
-  { icon: FaXTwitter, href: "https://x.com/oyebintan?s=21", label: "Twitter" },
-  { icon: FaWhatsapp, href: "http://Wa.me/2347015848547", label: "WhatsApp" },
-]
+import { socialLinks, EMAIL, EMAIL_HREF, WHATSAPP_HREF, LOCATION } from "../../data/site"
 
 const HomeContact = () => {
   return (
@@ -32,10 +27,10 @@ const HomeContact = () => {
             Have a project in mind? Tell me about it — I usually reply within a day.
           </p>
           <div className="flex flex-col gap-2.5">
-            <a href="mailto:lammydeart@gmail.com" className="text-[13.5px] text-[rgba(255,255,255,0.82)] hover:text-white transition-colors duration-300 py-1 inline-block">
-              lammydeart@gmail.com
+            <a href={EMAIL_HREF} className="text-[13.5px] text-[rgba(255,255,255,0.82)] hover:text-white transition-colors duration-300 py-1 inline-block">
+              {EMAIL}
             </a>
-            <div className="text-[13.5px] text-[rgba(255,255,255,0.82)]">Lagos, Nigeria — Remote</div>
+            <div className="text-[13.5px] text-[rgba(255,255,255,0.82)]">{LOCATION} — Remote</div>
             <div className="flex gap-3 mt-1.5">
               {socialLinks.map((s) => (
                 <motion.a
@@ -58,7 +53,7 @@ const HomeContact = () => {
 
         <div className="flex flex-col sm:flex-row gap-3.5">
           <motion.a
-            href="mailto:lammydeart@gmail.com"
+            href={EMAIL_HREF}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -67,7 +62,7 @@ const HomeContact = () => {
             <FaEnvelope /> Send an email
           </motion.a>
           <motion.a
-            href="http://Wa.me/2347015848547"
+            href={WHATSAPP_HREF}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.02, borderColor: "rgba(255,255,255,0.4)" }}
