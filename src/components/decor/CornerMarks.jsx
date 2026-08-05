@@ -1,4 +1,3 @@
-import React from "react"
 
 const Mark = ({ className }) => (
   <div className={`absolute w-3 h-3 pointer-events-none ${className}`}>

@@ -1,11 +1,12 @@
-import React from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { motion } from "framer-motion"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
+import { useScrollToTop } from "../../hooks/useScrollToTop"
 
 const MainLayout = () => {
   const location = useLocation()
+  useScrollToTop()
 
   return (
     <div>

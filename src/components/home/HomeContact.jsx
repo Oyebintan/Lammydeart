@@ -1,4 +1,3 @@
-import React from "react"
 import { motion } from "framer-motion"
 import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion"

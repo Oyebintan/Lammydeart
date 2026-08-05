@@ -1,29 +1,18 @@
-import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { usePageTitle } from "../hooks/usePageTitle"
 import { fadeUp, stagger, viewportOnce } from "../lib/motion"
 import { gridBg } from "../lib/decor"
 import CornerMarks from "../components/decor/CornerMarks"
 import LineBox from "../components/decor/LineBox"
-import { projects, projectCategories } from "../data/projects"
+import { projectCategories } from "../data/projects"
+import { useProjectGallery } from "../hooks/useProjectGallery"
 import ProjectCard from "../components/ProjectCard"
 import ProjectLightbox from "../components/ProjectLightbox"
 import CategoryFilter from "../components/CategoryFilter"
 
 const ProjectsPage = () => {
   usePageTitle("Projects")
-  const [filter, setFilter] = useState("All")
-  const [openId, setOpenId] = useState(null)
-
-  const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter)
-
-  // Keyed off the id so a filter change while the lightbox is open resolves to
-  // null instead of showing a project no longer in the grid.
-  const open = filtered.find((p) => p.id === openId) ?? null
-  const step = (dir) => {
-    const i = filtered.findIndex((p) => p.id === openId)
-    if (i !== -1) setOpenId(filtered[(i + dir + filtered.length) % filtered.length].id)
-  }
+  const { filter, setFilter, filtered, open, openProject, closeProject, step } = useProjectGallery()
 
   return (
     <div className={`relative overflow-hidden bg-[#000000] min-h-screen ${gridBg}`}>
@@ -79,7 +68,7 @@ const ProjectsPage = () => {
           <motion.div layout className="grid grid-flow-row-dense grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             <AnimatePresence mode="popLayout">
               {filtered.map((p) => (
-                <ProjectCard key={p.id} p={p} onOpen={(x) => setOpenId(x.id)} />
+                <ProjectCard key={p.id} p={p} onOpen={openProject} />
               ))}
             </AnimatePresence>
           </motion.div>
@@ -93,7 +82,7 @@ const ProjectsPage = () => {
         </div>
       </section>
 
-      <ProjectLightbox project={open} list={filtered} onClose={() => setOpenId(null)} onNavigate={step} />
+      <ProjectLightbox project={open} list={filtered} onClose={closeProject} onNavigate={step} />
     </div>
   )
 }

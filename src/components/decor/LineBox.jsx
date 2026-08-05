@@ -1,4 +1,3 @@
-import React from "react"
 import { motion } from "framer-motion"
 
 // A large, faint rotated line-box floating in a section's ambient space —

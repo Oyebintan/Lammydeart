@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-* {
-  box-sizing: border-box;
-}
-
 /* Manrope belongs on body so it INHERITS. On `*` it matched every descendant
    directly, which beat inheritance and silently undid .font-display on any
    nested element — the whole hero headline and the "deart" half of the logo
@@ -63,10 +59,12 @@ body::after {
    which on a black page renders as a near-invisible 1px dark outline. One rule
    here covers every control on the site. :focus-visible (not :focus) so it only
    shows for keyboard navigation, never on mouse clicks. */
+/* `inherit`, not a fixed radius: most controls here are rounded-full pills, and
+   a flat 4px drew a near-square ring around a round button. */
 :focus-visible {
   outline: 2px solid #60A5FA;
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: inherit;
 }
 
 ::selection {

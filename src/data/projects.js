@@ -5,6 +5,10 @@
 // Cards are portrait 4:5, matching how the work is designed. Set `wide: true` on
 // anything landscape so it gets a 16:9 card spanning two columns instead of being
 // cropped down to portrait.
+//
+// `featured: true` puts the "Featured" badge on a card in the home grid. It used
+// to be hardcoded as `p.id === 1`, so reordering the array or deleting that
+// entry silently moved the badge onto a project nobody chose.
 import zookNewMonth from "../assets/images/projects/zook-fabrics-new-month/preview.jpg"
 import relishLocals from "../assets/images/projects/relish-locals-opening/preview.jpg"
 import honeyPot from "../assets/images/projects/honey-pot-back-to-school/preview.jpg"
@@ -23,7 +27,7 @@ import transactxEid from "../assets/images/projects/transactx-eid-mubarak/previe
 import transactxSubAccounts from "../assets/images/projects/transactx-sub-accounts/preview.jpg"
 
 export const projects = [
-  { id: 1, slug: "zook-fabrics-new-month", title: "ZOOK Fabrics — New Month", category: "Poster Design", img: zookNewMonth, description: "Monthly brand greeting for ZOOK Fabrics, built around a bold spotlight portrait to keep the identity recognizable outside the core branding board." },
+  { id: 1, slug: "zook-fabrics-new-month", title: "ZOOK Fabrics — New Month", category: "Poster Design", img: zookNewMonth, featured: true, description: "Monthly brand greeting for ZOOK Fabrics, built around a bold spotlight portrait to keep the identity recognizable outside the core branding board." },
   { id: 2, slug: "relish-locals-opening", title: "Relish Locals — 2K Spot Opening", category: "Flyer Design", img: relishLocals, description: "Launch flyer for a street-food stall's new 2k-naira menu, pairing real product photography with a bold price-first layout." },
   { id: 3, slug: "honey-pot-back-to-school", title: "Honey Pot — Back to School", category: "Flyer Design", img: honeyPot, description: "Back-to-school promo flyer for a campus food vendor, led by close-up food photography and a clear ordering call to action." },
   { id: 4, slug: "after-it-hangout", title: "After IT Hangout", category: "Flyer Design", img: afterItHangout, description: "Event flyer for a graduating class hangout, combining a candid group photo with all the logistics a guest needs at a glance." },
@@ -42,3 +46,21 @@ export const projects = [
 ]
 
 export const projectCategories = ["All", "Flyer Design", "Poster Design", "Social Ads"]
+
+// Always look a project up through this, never `projects.find(...)` inline.
+// The hero and the Services panel both pick their artwork by slug at MODULE
+// scope, so an unguarded `.find(...).img` on a renamed slug throws while the
+// module is still evaluating — which blanks the entire site, not just the one
+// frame. Since the header above invites swapping artwork by folder name, that
+// was a live trap. This turns it into a message naming the slug and the file
+// to fix.
+export const getProject = (slug) => {
+  const project = projects.find((p) => p.slug === slug)
+  if (!project) {
+    throw new Error(
+      `No project with slug "${slug}". Check the slug against src/data/projects.js — ` +
+        `it is referenced by a hero frame or a Services tab.`
+    )
+  }
+  return project
+}

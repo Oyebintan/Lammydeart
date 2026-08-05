@@ -1,4 +1,3 @@
-import React from "react"
 import { motion } from "framer-motion"
 
 // Was duplicated verbatim in FeaturedWork and ProjectsPage, differing only by the

@@ -8,7 +8,7 @@ import { useTypewriter } from "../../hooks/useTypewriter"
 import { gridBg, boxTint } from "../../lib/decor"
 import CornerMarks from "../decor/CornerMarks"
 import LineBox from "../decor/LineBox"
-import { projects } from "../../data/projects"
+import { getProject } from "../../data/projects"
 import zookImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
 
 // Router-aware anchors. Raw <a href="/..."> triggered a full document reload on
@@ -21,7 +21,7 @@ const MotionLink = motion.create(Link)
 // sitting over the NEW artwork — that mismatch was the bug. Now a frame can
 // only ever describe the image it's actually showing.
 const featuredProject = (slug) => {
-  const p = projects.find((proj) => proj.slug === slug)
+  const p = getProject(slug)
   return {
     img: p.img,
     category: p.category,

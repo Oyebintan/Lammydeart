@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import { FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6"
 import { ArrowRight, Menu, X } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock"
 
 const MotionLink = motion.create(Link)
 
@@ -81,17 +82,10 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Lock background scroll while the mobile menu is open
-  useEffect(() => {
-    if (isMenuVisible) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = ""
-    }
-    return () => {
-      document.body.style.overflow = ""
-    }
-  }, [isMenuVisible])
+  // Shared with the lightbox. This used to write `""` unconditionally while the
+  // lightbox saved and restored the previous value, so opening and closing the
+  // menu over an open lightbox destroyed the lightbox's lock.
+  useBodyScrollLock(isMenuVisible)
 
   useEffect(() => {
     const handleClickOutside = (event) => {

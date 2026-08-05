@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Palette, Megaphone, PenTool, LayoutGrid, ArrowRight } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
-import { projects } from "../../data/projects"
+import { getProject } from "../../data/projects"
 // Same flagship brand asset used in Hero.jsx — swap that one file to update both.
 import brandingImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
 
@@ -10,7 +10,7 @@ import brandingImg from "../../assets/images/projects/zook-fabrics/preview.jpg"
 // go stale the way it did before: the image at cultural-festival-poster/ got
 // swapped for an unrelated TransactX ad, and this import kept pointing at the
 // file path with no way to know the content underneath had changed.
-const socialAdsImg = projects.find((p) => p.slug === "relish-locals-opening").img
+const socialAdsImg = getProject("relish-locals-opening").img
 
 const services = [
   {

@@ -1,4 +1,3 @@
-import React from "react"
 import { motion } from "framer-motion"
 import { Palette, Layout, Lightbulb, Sparkles } from "lucide-react"
 import { usePageTitle } from "../hooks/usePageTitle"

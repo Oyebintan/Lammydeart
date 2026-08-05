@@ -1,28 +1,18 @@
-import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link } from "react-router-dom"
 import { ArrowRight } from "lucide-react"
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion"
-import { projects, projectCategories } from "../../data/projects"
+import { projectCategories } from "../../data/projects"
+import { useProjectGallery } from "../../hooks/useProjectGallery"
 import ProjectCard from "../ProjectCard"
 import ProjectLightbox from "../ProjectLightbox"
 import CategoryFilter from "../CategoryFilter"
 
 const MotionLink = motion.create(Link)
 
-const FeaturedWork = ({ times = 6 }) => {
-  const [filter, setFilter] = useState("All")
-  const [openId, setOpenId] = useState(null)
-
-  const filtered = (filter === "All" ? projects : projects.filter((p) => p.category === filter)).slice(0, times)
-
-  // Derived from openId rather than storing the project itself, so the lightbox
-  // can't hold a stale copy after the filter changes under it.
-  const open = filtered.find((p) => p.id === openId) ?? null
-  const step = (dir) => {
-    const i = filtered.findIndex((p) => p.id === openId)
-    if (i !== -1) setOpenId(filtered[(i + dir + filtered.length) % filtered.length].id)
-  }
+const FeaturedWork = ({ limit = 6 }) => {
+  const { filter, setFilter, filtered, open, openProject, closeProject, step } =
+    useProjectGallery({ limit })
 
   return (
     <motion.section
@@ -57,10 +47,18 @@ const FeaturedWork = ({ times = 6 }) => {
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (
-              <ProjectCard key={p.id} p={p} featured={filter === "All" && p.id === 1} onOpen={(x) => setOpenId(x.id)} />
+              <ProjectCard key={p.id} p={p} featured={filter === "All" && p.featured} onOpen={openProject} />
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Matches the projects page — an empty category used to render a
+            silent blank space here */}
+        {filtered.length === 0 && (
+          <p className="text-[14px] text-[rgba(255,255,255,0.55)] py-10 text-center">
+            Nothing in {filter} yet — try another category.
+          </p>
+        )}
 
         <motion.div variants={fadeUp} className="flex justify-center mt-8">
           <MotionLink
@@ -75,7 +73,7 @@ const FeaturedWork = ({ times = 6 }) => {
         </motion.div>
       </div>
 
-      <ProjectLightbox project={open} list={filtered} onClose={() => setOpenId(null)} onNavigate={step} />
+      <ProjectLightbox project={open} list={filtered} onClose={closeProject} onNavigate={step} />
     </motion.section>
   )
 }

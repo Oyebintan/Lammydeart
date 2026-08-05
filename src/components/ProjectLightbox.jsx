@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock"
 
 // Project cards used to link to /project — the listing page they already sit on
 // — while a hover pill promised "View Project". There are no per-project routes,
@@ -16,6 +17,17 @@ const ProjectLightbox = ({ project, list = [], onClose, onNavigate }) => {
   const index = project ? list.findIndex((p) => p.id === project.id) : -1
   const hasSiblings = list.length > 1
 
+  // Three concerns, three effects, deliberately.
+  //
+  // They used to be one effect with `[project, hasSiblings, onClose, onNavigate]`
+  // as its deps. Both parents pass inline arrows for onClose and a `step`
+  // rebuilt every render, so those deps changed on EVERY parent render — the
+  // effect tore down and re-ran constantly, and the `focus()` call below fired
+  // each time, dragging focus back to the close button while the artwork was
+  // being viewed. Splitting it means the focus call is keyed only to which
+  // project is open, which is the one thing that should actually re-trigger it.
+
+  // Keydown. Handlers can change identity freely here; nothing else re-runs.
   useEffect(() => {
     if (!project) return
 
@@ -27,16 +39,20 @@ const ProjectLightbox = ({ project, list = [], onClose, onNavigate }) => {
     }
 
     document.addEventListener("keydown", onKey)
-    // Same lock the mobile drawer uses, so the page behind can't scroll away
-    const previous = document.body.style.overflow
-    document.body.style.overflow = "hidden"
-    closeRef.current?.focus()
-
-    return () => {
-      document.removeEventListener("keydown", onKey)
-      document.body.style.overflow = previous
-    }
+    return () => document.removeEventListener("keydown", onKey)
   }, [project, hasSiblings, onClose, onNavigate])
+
+  // Scroll lock — shared with the mobile menu so the two can't clobber each other
+  useBodyScrollLock(Boolean(project))
+
+  // Focus the close button once per opened project, not on every re-render.
+  // Depending on the id rather than the project object keeps this honest: the
+  // effect reads nothing else, so there is no dependency to omit.
+  const openId = project?.id
+  useEffect(() => {
+    if (openId == null) return
+    closeRef.current?.focus()
+  }, [openId])
 
   return (
     <AnimatePresence>

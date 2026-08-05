@@ -1,4 +1,3 @@
-import React from "react"
 import Hero from "../components/home/Hero"
 import Service from "../components/home/Service"
 import FeaturedWork from "../components/home/FeaturedWork"
@@ -11,7 +10,7 @@ const HomePage = () => {
     <div>
       <Hero />
       <Service />
-      <FeaturedWork times={6} />
+      <FeaturedWork />
       <AboutHome />
       <Testimonial />
       <HomeContact />
