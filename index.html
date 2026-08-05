@@ -31,12 +31,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>Lammydeart — Graphic & Web Designer</title>
     <meta name="description" content="Portfolio of Lammy (Olamide) — a graphic and web designer crafting bold visual identities and clean, functional websites." />
+    <link rel="canonical" href="https://thelammydeart.vercel.app/" />
     <meta property="og:title" content="Lammydeart — Graphic & Web Designer" />
     <meta property="og:description" content="Portfolio of Lammy (Olamide) — a graphic and web designer crafting bold visual identities and clean, functional websites." />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://thelammydeart.vercel.app/" />
+    <!-- Without og:image, sharing the portfolio on WhatsApp or X produced a
+         card with no artwork — which for a design portfolio is the worst place
+         to show nothing. Absolute URL is required; scrapers do not resolve
+         relative paths. 1200x630 is the standard ratio both platforms crop to. -->
+    <meta property="og:image" content="https://thelammydeart.vercel.app/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Lammydeart — bold visual identities, clean functional websites." />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Lammydeart — Graphic & Web Designer" />
     <meta name="twitter:description" content="Portfolio of Lammy (Olamide) — a graphic and web designer crafting bold visual identities and clean, functional websites." />
+    <meta name="twitter:image" content="https://thelammydeart.vercel.app/og.jpg" />
   </head>
   <body>
     <div id="root"></div>

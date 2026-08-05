@@ -1,0 +1,29 @@
+name: CI
+
+# Nothing ran the linter before this. `npm run lint` existed but no CI, no
+# pre-commit hook, and Vercel's build step runs `vite build` only — which does
+# not lint. A broken hook rule, an unused variable or a bad import shipped to
+# production unchallenged.
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # ci, not install: respects the lockfile exactly, so CI builds what the
+      # repo pins rather than whatever resolves today
+      - run: npm ci
+
+      - run: npx eslint .
+
+      - run: npm run build

@@ -86,9 +86,25 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
-    window.addEventListener("scroll", handleScroll)
+    // passive: this listener never calls preventDefault, and saying so lets the
+    // browser scroll without waiting to find out
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // Escape closes the menu, and focus returns to the toggle that opened it.
+  // The lightbox already handled Escape; the drawer could only be closed by
+  // clicking, which left keyboard users stuck behind a scroll-locked overlay.
+  useEffect(() => {
+    if (!isMenuVisible) return
+    const onKey = (e) => {
+      if (e.key !== "Escape") return
+      setIsMenuVisible(false)
+      toggleRef.current?.focus()
+    }
+    document.addEventListener("keydown", onKey)
+    return () => document.removeEventListener("keydown", onKey)
+  }, [isMenuVisible])
 
   // Shared with the lightbox. This used to write `""` unconditionally while the
   // lightbox saved and restored the previous value, so opening and closing the

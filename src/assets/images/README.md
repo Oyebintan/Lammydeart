@@ -13,6 +13,7 @@ images/
                                                  projects catalog below
     zook-fabrics-new-month/preview.jpg
     relish-locals-opening/preview.jpg        <- also used by the Home hero
+                                                 AND the Social Ads service tab
     honey-pot-back-to-school/preview.jpg
     after-it-hangout/preview.jpg
     asson-week-novelty-cup/preview.jpg
@@ -26,8 +27,7 @@ images/
     idpay-airdrop-tip/preview.jpg
     transactx-new-year/preview.jpg
     transactx-eid-mubarak/preview.jpg
-    transactx-sub-accounts/preview.jpg       <- also used by the Social Ads tab
-                                                 AND the Home hero
+    transactx-sub-accounts/preview.jpg       <- also used by the Home hero
 ```
 
 ## Replacing an image
@@ -48,6 +48,11 @@ cp ~/Downloads/new-headshot.jpg src/assets/images/profile/preview.jpg
 
 Then commit and push, and Vercel rebuilds automatically.
 
+**Do not rename a folder without updating its `slug`.** The hero and the Social
+Ads tab look their artwork up by slug through `getProject()`, which throws a
+named error if the slug is missing. That is deliberate — it used to be an
+unguarded lookup that took the whole site down with a bare `TypeError`.
+
 ## Adding a brand new project
 
 1. Make a folder: `projects/your-project-name/` and put `preview.jpg` in it.
@@ -55,8 +60,14 @@ Then commit and push, and Vercel rebuilds automatically.
    an object with `id`, `slug` (same as the folder name), `title`, `category`,
    `img`, and `description`.
 
-`category` must be one of the values in `projectCategories` in that same file,
-otherwise the project won't show under any filter.
+`category` can be any string; the filter list is derived from the data, so a new
+category creates its own filter chip automatically.
+
+Two optional fields:
+
+- `wide: true` — for landscape artwork. Gives it a 16:9 card spanning the full
+  grid width instead of cropping it into a portrait card.
+- `featured: true` — puts the "Featured" badge on that card in the Home grid.
 
 ## Featuring a project on the Home hero
 
@@ -69,14 +80,18 @@ new artwork's own palette.
 
 ## Sizing guidance
 
-- **Project previews** — around 1400–1700px on the long edge is plenty. They're
-  displayed in 4:3 and square-ish cards, so anything close to those ratios crops
-  best; very tall or very wide images lose their edges.
-- **Your photo** — crop to roughly 4:3 (landscape) *before* dropping it in. The
-  frame on the About page is 4:3, so a tall portrait gets its top and bottom cut
-  off and ends up looking zoomed in.
-- Save as JPEG at ~80–85% quality. Every image here ships to visitors, so keeping
-  each one under about 400–600KB keeps the site quick to load. The catalog
-  swapped in mid-2026 arrived at 2–8MB per file straight from the design
-  software — resized to a 1700px long edge and re-encoded, they landed at
-  200–600KB with no visible quality loss.
+**Export at roughly 1200px on the long edge, JPEG quality ~80.** That is the
+whole rule, and the root `README.md` states the same thing — if these two ever
+disagree, the root README is correct.
+
+- **Project previews** — cards are **portrait 4:5**, which is how most of this
+  work is designed, so 4:5 crops best. Genuinely landscape pieces should set
+  `wide: true` in `data/projects.js` rather than being squeezed into portrait.
+- **Your photo** — crop to **4:5 (portrait)** before dropping it in. The frame
+  on the About page is 4:5, so a landscape crop loses its sides.
+- The current set runs 73–270KB per file, 2.73MB for all 18. They arrived from
+  the design software at 2–8MB each; re-encoding at 1200px/q80 cut the total
+  from 6.11MB to 2.73MB with no visible loss at display size. Oversized files
+  are the main thing that makes the work look slow to appear on mobile data, so
+  please do not raise these numbers — the grid shows images around 420px wide
+  on desktop and ~170px on a phone, and the lightbox caps at 65vh.
