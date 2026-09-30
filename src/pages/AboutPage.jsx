@@ -45,8 +45,8 @@ const AboutPage = () => {
             <Sparkles size={12} /> About Me
           </motion.div>
 
-          <motion.h1 variants={fadeUp} className="font-display font-bold text-4xl lg:text-5xl text-[#FAFAFA]">
-            Olamide
+          <motion.h1 variants={fadeUp} className="font-display font-bold text-4xl lg:text-5xl text-[#F3F6FB]">
+            GANIY
           </motion.h1>
           <motion.p variants={fadeUp} className="text-lg text-[rgba(255,255,255,0.70)]">
             Graphic Designer & Product Designer

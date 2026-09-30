@@ -19,8 +19,8 @@ import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6
 //     not the profile, and the bare URL resolves identically.
 
 export const EMAIL = "lammydeart@gmail.com"
-export const PHONE = "+234 701 584 8547"
-export const PHONE_E164 = "2347015848547"
+export const PHONE = "+234 701 254 6836"
+export const PHONE_E164 = "2347012546836"
 export const LOCATION = "Lagos, Nigeria"
 
 export const EMAIL_HREF = `mailto:${EMAIL}`

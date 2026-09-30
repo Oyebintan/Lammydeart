@@ -67,7 +67,7 @@ const stats = [
 // Module-level so the reference is stable. Inline array literals made
 // useTypewriter's effect tear down and restart its timer on every render.
 const greetingWords = ["Hi, I'm Lammy"]
-const roles = ["a Graphic Designer.", "a Web Designer.", "a UI/UX Designer."]
+const roles = ["a Graphic Designer.", "a Web Developer.", "a UI/UX Designer."]
 
 const container = {
   hidden: {},
@@ -305,7 +305,7 @@ const Hero = () => {
             className={pillClass}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] shadow-[0_0_8px_#60A5FA]" />
-            Graphic Designer + Web Designer
+            Graphic Designer + Web Developer
           </motion.div>
 
           <motion.h1

@@ -15,7 +15,7 @@ const HomePage = () => {
       <Testimonial />
       <HomeContact />
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

@@ -112,6 +112,7 @@ const Testimonial = () => {
           </div>
           <div className="hidden sm:flex items-center gap-2">
             <button
+              type="button"
               onClick={() => go(-1)}
               aria-label="Previous testimonial"
               className="w-9 h-9 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)] hover:text-white hover:border-[rgba(255,255,255,0.4)] transition-colors duration-300"
@@ -119,6 +120,7 @@ const Testimonial = () => {
               <ChevronLeft size={16} />
             </button>
             <button
+              type="button"
               onClick={() => go(1)}
               aria-label="Next testimonial"
               className="w-9 h-9 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)] hover:text-white hover:border-[rgba(255,255,255,0.4)] transition-colors duration-300"
@@ -162,6 +164,7 @@ const Testimonial = () => {
           {/* Mobile arrow controls */}
           <div className="flex sm:hidden items-center justify-between mt-6">
             <button
+              type="button"
               onClick={() => go(-1)}
               aria-label="Previous testimonial"
               className="w-9 h-9 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)]"
@@ -169,6 +172,7 @@ const Testimonial = () => {
               <ChevronLeft size={16} />
             </button>
             <button
+              type="button"
               onClick={() => go(1)}
               aria-label="Next testimonial"
               className="w-9 h-9 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 rounded-full border border-[rgba(255,255,255,0.14)] flex items-center justify-center text-[rgba(255,255,255,0.78)]"
@@ -182,14 +186,13 @@ const Testimonial = () => {
           {reviews.map((r, i) => (
             <button
               key={r.id}
+              type="button"
               onClick={() => {
                 setDirection(i > index ? 1 : -1)
                 setIndex(i)
               }}
               aria-label={`Go to testimonial ${i + 1}`}
               aria-current={i === index}
-              /* The dot itself stays 6px; the button around it carries a 24px
-                 hit area. It was 6x6, under the 24x24 minimum. */
               className="py-2.5 px-2.5 flex items-center group/dot"
             >
               <span
