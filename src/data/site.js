@@ -1,4 +1,4 @@
-import { FaXTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
+import { FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa6"
 
 // Every contact detail on the site, in one place.
 //
@@ -27,13 +27,11 @@ export const EMAIL_HREF = `mailto:${EMAIL}`
 export const PHONE_HREF = `tel:+${PHONE_E164}`
 export const WHATSAPP_HREF = `https://wa.me/${PHONE_E164}`
 export const INSTAGRAM_HREF = "https://www.instagram.com/lammyde.art"
-export const TWITTER_HREF = "https://x.com/oyebintan?s=21"
 
 // Instagram first — it is the portfolio's main channel. Footer additionally
 // shows email, so it appends `emailLink` rather than keeping its own array.
 export const socialLinks = [
   { icon: FaInstagram, href: INSTAGRAM_HREF, label: "Instagram" },
-  { icon: FaXTwitter, href: TWITTER_HREF, label: "Twitter" },
   { icon: FaWhatsapp, href: WHATSAPP_HREF, label: "WhatsApp" },
 ]
 

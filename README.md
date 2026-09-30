@@ -1,6 +1,6 @@
 # Lammydeart
 
-Portfolio site for Olamide (Lammy) — graphic and Web Developer. React 19 + Vite 6
+Portfolio site for Ganiy (Lammy) — graphic and Web Developer. React 19 + Vite 6
 + Tailwind CSS v4, deployed on Vercel at
 [thelammydeart.vercel.app](https://thelammydeart.vercel.app).
 

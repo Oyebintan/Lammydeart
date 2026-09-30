@@ -17,7 +17,7 @@ const reviews = [
     role: "PR & Broadcast Consultant",
     rating: 4.5,
     message:
-      "Choosing Olamide for my campaign flyers was a game-changer. He captured the message perfectly and delivered bold, eye-catching designs that read clearly the moment people see them.",
+      "Choosing Ganiy for my campaign flyers was a game-changer. He captured the message perfectly and delivered bold, eye-catching designs that read clearly the moment people see them.",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const reviews = [
     role: "Full-Stack Development Company",
     rating: 4.5,
     message:
-      "Olamide brought thoughtful, intuitive UI/UX design to our product. He grasped our goals quickly and crafted an interface that feels effortless to use and consistent throughout.",
+      "Ganiy brought thoughtful, intuitive design to our product. He grasped our goals quickly and crafted an interface that feels effortless to use and consistent throughout.",
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const reviews = [
     role: "Clothing Brand",
     rating: 5,
     message:
-      "Working with Olamide on our brand identity was the best decision we made. He understood the vision immediately and built a logo and system that genuinely represents who we are.",
+      "Working with Ganiy on our brand identity was the best decision we made. He understood the vision immediately and built a logo and system that genuinely represents who we are.",
   },
 ]
 

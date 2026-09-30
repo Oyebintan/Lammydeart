@@ -67,7 +67,7 @@ const stats = [
 // Module-level so the reference is stable. Inline array literals made
 // useTypewriter's effect tear down and restart its timer on every render.
 const greetingWords = ["Hi, I'm Lammy"]
-const roles = ["a Graphic Designer.", "a Web Developer.", "a UI/UX Designer."]
+const roles = ["a Graphic Designer.", "a Web Developer."]
 
 const container = {
   hidden: {},

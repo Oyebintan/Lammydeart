@@ -23,7 +23,7 @@ const contactDetails = [
 ]
 
 // Quick answers to what clients ask before they get in touch. Turnaround
-// windows below are Olamide's own figures. The revision count is still a
+// windows below are Ganiy's own figures. The revision count is still a
 // placeholder default — confirm it before treating it as a commitment.
 const quickAnswers = [
   {
