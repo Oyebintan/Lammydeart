@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import IconButton from "../ui/IconButton"
 import { ArrowUp } from "lucide-react"
@@ -9,7 +10,36 @@ import { socialLinks, emailLink } from "../../data/site"
 const footerSocials = [...socialLinks, emailLink]
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear()
+  const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear())
+
+  useEffect(() => {
+    let timeout
+    const scheduleYearUpdate = () => {
+      const now = new Date()
+      const nextYear = new Date(now.getFullYear() + 1, 0, 1)
+      // Long delays can overflow browser timers, so reschedule in bounded intervals.
+      const delay = Math.min(nextYear.getTime() - now.getTime(), 2_000_000_000)
+
+      timeout = window.setTimeout(() => {
+        const year = new Date().getFullYear()
+        setCurrentYear(year)
+        if (year === currentYear) scheduleYearUpdate()
+      }, delay)
+    }
+
+    scheduleYearUpdate()
+    const updateOnVisibility = () => {
+      if (document.visibilityState === "visible") {
+        setCurrentYear(new Date().getFullYear())
+      }
+    }
+
+    document.addEventListener("visibilitychange", updateOnVisibility)
+    return () => {
+      window.clearTimeout(timeout)
+      document.removeEventListener("visibilitychange", updateOnVisibility)
+    }
+  }, [currentYear])
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
